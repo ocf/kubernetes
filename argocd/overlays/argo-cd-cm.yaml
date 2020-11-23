@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  url: https://argocd.ocf.berkeley.edu
+  repositories: |
+    - url: https://github.com/ocf/kubernetes
+kind: ConfigMap
+metadata:
+  name: argocd-cm
