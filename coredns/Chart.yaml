@@ -1,2 +1,7 @@
-apiVersion: v1
+apiVersion: v2
 name: coredns
+version: 1.0.0
+dependencies:
+  - name: coredns
+    version: 1.14.0
+    repository: https://raw.github.com/coredns/deployment/gh-pages

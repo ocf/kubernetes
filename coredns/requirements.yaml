@@ -1,4 +1,0 @@
-dependencies:
-  - name: coredns
-    version: 1.14.0
-    repository: https://raw.github.com/coredns/deployment/gh-pages

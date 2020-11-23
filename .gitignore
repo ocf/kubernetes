@@ -1,0 +1,6 @@
+# Helm Lockfiles
+# Normally committing the lockfile is a good idea, but it's difficult for adelie to
+# update so they aren't committed for now.
+requirements.lock
+Chart.lock
+charts/
