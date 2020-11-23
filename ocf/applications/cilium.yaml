@@ -11,3 +11,7 @@ spec:
     path: cilium
     repoURL: https://github.com/ocf/kubernetes
     targetRevision: HEAD
+    helm:
+      valueFiles:
+      - values.yaml
+      version: v3
