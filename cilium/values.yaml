@@ -4,6 +4,7 @@ cilium:
   k8sServicePort: "6443"
   tunnel: "disabled"
   autoDirectNodeRoutes: true
+  nativeRoutingCIDR: "169.229.226.0/24"
   loadBalancer:
     acceleration: "native"
     mode: "hybrid"
