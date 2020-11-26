@@ -1,5 +1,0 @@
-resources:
-- applications/argocd.yaml
-- applications/cilium.yaml
-- applications/coredns.yaml
-- applications/ocf.yaml
