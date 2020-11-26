@@ -4,10 +4,27 @@ This is the git repository for the [Open Computing Facility](https://ocf.berkele
 
 ## Deploying Software
 
-1. Create a new folder in the format of the other folders in this repository. You can pick from Helm Charts (recommended), our custom Python script plugin (recommended), JSONnet Files (eh), or Kustomize (not recommended).
-2. Add a YAML file to `ocf/applications` defining how to deploy the folder you made.
-3. Edit `ocf/kustomization.yml` to add the name of the YAML file you made.
-4. (Root Required) Go to [ArgoCD](https://argocd.ocf.berkeley.edu/) and manually run the first sync, if it hasn't automatically.
+1. Create a new folder in `apps` or `core` and put your configuration in it. See the other folders for examples. You can pick from Helm Charts (recommended), JSONnet Files (recommended for software the OCF wrote), or Kustomize (only recommended if necessary).
+2. Add a JSONNET file to `deployment/applications` defining how to deploy the folder you made.
+3. (Root Required) Go to [ArgoCD](https://argocd.ocf.berkeley.edu/) and run a sync. We do not automatically sync configuration for safety reasons.
+
+## Folder Structure
+
+```
+- apps
+    - templates
+    - notes
+    - ... (stakeholder-facing applications)
+- core
+    - cilium
+    - argocd
+    - ... (cluster resources and configuration)
+- deployment
+    - applications
+        - *.jsonnet (ArgoCD application CRDs)
+    - projects
+        - *.jsonnet (Argocd project CRDs)
+```
 
 ## Bootstrapping
 
