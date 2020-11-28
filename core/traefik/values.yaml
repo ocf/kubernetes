@@ -1,0 +1,21 @@
+traefik:
+  service:
+    spec:
+      loadBalancerIP: "169.229.226.81"
+  ports:
+    traefik:
+      expose: true
+      exposedPort: 9000
+      port: 9000
+      protocol: TCP
+    web:
+      expose: true
+      exposedPort: 80
+      port: 8000
+      protocol: TCP
+      redirectTo: websecure
+    websecure:
+      expose: true
+      exposedPort: 443
+      port: 8443
+      protocol: TCP
