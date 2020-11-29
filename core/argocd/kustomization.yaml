@@ -6,7 +6,7 @@ bases:
 
 # BOOTSTRAP: Circular dependency w/ Traefik
 #resources:
-#- resources/argocd-server-http-ingress.yaml
+- resources/argocd-server-http-ingress.yaml
 # BOOTSTRAP: Circular dependency w/ Vault
 #- resources/argocd-vault-secret.yaml
 
