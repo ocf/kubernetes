@@ -1,0 +1,7 @@
+apiVersion: v2
+name: traefik
+version: 1.0.0
+dependencies:
+  - name: traefik
+    version: 1.4.4
+    repository: https://charts.rook.io/release
