@@ -4,4 +4,4 @@ version: 1.0.0
 dependencies:
   - name: traefik
     version: 9.11.0
-    repository: https://containous.github.io/traefik-helm-chart
+    repository: https://helm.traefik.io/traefik
