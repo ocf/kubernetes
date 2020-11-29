@@ -1,8 +1,7 @@
 metallb:
   configInline:
-    peers:
-      address-pools:
-      - name: default
-        protocol: layer2
-        addresses:
-        - 169.229.226.81-169.229.226.89
+    address-pools:
+    - name: default
+      protocol: layer2
+      addresses:
+      - 169.229.226.81-169.229.226.89
