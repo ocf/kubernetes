@@ -1,7 +1,7 @@
 apiVersion: v2
-name: traefik
+name: ceph
 version: 1.0.0
 dependencies:
-  - name: traefik
-    version: 1.4.4
+  - name: rook-ceph
+    version: 1.5.1
     repository: https://charts.rook.io/release
