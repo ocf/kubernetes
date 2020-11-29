@@ -1,4 +1,8 @@
 traefik:
+  ingressClass:
+    # true is not unit-testable yet, pending https://github.com/rancher/helm-unittest/pull/12
+    enabled: true
+    isDefaultClass: true
   service:
     spec:
       loadBalancerIP: "169.229.226.81"
