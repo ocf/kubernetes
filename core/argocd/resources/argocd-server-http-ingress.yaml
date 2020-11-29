@@ -1,13 +1,15 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: argocd-server-http-ingress
   namespace: argocd
 spec:
   rules:
-  - http:
+  - host: argo.ocf.berkeley.edu
+    http:
       paths:
       - backend:
-          serviceName: argocd-server
-          servicePort: http
-    host: argo.ocf.berkeley.edu
+          service:
+            name: argocd-server
+            port:
+              number: 80
