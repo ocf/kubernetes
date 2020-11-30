@@ -13,6 +13,7 @@ bases:
 patchesStrategicMerge:
 - overlays/argo-cd-cm.yaml
 - overlays/argocd-rbac-cm.yaml
+- overlays/argocd-server.yaml
 # BOOTSTRAP: Circular dependency w/ Vault
 #- overlays/argocd-secret.yaml
 
