@@ -5,8 +5,8 @@ bases:
 - https://github.com/argoproj/argo-cd/manifests/ha/cluster-install?ref=v1.8.0-rc1
 
 # BOOTSTRAP: Circular dependency w/ Traefik
-# resources:
-# - resources/argocd-server-http-ingress.yaml
+resources:
+- resources/argocd-server-http-ingress.yaml
 # BOOTSTRAP: Circular dependency w/ Vault
 #- resources/argocd-vault-secret.yaml
 
