@@ -1,0 +1,46 @@
+vault:
+  global:
+    enabled: true
+    tlsDisable: false
+
+  server:
+    readinessProbe:
+      enabled: true
+    livenessProbe:
+      enabled: true
+      initialDelaySeconds: 60
+
+    # https://www.vaultproject.io/docs/audit/index.html
+    auditStorage:
+      enabled: true
+
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+        ingress.kubernetes.io/force-ssl-redirect: "true"
+        kubernetes.io/ingress.class: contour
+        kubernetes.io/tls-acme: "true"
+      hosts:
+      - host: vault.ocf.berkeley.edu
+        paths: []
+      tls:
+      - hosts:
+        - vault.ocf.berkeley.edu
+        secretName: vault-ingress-tls
+
+    # in favor of HA, disable standalone
+    standalone:
+      enabled: false
+
+    ha:
+      enabled: true
+      replicas: 5
+      # the other option is consul
+      raft:
+        enabled: true
+        setNodeId: true
+
+  # enable UI service
+  ui:
+    enabled: true
