@@ -13,6 +13,10 @@ vault:
     # https://www.vaultproject.io/docs/audit/index.html
     auditStorage:
       enabled: true
+      storageClass: rook-ceph-block
+
+    dataStorage:
+      storageClass: rook-ceph-block
 
     ingress:
       enabled: true
