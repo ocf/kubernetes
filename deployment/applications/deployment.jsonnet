@@ -1,22 +1,12 @@
-{
-  apiVersion: 'argoproj.io/v1alpha1',
-  kind: 'Application',
-  metadata: {
-    name: 'deployment',
-  },
-  spec: {
-    destination: {
-      namespace: 'argocd',
-      server: 'https://kubernetes.default.svc',
-    },
-    project: 'default',
-    source: {
-      path: 'deployment',
-      repoURL: 'https://github.com/ocf/kubernetes',
-      targetRevision: 'HEAD',
-      directory: {
-        recurse: true,
-      },
+local lib = import 'lib.libsonnet';
+
+lib.make_deployment(
+  name='deployment',
+  namespace='argocd',
+  directory='deployment',
+  extraArgs={
+    directory: { // "Just parse this directory into YAML" mode
+      recurse: true,
     },
   },
-}
+)
