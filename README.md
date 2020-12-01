@@ -6,7 +6,7 @@ This is the git repository for the [Open Computing Facility](https://ocf.berkele
 
 1. Create a new folder in `apps` or `core` and put your configuration in it. See the other folders for examples. You can pick from Helm Charts (recommended), JSONnet Files (recommended for software the OCF wrote), or Kustomize (only recommended if necessary).
 2. Add a JSONNET file to `deployment/applications` defining how to deploy the folder you made.
-3. (Root Required) Go to [ArgoCD](https://argocd.ocf.berkeley.edu/) and run a sync. We do not automatically sync configuration for safety reasons.
+3. (Root Required) Go to [ArgoCD](https://argo.ocf.berkeley.edu/) and run a sync. We do not automatically sync configuration for safety reasons.
 
 ## Folder Structure
 
