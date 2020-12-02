@@ -49,3 +49,11 @@ vault:
   # enable UI service
   ui:
     enabled: true
+
+
+
+# This is a separate helm chart.
+vault-secrets-operator:
+  vault:
+    authMethod: kubernetes
+  # TODO: Enable prometheus operator.
