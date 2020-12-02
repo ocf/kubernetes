@@ -4,10 +4,11 @@ vault:
     tlsDisable: false
 
   server:
+    # TODO: Fix this.
     readinessProbe:
-      enabled: true
+      enabled: false
     livenessProbe:
-      enabled: true
+      enabled: false
       initialDelaySeconds: 60
 
     # https://www.vaultproject.io/docs/audit/index.html
