@@ -19,6 +19,9 @@ vault:
     dataStorage:
       storageClass: rook-ceph-block
 
+    image:
+      tag: "1.6.0"
+
     ingress:
       enabled: true
       annotations:
@@ -40,7 +43,7 @@ vault:
 
     ha:
       enabled: true
-      replicas: 5
+      replicas: 3
       # the other option is consul
       raft:
         enabled: true
