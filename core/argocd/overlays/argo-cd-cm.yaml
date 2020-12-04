@@ -1,6 +1,11 @@
 apiVersion: v1
 data:
   url: https://argocd.ocf.berkeley.edu
+  resource.exclusions: |
+    - apiGroups:
+      - "cilium.io/v2"
+      kinds:
+      - "CiliumIdentity"
   repositories: |
     - url: https://github.com/ocf/kubernetes
 kind: ConfigMap
