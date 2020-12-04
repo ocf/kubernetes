@@ -25,6 +25,9 @@
         repoURL: 'https://github.com/ocf/kubernetes',
         targetRevision: 'HEAD',
       } + extraArgs,
+      syncPolicy: {
+        syncOptions: ["CreateNamespace=true",],
+      },
     },
   },
 }
