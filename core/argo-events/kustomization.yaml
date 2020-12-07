@@ -1,0 +1,15 @@
+# This is the configuration for Argo Events.
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+- https://github.com/argoproj/argo-events/manifests/cluster-install?ref=v1.1.0
+
+#resources:
+#- resources/argocd-server-http-ingress.yaml
+
+#patchesStrategicMerge:
+#- overlays/argo-cd-cm.yaml
+
+namespace: argo-events
