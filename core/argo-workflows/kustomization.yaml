@@ -1,0 +1,16 @@
+# This is the configuration for Argo Workflows. For historical reasons it's
+# just called "Argo" and goes into the "argo" namespace.
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+- https://github.com/argoproj/argo/manifests/cluster-install?ref=v2.11.8
+
+#resources:
+#- resources/argocd-server-http-ingress.yaml
+
+#patchesStrategicMerge:
+#- overlays/argo-cd-cm.yaml
+
+namespace: argo
