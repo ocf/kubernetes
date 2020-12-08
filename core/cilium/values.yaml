@@ -2,6 +2,13 @@ cilium:
   kubeProxyReplacement: "strict"
   k8sServiceHost: "127.0.0.1"
   k8sServicePort: "6443"
+  devices: "{ens3,enp8s0f0np0,enp8s0f1np1}"
+  tunnel: "disabled"
+  autoDirectNodeRoutes: "true"
+  nativeRoutingCIDR: 10.0.0.0/8
+  loadBalancer:
+    acceleration: "native"
+    mode: "hybrid"
   containerRuntime:
     integration: "containerd"
     socketPath: "/run/containerd/containerd.sock"
