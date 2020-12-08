@@ -1,0 +1,10 @@
+# Instructions
+# https://github.com/argoproj/argo/blob/master/docs/workflow-controller-configmap.md
+# https://github.com/argoproj/argo/blob/master/docs/workflow-controller-configmap.yaml
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: workflow-controller-configmap
+data:
+  containerRuntimeExecutor: k8sapi

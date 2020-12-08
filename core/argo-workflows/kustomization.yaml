@@ -10,7 +10,7 @@ bases:
 #resources:
 #- resources/argocd-server-http-ingress.yaml
 
-#patchesStrategicMerge:
-#- overlays/argo-cd-cm.yaml
+patchesStrategicMerge:
+- overlays/workflow-controller-configmap.yaml
 
 namespace: argo
