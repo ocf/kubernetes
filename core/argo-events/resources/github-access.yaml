@@ -1,0 +1,7 @@
+apiVersion: ricoberger.de/v1alpha1
+kind: VaultSecret
+metadata:
+  name: github-access
+spec:
+  path: kvv2/argo-workflows/github
+  type: Opaque

@@ -6,8 +6,8 @@ kind: Kustomization
 bases:
 - https://github.com/argoproj/argo-events/manifests/cluster-install?ref=v1.1.0
 
-#resources:
-#- resources/argocd-server-http-ingress.yaml
+resources:
+- resources/github-access.yaml
 
 #patchesStrategicMerge:
 #- overlays/argo-cd-cm.yaml
