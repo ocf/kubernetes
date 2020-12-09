@@ -1,0 +1,4 @@
+postgresql:
+  existingSecret: postgresql-pw
+pgpool:
+  existingSecret: pgpool-pw
