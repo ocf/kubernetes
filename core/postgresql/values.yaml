@@ -1,4 +1,5 @@
-postgresql:
-  existingSecret: postgresql-pw
-pgpool:
-  existingSecret: pgpool-pw
+postgresql-ha:
+  postgresql:
+    existingSecret: postgresql-pw
+  pgpool:
+    existingSecret: pgpool-pw
