@@ -1,6 +1,14 @@
 apiVersion: v1
 data:
   url: https://argocd.ocf.berkeley.edu
+  # Temp workaround: hides all CiliumIdentities from ArgoCD's UI.
+  resource.exclusions: |
+    - apiGroups:
+      - "cilium*"
+      kinds:
+      - "CiliumIdentity"
+      clusters:
+      - "*"
   repositories: |
     - url: https://github.com/ocf/kubernetes
 kind: ConfigMap
