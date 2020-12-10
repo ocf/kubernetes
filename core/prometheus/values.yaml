@@ -3,6 +3,10 @@ kube-prometheus-stack:
     enabled: true
     ingress:
       enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+        ingress.kubernetes.io/force-ssl-redirect: "true"
+        kubernetes.io/tls-acme: "true"
       hosts:
       - alerts.ocf.berkeley.edu
       tls:
@@ -15,6 +19,10 @@ kube-prometheus-stack:
   prometheus:
     ingress:
       enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+        ingress.kubernetes.io/force-ssl-redirect: "true"
+        kubernetes.io/tls-acme: "true"
       hosts:
       - prom.ocf.berkeley.edu
       tls:
@@ -24,6 +32,10 @@ kube-prometheus-stack:
   grafana:
     ingress:
       enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+        ingress.kubernetes.io/force-ssl-redirect: "true"
+        kubernetes.io/tls-acme: "true"
       hosts:
       - graf.ocf.berkeley.edu
       tls:
