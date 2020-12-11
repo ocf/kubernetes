@@ -1,0 +1,7 @@
+apiVersion: v2
+name: harbor
+version: 1.0.0
+dependencies:
+  - name: harbor
+    version: 9.1.1
+    repository: https://charts.bitnami.com/bitnami

@@ -1,0 +1,26 @@
+harbor:
+  service:
+    type: Ingress
+    tls:
+      enabled: true
+      existingSecret: "harbor-tls"
+      notaryExistingSecret: "harbor-notary-tls"
+  ingress:
+    enabled: true
+    hosts:
+      core: harbor.ocf.berkeley.edu
+      notary: harbor-notary.ocf.berkeley.edu
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      ingress.kubernetes.io/force-ssl-redirect: "true"
+      kubernetes.io/tls-acme: "true"
+  externalURL: https://harbor.ocf.berkeley.edu
+  forcePassword: true
+  # we have to specify something here, but it isn't the real password
+  harborAdminPassword: "nice-try-this-isnt-it"
+  # we don't put secrets in our container images
+  # so this is okay... probably...
+  core:
+    secretKey: "aaaaaaaaaaaaaaaa"
+    secret: "aaaaaaaaaaaaaaaa"
+
