@@ -4,7 +4,7 @@ local name = 'templates';
   apiVersion: 'apps/v1',
   kind: 'Deployment',
   metadata: {
-    name: 'templates-deployment',
+    name: name,
     labels: {
       app: name,
     },
@@ -26,7 +26,7 @@ local name = 'templates';
         containers: [
           {
             name: name,
-            image: 'docker.ocf.berkeley.edu/templates:<%= version %>',
+            image: 'harbor.ocf.berkeley.edu/library/templates:latest',
             resources: {
               limits: {
                 memory: '128Mi',

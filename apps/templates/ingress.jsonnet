@@ -4,7 +4,12 @@ local name = 'templates';
   apiVersion: 'extensions/v1beta1',
   kind: 'Ingress',
   metadata: {
-    name: 'virtual-host-ingress',
+    name: name,
+    annotations: {
+      'cert-manager.io/cluster-issuer': 'letsencrypt',
+      'ingress.kubernetes.io/force-ssl-redirect': 'true',
+      'kubernetes.io/tls-acme': 'true',
+    },
   },
   spec: {
     rules: [
@@ -17,9 +22,18 @@ local name = 'templates';
                 serviceName: name,
                 servicePort: 80,
               },
+              pathType: 'ImplementationSpecific',
             },
           ],
         },
+      },
+    ],
+    tls: [
+      {
+        hosts: [
+          'templates.ocf.berkeley.edu',
+        ],
+        secretName: 'templates-tls',
       },
     ],
   },
