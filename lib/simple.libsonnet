@@ -46,6 +46,10 @@
               },
             ],
             securityContext: {
+              // TODO: Are these values important? Or do they just need to be not root?
+              fsGroup: 1000,
+              runAsUser: 100,
+              runAsGroup: 1000,
               runAsNonRoot: if 'nonRoot' in options then assert std.isBoolean(options.nonRoot); options.nonRoot else true,
             },
           },
