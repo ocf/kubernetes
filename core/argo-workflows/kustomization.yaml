@@ -7,8 +7,8 @@ kind: Kustomization
 bases:
 - https://github.com/argoproj/argo/manifests/cluster-install?ref=v2.11.8
 
-#resources:
-#- resources/argocd-server-http-ingress.yaml
+resources:
+- resources/workflow-account.yaml
 
 patchesStrategicMerge:
 - overlays/workflow-controller-configmap.yaml

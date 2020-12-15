@@ -1,0 +1,7 @@
+apiVersion: ricoberger.de/v1alpha1
+kind: VaultSecret
+metadata:
+  name: workflow-account
+spec:
+  path: kvv2/harbor/workflow-account
+  type: Opaque
