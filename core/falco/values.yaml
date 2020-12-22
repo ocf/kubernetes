@@ -2,8 +2,9 @@ falco:
   docker:
     enabled: false
 
+  # some c related errors happen
   ebpf:
-    enabled: true
+    enabled: false
 
   auditLog:
     enable: true
