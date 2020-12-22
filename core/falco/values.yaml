@@ -1,0 +1,17 @@
+falco:
+  docker:
+    enabled: false
+
+  ebpf:
+    enabled: true
+
+  auditLog:
+    enable: true
+    dynamicBackend:
+      enabled: true
+
+  falco:
+    priority: notice
+
+  # todo: find a clean way to generate this
+  # customRules:

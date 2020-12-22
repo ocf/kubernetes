@@ -1,0 +1,7 @@
+apiVersion: v2
+name: falco
+version: 1.0.0
+dependencies:
+  - name: falco
+    version: 1.5.7
+    repository: https://falcosecurity.github.io/charts

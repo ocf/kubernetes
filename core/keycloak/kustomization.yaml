@@ -5,13 +5,12 @@ kind: Kustomization
 
 resources:
 - keycloak.yaml
-- https://github.com/keycloak/keycloak-operator/deploy/crds/keycloak.org_keycloakbackups_crd.yaml?tag=11.0.3
-- https://github.com/keycloak/keycloak-operator/deploy/crds/keycloak.org_keycloakclients_crd.yaml?tag=11.0.3
-- https://github.com/keycloak/keycloak-operator/deploy/crds/keycloak.org_keycloakrealms_crd.yaml?tag=11.0.3
-- https://github.com/keycloak/keycloak-operator/deploy/crds/keycloak.org_keycloaks_crd.yaml?tag=11.0.3
-- https://github.com/keycloak/keycloak-operator/deploy/crds/keycloak.org_keycloakusers_crd.yaml?tag=11.0.3
-- https://github.com/keycloak/keycloak-operator/deploy/namespace.yaml?tag=11.0.3
-- https://github.com/keycloak/keycloak-operator/deploy/role.yaml?tag=11.0.3
-- https://github.com/keycloak/keycloak-operator/deploy/role_binding.yaml?tag=11.0.3
-- https://github.com/keycloak/keycloak-operator/deploy/service_account.yaml?tag=11.0.3
-- https://github.com/keycloak/keycloak-operator/deploy/operator.yaml?tag=11.0.3
+- https://raw.githubusercontent.com/keycloak/keycloak-operator/11.0.3/deploy/crds/keycloak.org_keycloakbackups_crd.yaml
+- https://raw.githubusercontent.com/keycloak/keycloak-operator/11.0.3/deploy/crds/keycloak.org_keycloakclients_crd.yaml
+- https://raw.githubusercontent.com/keycloak/keycloak-operator/11.0.3/deploy/crds/keycloak.org_keycloakrealms_crd.yaml
+- https://raw.githubusercontent.com/keycloak/keycloak-operator/11.0.3/deploy/crds/keycloak.org_keycloaks_crd.yaml
+- https://raw.githubusercontent.com/keycloak/keycloak-operator/11.0.3/deploy/crds/keycloak.org_keycloakusers_crd.yaml
+- https://raw.githubusercontent.com/keycloak/keycloak-operator/11.0.3/deploy/role.yaml
+- https://raw.githubusercontent.com/keycloak/keycloak-operator/11.0.3/deploy/role_binding.yaml
+- https://raw.githubusercontent.com/keycloak/keycloak-operator/11.0.3/deploy/service_account.yaml
+- https://raw.githubusercontent.com/keycloak/keycloak-operator/11.0.3/deploy/operator.yaml
