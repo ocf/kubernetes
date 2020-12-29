@@ -3,5 +3,5 @@ name: ceph
 version: 1.0.0
 dependencies:
   - name: rook-ceph
-    version: 1.5.1
+    version: 1.5.4
     repository: https://charts.rook.io/release
