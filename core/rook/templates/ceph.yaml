@@ -3,15 +3,15 @@ kind: CephCluster
 metadata:
   name: ceph
   namespace: rook-ceph
+  annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
 spec:
   cephVersion:
     image: ceph/ceph:v15.2.6
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
-    # This gets automatically removed, so ArgoCD doesn't like it.
-    # it should be the default though...
-    # allowMultiplePerNode: false
+    allowMultiplePerNode: false
   storage:
     useAllNodes: false
     useAllDevices: false
