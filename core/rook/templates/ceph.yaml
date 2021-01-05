@@ -9,7 +9,9 @@ spec:
   dataDirHostPath: /var/lib/rook
   mon:
     count: 3
-    allowMultiplePerNode: false
+    # This gets automatically removed, so ArgoCD doesn't like it.
+    # it should be the default though...
+    # allowMultiplePerNode: false
   storage:
     useAllNodes: false
     useAllDevices: false
