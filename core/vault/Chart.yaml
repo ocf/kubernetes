@@ -3,8 +3,8 @@ name: vault
 version: 1.0.0
 dependencies:
   - name: vault
-    version: 0.8.0
+    version: 0.10.0
     repository: https://helm.releases.hashicorp.com
   - name: vault-secrets-operator
-    version: 1.10.1
+    version: 1.14.2
     repository: https://ricoberger.github.io/helm-charts
