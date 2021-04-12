@@ -1,5 +1,6 @@
 postgresql-ha:
   postgresql:
     existingSecret: postgresql-pw
+    replicaCount: 1 # very ha
   pgpool:
     existingSecret: pgpool-pw
