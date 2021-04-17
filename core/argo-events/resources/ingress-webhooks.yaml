@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: webhooks
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    ingress.kubernetes.io/force-ssl-redirect: 'true'
+    ingress.kubernetes.io/proxy-body-size: '0'
+    ingress.kubernetes.io/ssl-redirect: 'true'
+    kubernetes.io/tls-acme: 'true'
+spec:
+  rules:
+  - host: workflow.ocf.berkeley.edu
+    http:
+      paths:
+      - backend:
+          serviceName: github-webhook-eventsource-svc
+          servicePort: '12000'
+        path: "/github"
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - workflow.ocf.berkeley.edu
+    secretName: workflow-tls
