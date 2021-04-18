@@ -4,7 +4,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 bases:
-- https://github.com/argoproj/argo-events/manifests/cluster-install?ref=v1.1.0
+- https://github.com/argoproj/argo-events/manifests/cluster-install?ref=v1.3.0
 
 resources:
 - resources/github-access.yaml
