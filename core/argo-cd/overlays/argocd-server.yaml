@@ -16,11 +16,42 @@ spec:
         app.kubernetes.io/name: argocd-server
     spec:
       containers:
-        - command:
+        - name: argocd-server
+          command:
             - argocd-server
             - --staticassets
             - /shared/app
             - --redis
             - argocd-redis-ha-haproxy:6379
             - --insecure
-          name: argocd-server
+          volumeMounts:
+          - mountPath: /usr/local/sbin
+            name: usr-local-bin
+          - mountPath: /usr/local/include
+            name: usr-local-include
+          - mountPath: /usr/local/lib
+            name: usr-local-lib
+      volumes:
+      - name: usr-local-lib
+        emptyDir: {}
+      - name: usr-local-include
+        emptyDir: {}
+      - name: usr-local-bin
+        emptyDir: {}
+      initContainers:
+      - name: nodejs
+        image: node:16-buster
+        command: ["sh", "-c"]
+        args:
+        - cp -r /usr/local/bin/. /mnt/usr/local/bin/ &&
+          mkdir /mnt/usr/local/include/node &&
+          cp -r /usr/local/include/node/. /mnt/usr/local/include/node/ &&
+          mkdir /mnt/usr/local/lib/node_modules &&
+          cp -r /usr/local/lib/node_modules/. /mnt/usr/local/lib/node_modules
+        volumeMounts:
+        - mountPath: /mnt/usr/local/bin
+          name: usr-local-bin
+        - mountPath: /mnt/usr/local/include
+          name: usr-local-include
+        - mountPath: /mnt/usr/local/lib
+          name: usr-local-lib
