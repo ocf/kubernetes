@@ -1,0 +1,7 @@
+apiVersion: v2
+name: fission
+version: 1.0.0
+dependencies:
+  - name: fission-core
+    version: 1.12.0
+    repository: https://fission.github.io/fission-charts/

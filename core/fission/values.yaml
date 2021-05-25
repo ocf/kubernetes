@@ -1,0 +1,9 @@
+fission-core:
+  serviceType: "ClusterIP"
+  routerServiceType: "ClusterIP"
+  analytics: false
+  # TODO: What is this?
+  # prometheus:
+  #   serviceEndpoint: xx
+  canaryDeployment:
+    enabled: true
