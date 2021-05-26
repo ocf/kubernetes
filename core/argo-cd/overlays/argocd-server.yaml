@@ -40,14 +40,12 @@ spec:
         emptyDir: {}
       initContainers:
       - name: nodejs
-        image: node:16-buster
+        image: python:3.9-buster
         command: ["sh", "-c"]
         args:
         - cp -r /usr/local/bin/. /mnt/usr/local/bin/ &&
-          mkdir /mnt/usr/local/include/node &&
-          cp -r /usr/local/include/node/. /mnt/usr/local/include/node/ &&
-          mkdir /mnt/usr/local/lib/node_modules &&
-          cp -r /usr/local/lib/node_modules/. /mnt/usr/local/lib/node_modules
+          cp -r /usr/local/include/. /mnt/usr/local/include/ &&
+          cp -r /usr/local/lib/. /mnt/usr/local/lib/
         volumeMounts:
         - mountPath: /mnt/usr/local/bin
           name: usr-local-bin
