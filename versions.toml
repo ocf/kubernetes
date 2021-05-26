@@ -1,0 +1,81 @@
+# This file contains version numbers for software in the cluster.
+# It is formatted as best as possible to avoid merge conflicts from
+# automated tooling.
+
+
+# Cluster Services & Core Applications
+
+[argo-cd]
+version = "2.0.1"
+github = "https://github.com/argoproj/argo-cd"
+
+[cert-manager]
+version = "1.1.0"
+helm = "https://charts.jetstack.io"
+
+[cilium]
+version = "1.10.0"
+helm = "https://helm.cilium.io/"
+
+[contour]
+version = "4.3.4"
+helm = "https://charts.bitnami.com/bitnami"
+
+[coredns]
+version = "1.15.0"
+helm = "https://coredns.github.io/helm"
+
+[falco]
+version = "1.11.1"
+helm = "https://falcosecurity.github.io/charts"
+
+[fission]
+version = "1.12.0"
+helm = "https://fission.github.io/fission-charts/"
+chart = "fission-core"
+
+[harbor]
+version = "10.0.4"
+helm = "https://charts.bitnami.com/bitnami"
+
+[keycloak]
+version = "11.0.3"
+github = "https://github.com/keycloak/keycloak"
+
+[metallb]
+version = "2.3.7"
+helm = "https://charts.bitnami.com/bitnami"
+
+[postgresql]
+version = "7.5.2"
+helm = "https://charts.bitnami.com/bitnami"
+chart = "postgresql-ha"
+
+[prometheus]
+version = "16.0.1"
+helm = "https://prometheus-community.github.io/helm-charts"
+chart = "kube-prometheus-stack"
+
+[rook]
+version = "1.6.3"
+helm = "https://charts.rook.io/release"
+chart = "rook-ceph"
+
+[vault]
+version = "0.12.0"
+helm = "https://helm.releases.hashicorp.com"
+
+[vault-secrets-operator]
+version = "1.14.5"
+helm = "https://ricoberger.github.io/helm-charts"
+
+
+# Stakeholder Services & Client Applications
+# items without `version` won't get checked by adelie here
+# -> be sure to point adelie at the upstream repository!
+
+[codimd]
+image = "harbor.ocf.berkeley.edu/ocf/codimd:latest"
+
+[templates]
+image = "harbor.ocf.berkeley.edu/ocf/templates:latest"
