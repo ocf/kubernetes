@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "ocf-kubernetes"
+version = "0.1.0"
+description = "OCF Kubernetes configuration"
+authors = ["OCF Staff <root@ocf.berkeley.edu>"]
+
+packages = [
+    { include="main.py" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+kubernetes = "^17.17.0"
+
+[tool.poetry.scripts]
+build-yaml = "main:build_yaml"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
