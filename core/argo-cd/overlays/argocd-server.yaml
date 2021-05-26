@@ -31,6 +31,9 @@ spec:
             name: usr-local-include
           - mountPath: /usr/local/lib
             name: usr-local-lib
+          env:
+          - name: LD_LIBRARY_PATH
+            value: /usr/local/lib
       volumes:
       - name: usr-local-lib
         emptyDir: {}
