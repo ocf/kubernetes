@@ -4,29 +4,42 @@ This is the git repository for the [Open Computing Facility](https://ocf.berkele
 
 ## Deploying Software
 
-1. Create a new folder in `apps` or `core` and put your configuration in it. See the other folders for examples. You can pick from Helm Charts (recommended), JSONnet Files (recommended for software the OCF wrote), or Kustomize (only recommended if necessary).
+1. Create a new python file in `ocfkube/apps` with a function `build()` that returns a list of Kubernetes objects (as dicts). See the other python files in that folder for examples. Helper functions are provided for Helm charts, although not all software will use helm charts.
     a. If you need to build your own container image, do so in another git repository. Instructions coming soon (TM).
-2. Add a JSONnet file to `deployment/applications` defining how to deploy the folder you made.
-3. (Root Required) Go to [ArgoCD](https://argo.ocf.berkeley.edu/) and run a sync. Before you click sync, look at the diff to sanity check what will change. We do not automatically sync configuration for safety reasons.
+2. (Root Required) Go to [ArgoCD](https://argo.ocf.berkeley.edu/) and run a sync. Before you click sync, look at the diff to sanity check what will change. We do not automatically sync configuration for safety reasons.
+
+### Code-Test Loop
+
+First, install dependencies and start a poetry shell...
+
+```bash
+poetry install
+poetry shell
+```
+
+Then, make changes and run the following command to test your changes...
+
+```bash
+# inside poetry shell, might be python3 depending on your package manager
+# e.x. python -m ocfkube cilium -> prints YAML to stdout for cilium
+python -m ocfkube <appname>
+```
 
 ## Folder Structure
 
+Our deployment follows the folder structure of a typical poetry application.
+
 ```
-- apps
-    - templates
-    - notes
-    - ... (stakeholder-facing applications)
-- core
-    - cilium
-    - argocd
-    - ... (cluster resources and configuration)
-- deployment
-    - {apps, core}
-        - *.jsonnet (ArgoCD application CRDs)
-    - projects
-        - *.jsonnet (Argocd project CRDs)
-- lib
-    - *.libsonnet (JSONnet helper libraries)
+- ocfkube
+    - apps
+        - cilium
+        - notes
+        - ... (any software)
+        - versions.toml (all software versions)
+    - utils
+        - ... (helper functions)
+    - lib
+        - ... (common k8s object generators)
 ```
 
 ## Bootstrapping

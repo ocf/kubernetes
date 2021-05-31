@@ -7,6 +7,11 @@ authors = [
     "Nikhil Jha <njha@ocf.berkeley.edu>",
     "Frank Dai <fydai@ocf.berkeley.edu>",
 ]
+readme = "README.md"
+homepage = "https://github.com/ocf/kubernetes"
+repository = "https://github.com/ocf/kubernetes"
+documentation = "https://www.ocf.berkeley.edu/docs/staff/"
+keywords = ["kubernetes"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
