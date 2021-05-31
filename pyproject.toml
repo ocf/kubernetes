@@ -14,7 +14,7 @@ kubernetes = "^17.17.0"
 PyYAML = "^5.4.1"
 
 [tool.poetry.scripts]
-argocd-build = "main:argocd_build"
+argocd-build = "ocfkube:argocd_build"
 
 [tool.poetry.dev-dependencies]
 black = "^21.5b1"
