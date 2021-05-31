@@ -2,15 +2,17 @@ from pkgutil import iter_modules
 
 
 def application_for_name(app_name: str) -> object:
+    new_app_name = app_name.replace("_", "-")
+
     return {
         "apiVersion": "argoproj.io/v1alpha1",
         "kind": "Application",
-        "metadata": {"name": app_name, "namespace": "argocd"},
+        "metadata": {"name": new_app_name, "namespace": "argocd"},
         "spec": {
             "project": "default",
             "destination": {
                 "server": "https://kubernetes.default.svc",
-                "namespace": app_name,
+                "namespace": new_app_name,
             },
             "source": {
                 "repoURL": "https://github.com/ocf/kubernetes",
