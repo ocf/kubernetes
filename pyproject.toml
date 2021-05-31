@@ -12,6 +12,7 @@ authors = [
 python = "^3.7"
 kubernetes = "^17.17.0"
 PyYAML = "^5.4.1"
+tomlkit = "^0.7.2"
 
 [tool.poetry.scripts]
 argocd-build = "ocfkube:argocd_build"
