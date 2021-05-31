@@ -28,4 +28,4 @@ data:
         args: ["python -m pip install poetry"]
       generate:
         command: ["/bin/sh", "-c"]
-        args: ["~/.local/bin/poetry run build-yaml"]
+        args: ["~/.local/bin/poetry run argocd-build"]
