@@ -6,10 +6,7 @@ import os
 def argocd_build():
     # See https://argoproj.github.io/argo-cd/user-guide/build-environment/
     ARGOCD_APP_NAME = os.environ["ARGOCD_APP_NAME"]
-    s = build(ARGOCD_APP_NAME)
-    with open("/tmp/argocdsucks.yaml", "w") as f:
-        f.write(s)
-    print(s)
+    print(build(ARGOCD_APP_NAME))
 
 def build(app_name: str) -> str:
     # avoid casing on application name, just try to import the right file
