@@ -32,5 +32,5 @@ settings = {
 def build() -> object:
     yamls = []
     for path in paths:
-        yamls += list(yaml.load_all(requests.get(base_url.format(path)).text))
+        yamls += list(yaml.safe_load_all(requests.get(base_url.format(path)).text))
     return yamls + settings

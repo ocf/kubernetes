@@ -53,7 +53,6 @@ argo_cd = {
 
 
 def build() -> object:
-
     return [
         application_for_name(module.name)
         for module in iter_modules(__import__("ocfkube").apps.__path__)

@@ -13,7 +13,7 @@ values = {
 
 def build() -> object:
     return helm.build_chart_from_versions(
-        name="contour",
+        name="coredns",
         versions=versions,
         values=values,
     )

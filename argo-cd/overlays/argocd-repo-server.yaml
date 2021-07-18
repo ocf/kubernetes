@@ -35,7 +35,7 @@ spec:
       - name: usr-local-bin
         emptyDir: {}
       initContainers:
-      - name: nodejs
+      - name: python
         image: python:3.9-buster
         command: ["sh", "-c"]
         args:
