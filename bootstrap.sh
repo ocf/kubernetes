@@ -17,23 +17,23 @@ then
     command -v kubectl >/dev/null 2>&1 || { echo >&2 "Please install kubectl before running this script."; exit 1; }
 
     echo "Installing Cilium..."
-    kubectl create ns cilium
+    kubectl create namespace cilium --dry-run=client -o yaml | kubectl apply -f -
     python3 -m ocfkube cilium | kubectl apply -n cilium -f -
     read -p "Now wait for Cilium to come up, press enter once it's healthy... " -n 1 -r
     
     echo "Installing CoreDNS..."
-    kubectl create ns coredns
+    kubectl create namespace coredns --dry-run=client -o yaml | kubectl apply -f -
     python3 -m ocfkube coredns | kubectl apply -n coredns -f -
     read -p "Now wait for CoreDNS to come up, press enter once it's healthy... " -n 1 -r
     
     echo "Installing ArgoCD..."
-    kubectl create namespace argocd
-    kubectl apply -n argocd -k argo-cd/
+    kubectl create namespace argocd --dry-run=client -o yaml | kubectl apply -f -
+    python3 -m ocfkube argocd | kubectl apply -n argocd -f -
     read -p "Now wait for ArgoCD to come up, press enter once it's healthy... " -n 1 -r
     
     echo "USERNAME: admin, PASSWORD: the name of the argocd-server pod"
     kubectl -n argocd get pods
 
-    echo "To finish bootstrapping the cluster, visit http://localhost:8000 and manually create a new Application with the contents of bootstrap.yaml, then press sync. When you're done, Ctrl+C this script. ArgoCD should now redeploy itself, cilium, and everything else in this repo."
+    echo "To finish bootstrapping the cluster, visit http://localhost:8000, log in, and press sync. When you're done, Ctrl+C this script. ArgoCD should now redeploy itself, cilium, and everything else in this repo."
     kubectl -n argocd port-forward service/argocd-server 8000:80
 fi

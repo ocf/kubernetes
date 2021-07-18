@@ -5,8 +5,8 @@
 
 # Cluster Services & Core Applications
 
-[argo-cd]
-version = "2.0.1"
+[argocd]
+version = "2.0.4"
 github = "https://github.com/argoproj/argo-cd"
 
 [cert-manager]

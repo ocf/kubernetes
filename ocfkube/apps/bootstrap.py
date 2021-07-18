@@ -57,4 +57,4 @@ def build() -> object:
         application_for_name(module.name)
         for module in iter_modules(__import__("ocfkube").apps.__path__)
         if module.name != "bootstrap"
-    ] + argo_cd
+    ] + [argo_cd]
