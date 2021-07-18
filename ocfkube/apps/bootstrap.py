@@ -28,33 +28,9 @@ def application_for_name(app_name: str) -> object:
     }
 
 
-argo_cd = {
-    "apiVersion": "argoproj.io/v1alpha1",
-    "kind": "Application",
-    "metadata": {"name": "argo-cd", "namespace": "argocd"},
-    "spec": {
-        "project": "default",
-        "destination": {
-            "server": "https://kubernetes.default.svc",
-            "namespace": "argocd",
-        },
-        "source": {
-            "repoURL": "https://github.com/ocf/kubernetes",
-            "path": "argo-cd",
-            "targetRevision": "HEAD",
-        },
-        "syncPolicy": {
-            "syncOptions": [
-                "CreateNamespace=true",
-            ],
-        },
-    },
-}
-
-
 def build() -> object:
     return [
         application_for_name(module.name)
         for module in iter_modules(__import__("ocfkube").apps.__path__)
         if module.name != "bootstrap"
-    ] + [argo_cd]
+    ]
