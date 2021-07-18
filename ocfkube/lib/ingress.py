@@ -1,6 +1,7 @@
 from .resource import Resource
 from .service import Service
 
+
 class Ingress(Resource):
     def from_service(service: Service, domain: str):
         if len(service["spec"]["ports"] != 1):
@@ -37,6 +38,8 @@ class Ingress(Resource):
                         },
                     }
                 ],
-                "tls": [{"hosts": [domain], "secretName": service.name + "-ingress-tls"}],
+                "tls": [
+                    {"hosts": [domain], "secretName": service.name + "-ingress-tls"}
+                ],
             },
-        };
+        }

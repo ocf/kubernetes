@@ -1,8 +1,0 @@
-coredns:
-  serviceAccount:
-    create: True
-
-  # TODO: This is a hardcoded variable from the kubelet configuration.
-  # Consider switching this deployment to Python so it can automatically grab this value.
-  service:
-    clusterIP: "10.32.0.10"
