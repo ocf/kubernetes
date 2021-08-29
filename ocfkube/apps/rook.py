@@ -8,7 +8,7 @@ ceph_yaml = {
     "kind": "CephCluster",
     "metadata": {
         "name": "ceph",
-        "namespace": "rook-ceph",
+        "namespace": "rook",
         "annotations": {"argocd.argoproj.io/compare-options": "IgnoreExtraneous"},
     },
     "spec": {
@@ -56,7 +56,7 @@ storageclass_yaml = [
     {
         "apiVersion": "ceph.rook.io/v1",
         "kind": "CephBlockPool",
-        "metadata": {"name": "replicapool", "namespace": "rook-ceph"},
+        "metadata": {"name": "replicapool", "namespace": "rook"},
         "spec": {
             "failureDomain": "host",
             "replicated": {"size": 2, "requireSafeReplicaSize": True},
@@ -76,11 +76,11 @@ storageclass_yaml = [
             "imageFormat": "2",
             "imageFeatures": "layering",
             "csi.storage.k8s.io/provisioner-secret-name": "rook-csi-rbd-provisioner",
-            "csi.storage.k8s.io/provisioner-secret-namespace": "rook-ceph",
+            "csi.storage.k8s.io/provisioner-secret-namespace": "rook",
             "csi.storage.k8s.io/controller-expand-secret-name": "rook-csi-rbd-provisioner",
-            "csi.storage.k8s.io/controller-expand-secret-namespace": "rook-ceph",
+            "csi.storage.k8s.io/controller-expand-secret-namespace": "rook",
             "csi.storage.k8s.io/node-stage-secret-name": "rook-csi-rbd-node",
-            "csi.storage.k8s.io/node-stage-secret-namespace": "rook-ceph",
+            "csi.storage.k8s.io/node-stage-secret-namespace": "rook",
             "csi.storage.k8s.io/fstype": "ext4",
         },
         "allowVolumeExpansion": True,

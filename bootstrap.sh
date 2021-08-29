@@ -31,7 +31,8 @@ then
     python3 -m ocfkube argocd | kubectl apply -n argocd -f -
     read -p "Now wait for ArgoCD to come up, press enter once it's healthy... " -n 1 -r
     
-    echo "USERNAME: admin, PASSWORD: the name of the argocd-server pod"
+    echo -n "USERNAME: admin, PASSWORD: "
+    kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
     kubectl -n argocd get pods
 
     echo "To finish bootstrapping the cluster, visit http://localhost:8000, log in, and press sync. When you're done, Ctrl+C this script. ArgoCD should now redeploy itself, cilium, and everything else in this repo."
