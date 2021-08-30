@@ -23,28 +23,36 @@ ceph_yaml = {
                     "name": "jaws",
                     "devices": [
                         {
-                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K932843P"
+                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K932843P",
+                            "config": {}
                         },
                         {
-                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K933151M"
+                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K933151M",
+                            "config": {}
                         },
                         {
-                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K934154M"
+                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K934154M",
+                            "config": {}
                         },
                         {
-                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K934284J"
+                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K934284J",
+                            "config": {}
                         },
                         {
-                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K934288X"
+                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K934288X",
+                            "config": {}
                         },
                         {
-                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K937582P"
+                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K937582P",
+                            "config": {}
                         },
                         {
-                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K943700W"
+                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K943700W",
+                            "config": {}
                         },
                         {
-                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K944017K"
+                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K944017K",
+                            "config": {}
                         },
                     ],
                 }
