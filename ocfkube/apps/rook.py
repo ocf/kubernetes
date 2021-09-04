@@ -77,9 +77,9 @@ storageclass_yaml = [
             "name": "rook-ceph-block",
             "annotations": {"storageclass.kubernetes.io/is-default-class": "true"},
         },
-        "provisioner": "rook-ceph.rbd.csi.ceph.com",
+        "provisioner": "rook.rbd.csi.ceph.com",
         "parameters": {
-            "clusterID": "rook-ceph",
+            "clusterID": "rook",
             "pool": "replicapool",
             "imageFormat": "2",
             "imageFeatures": "layering",
