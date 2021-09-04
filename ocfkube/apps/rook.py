@@ -15,6 +15,9 @@ ceph_yaml = {
         "cephVersion": {"image": "ceph/ceph:v15.2.6"},
         "dataDirHostPath": "/var/lib/rook",
         "mon": {"count": 3, "allowMultiplePerNode": False},
+        "dashboard": {
+            "enabled": True,
+        },
         "storage": {
             "useAllNodes": False,
             "useAllDevices": False,
