@@ -2,7 +2,10 @@ import sys
 import ocfkube
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    # TODO: Make this more robust...
+    if len(sys.argv) == 1:
+        print(ocfkube.build_changed())
+    elif len(sys.argv) == 2:
+        print(ocfkube.build(sys.argv[1]))
+    else:
         raise ValueError(f"usage: {sys.argv[0]} <application name>")
-    application_name = sys.argv[1]
-    print(ocfkube.build(application_name))
