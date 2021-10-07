@@ -24,7 +24,7 @@ def convert_secret(secret: dict, bootstrap: bool = False) -> dict:
         return secret
 
     client = hvac.Client("https://vault.ocf.berkeley.edu")
-    client.token = os.get("VAULT_TOKEN")
+    client.token = os.getenv("VAULT_TOKEN")
     if not client.token:
         print(
             "I couldn't find your VAULT_TOKEN env variable, so I can't push secrets to Vault."
