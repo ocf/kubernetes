@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    application: fission-api
+    chart: fission-core-1.12.0
+    svc: controller
+  name: controller
+spec:
+  ports:
+  - port: 80
+    targetPort: 8888
+  selector:
+    svc: controller
+  type: ClusterIP

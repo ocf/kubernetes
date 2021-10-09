@@ -1,0 +1,24 @@
+apiVersion: v1
+data:
+  HTTPS_PROXY: ''
+  HTTP_PROXY: ''
+  NO_PROXY: ocf-harbor-core,ocf-harbor-jobservice,ocf-harbor-database,ocf-harbor-chartmuseum,ocf-harbor-clair,ocf-harbor-notary-server,ocf-harbor-notary-signer,ocf-harbor-registry,ocf-harbor-portal,ocf-harbor-trivy,127.0.0.1,localhost,.local,.internal
+  SCANNER_API_SERVER_ADDR: :8080
+  SCANNER_LOG_LEVEL: debug
+  SCANNER_TRIVY_CACHE_DIR: /bitnami/harbor-adapter-trivy/.cache/trivy
+  SCANNER_TRIVY_DEBUG_MODE: 'false'
+  SCANNER_TRIVY_IGNORE_UNFIXED: 'false'
+  SCANNER_TRIVY_INSECURE: 'false'
+  SCANNER_TRIVY_REPORTS_DIR: /bitnami/harbor-adapter-trivy/.cache/reports
+  SCANNER_TRIVY_SEVERITY: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
+  SCANNER_TRIVY_SKIP_UPDATE: 'false'
+  SCANNER_TRIVY_VULN_TYPE: os,library
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/component: trivy
+    app.kubernetes.io/instance: ocf-harbor
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: harbor
+    helm.sh/chart: harbor-10.0.4
+  name: ocf-harbor-trivy-envvars

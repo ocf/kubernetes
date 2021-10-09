@@ -1,0 +1,206 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: repo-server
+    app.kubernetes.io/name: argocd-repo-server
+    app.kubernetes.io/part-of: argocd
+  name: argocd-repo-server
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: argocd-repo-server
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: argocd-repo-server
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: argocd-repo-server
+              topologyKey: failure-domain.beta.kubernetes.io/zone
+            weight: 100
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                app.kubernetes.io/name: argocd-repo-server
+            topologyKey: kubernetes.io/hostname
+      automountServiceAccountToken: false
+      containers:
+      - command:
+        - entrypoint.sh
+        - argocd-repo-server
+        - --redis
+        - argocd-redis-ha-haproxy:6379
+        env:
+        - name: ARGOCD_RECONCILIATION_TIMEOUT
+          valueFrom:
+            configMapKeyRef:
+              key: timeout.reconciliation
+              name: argocd-cm
+              optional: true
+        - name: ARGOCD_REPO_SERVER_LOGFORMAT
+          valueFrom:
+            configMapKeyRef:
+              key: reposerver.log.format
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_REPO_SERVER_LOGLEVEL
+          valueFrom:
+            configMapKeyRef:
+              key: reposerver.log.level
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_REPO_SERVER_PARALLELISM_LIMIT
+          valueFrom:
+            configMapKeyRef:
+              key: reposerver.parallelism.limit
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_REPO_SERVER_DISABLE_TLS
+          valueFrom:
+            configMapKeyRef:
+              key: reposerver.disable.tls
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_TLS_MIN_VERSION
+          valueFrom:
+            configMapKeyRef:
+              key: reposerver.tls.minversion
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_TLS_MAX_VERSION
+          valueFrom:
+            configMapKeyRef:
+              key: reposerver.tls.maxversion
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_TLS_CIPHERS
+          valueFrom:
+            configMapKeyRef:
+              key: reposerver.tls.ciphers
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_REPO_CACHE_EXPIRATION
+          valueFrom:
+            configMapKeyRef:
+              key: reposerver.repo.cache.expiration
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: REDIS_SERVER
+          valueFrom:
+            configMapKeyRef:
+              key: redis.server
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: REDISDB
+          valueFrom:
+            configMapKeyRef:
+              key: redis.db
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_DEFAULT_CACHE_EXPIRATION
+          valueFrom:
+            configMapKeyRef:
+              key: reposerver.default.cache.expiration
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: LD_LIBRARY_PATH
+          value: /usr/local/lib
+        image: quay.io/argoproj/argocd:v2.1.2
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz?full=true
+            port: 8084
+          initialDelaySeconds: 30
+          periodSeconds: 5
+        name: argocd-repo-server
+        ports:
+        - containerPort: 8081
+        - containerPort: 8084
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8084
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - all
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /app/config/ssh
+          name: ssh-known-hosts
+        - mountPath: /app/config/tls
+          name: tls-certs
+        - mountPath: /app/config/gpg/source
+          name: gpg-keys
+        - mountPath: /app/config/gpg/keys
+          name: gpg-keyring
+        - mountPath: /app/config/reposerver/tls
+          name: argocd-repo-server-tls
+        - mountPath: /tmp
+          name: tmp
+        - mountPath: /usr/local/sbin
+          name: usr-local-bin
+        - mountPath: /usr/local/include
+          name: usr-local-include
+        - mountPath: /usr/local/lib
+          name: usr-local-lib
+      initContainers:
+      - args:
+        - cp -r /usr/local/bin/. /mnt/usr/local/bin/ && cp -r /usr/local/include/.
+          /mnt/usr/local/include/ && cp -r /usr/local/lib/. /mnt/usr/local/lib/
+        command:
+        - sh
+        - -c
+        image: python:3.9-buster
+        name: python
+        volumeMounts:
+        - mountPath: /mnt/usr/local/bin
+          name: usr-local-bin
+        - mountPath: /mnt/usr/local/include
+          name: usr-local-include
+        - mountPath: /mnt/usr/local/lib
+          name: usr-local-lib
+      volumes:
+      - configMap:
+          name: argocd-ssh-known-hosts-cm
+        name: ssh-known-hosts
+      - configMap:
+          name: argocd-tls-certs-cm
+        name: tls-certs
+      - configMap:
+          name: argocd-gpg-keys-cm
+        name: gpg-keys
+      - emptyDir: {}
+        name: gpg-keyring
+      - emptyDir: {}
+        name: tmp
+      - name: argocd-repo-server-tls
+        secret:
+          items:
+          - key: tls.crt
+            path: tls.crt
+          - key: tls.key
+            path: tls.key
+          - key: ca.crt
+            path: ca.crt
+          optional: true
+          secretName: argocd-repo-server-tls
+      - emptyDir: {}
+        name: usr-local-lib
+      - emptyDir: {}
+        name: usr-local-include
+      - emptyDir: {}
+        name: usr-local-bin

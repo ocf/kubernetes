@@ -1,0 +1,32 @@
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  labels:
+    app.kubernetes.io/instance: ocf-prometheus
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/version: 7.5.5
+    helm.sh/chart: grafana-6.9.1
+  name: ocf-prometheus-grafana-test
+  namespace: prometheus
+spec:
+  allowPrivilegeEscalation: true
+  fsGroup:
+    rule: RunAsAny
+  hostIPC: false
+  hostNetwork: false
+  hostPID: false
+  privileged: false
+  runAsUser:
+    rule: RunAsAny
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: RunAsAny
+  volumes:
+  - configMap
+  - downwardAPI
+  - emptyDir
+  - projected
+  - csi
+  - secret

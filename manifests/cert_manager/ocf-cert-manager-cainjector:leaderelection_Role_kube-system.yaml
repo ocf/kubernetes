@@ -1,0 +1,30 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    app: cainjector
+    app.kubernetes.io/component: cainjector
+    app.kubernetes.io/instance: ocf-cert-manager
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: cainjector
+    helm.sh/chart: cert-manager-v1.1.0
+  name: ocf-cert-manager-cainjector:leaderelection
+  namespace: kube-system
+rules:
+- apiGroups:
+  - ''
+  resourceNames:
+  - cert-manager-cainjector-leader-election
+  - cert-manager-cainjector-leader-election-core
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - update
+  - patch
+- apiGroups:
+  - ''
+  resources:
+  - configmaps
+  verbs:
+  - create

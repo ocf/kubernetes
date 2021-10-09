@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    ingress.kubernetes.io/force-ssl-redirect: 'true'
+    ingress.kubernetes.io/proxy-body-size: '0'
+    ingress.kubernetes.io/ssl-redirect: 'true'
+    kubernetes.io/tls-acme: 'true'
+    nginx.ingress.kubernetes.io/proxy-body-size: '0'
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+  labels:
+    app.kubernetes.io/instance: ocf-harbor
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: harbor
+    helm.sh/chart: harbor-10.0.4
+  name: ocf-harbor-ingress-notary
+spec:
+  rules:
+  - host: harbor-notary.ocf.berkeley.edu
+    http:
+      paths:
+      - backend:
+          service:
+            name: ocf-harbor-notary-server
+            port:
+              number: 4443
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - harbor-notary.ocf.berkeley.edu
+    secretName: harbor-notary-tls

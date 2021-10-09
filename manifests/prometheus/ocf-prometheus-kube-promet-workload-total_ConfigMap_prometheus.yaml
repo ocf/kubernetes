@@ -1,0 +1,659 @@
+apiVersion: v1
+data:
+  workload-total.json: "{\n    \"__inputs\": [\n\n    ],\n    \"__requires\": [\n\n\
+    \    ],\n    \"annotations\": {\n        \"list\": [\n            {\n        \
+    \        \"builtIn\": 1,\n                \"datasource\": \"-- Grafana --\",\n\
+    \                \"enable\": true,\n                \"hide\": true,\n        \
+    \        \"iconColor\": \"rgba(0, 211, 255, 1)\",\n                \"name\": \"\
+    Annotations & Alerts\",\n                \"type\": \"dashboard\"\n           \
+    \ }\n        ]\n    },\n    \"editable\": true,\n    \"gnetId\": null,\n    \"\
+    graphTooltip\": 0,\n    \"hideControls\": false,\n    \"id\": null,\n    \"links\"\
+    : [\n\n    ],\n    \"panels\": [\n        {\n            \"collapse\": false,\n\
+    \            \"collapsed\": false,\n            \"gridPos\": {\n             \
+    \   \"h\": 1,\n                \"w\": 24,\n                \"x\": 0,\n       \
+    \         \"y\": 0\n            },\n            \"id\": 2,\n            \"panels\"\
+    : [\n\n            ],\n            \"repeat\": null,\n            \"repeatIteration\"\
+    : null,\n            \"repeatRowId\": null,\n            \"showTitle\": true,\n\
+    \            \"title\": \"Current Bandwidth\",\n            \"titleSize\": \"\
+    h6\",\n            \"type\": \"row\"\n        },\n        {\n            \"aliasColors\"\
+    : {\n\n            },\n            \"bars\": true,\n            \"dashLength\"\
+    : 10,\n            \"dashes\": false,\n            \"datasource\": \"$datasource\"\
+    ,\n            \"fill\": 2,\n            \"fillGradient\": 0,\n            \"\
+    gridPos\": {\n                \"h\": 9,\n                \"w\": 12,\n        \
+    \        \"x\": 0,\n                \"y\": 1\n            },\n            \"id\"\
+    : 3,\n            \"legend\": {\n                \"alignAsTable\": true,\n   \
+    \             \"avg\": false,\n                \"current\": true,\n          \
+    \      \"hideEmpty\": true,\n                \"hideZero\": true,\n           \
+    \     \"max\": false,\n                \"min\": false,\n                \"rightSide\"\
+    : true,\n                \"show\": true,\n                \"sideWidth\": null,\n\
+    \                \"sort\": \"current\",\n                \"sortDesc\": true,\n\
+    \                \"total\": false,\n                \"values\": true\n       \
+    \     },\n            \"lines\": false,\n            \"linewidth\": 1,\n     \
+    \       \"links\": [\n\n            ],\n            \"minSpan\": 24,\n       \
+    \     \"nullPointMode\": \"null\",\n            \"paceLength\": 10,\n        \
+    \    \"percentage\": false,\n            \"pointradius\": 5,\n            \"points\"\
+    : false,\n            \"renderer\": \"flot\",\n            \"repeat\": null,\n\
+    \            \"seriesOverrides\": [\n\n            ],\n            \"spaceLength\"\
+    : 10,\n            \"span\": 24,\n            \"stack\": false,\n            \"\
+    steppedLine\": false,\n            \"targets\": [\n                {\n       \
+    \             \"expr\": \"sort_desc(sum(irate(container_network_receive_bytes_total{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\"}[$interval:$resolution])\\n* on (namespace,pod)\\\
+    ngroup_left(workload,workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\", workload=~\\\"$workload\\\", workload_type=\\\
+    \"$type\\\"}) by (pod))\\n\",\n                    \"format\": \"time_series\"\
+    ,\n                    \"intervalFactor\": 1,\n                    \"legendFormat\"\
+    : \"{{ pod }}\",\n                    \"refId\": \"A\",\n                    \"\
+    step\": 10\n                }\n            ],\n            \"thresholds\": [\n\
+    \n            ],\n            \"timeFrom\": null,\n            \"timeShift\":\
+    \ null,\n            \"title\": \"Current Rate of Bytes Received\",\n        \
+    \    \"tooltip\": {\n                \"shared\": true,\n                \"sort\"\
+    : 2,\n                \"value_type\": \"individual\"\n            },\n       \
+    \     \"type\": \"graph\",\n            \"xaxis\": {\n                \"buckets\"\
+    : null,\n                \"mode\": \"series\",\n                \"name\": null,\n\
+    \                \"show\": false,\n                \"values\": [\n           \
+    \         \"current\"\n                ]\n            },\n            \"yaxes\"\
+    : [\n                {\n                    \"format\": \"Bps\",\n           \
+    \         \"label\": null,\n                    \"logBase\": 1,\n            \
+    \        \"max\": null,\n                    \"min\": 0,\n                   \
+    \ \"show\": true\n                },\n                {\n                    \"\
+    format\": \"Bps\",\n                    \"label\": null,\n                   \
+    \ \"logBase\": 1,\n                    \"max\": null,\n                    \"\
+    min\": 0,\n                    \"show\": true\n                }\n           \
+    \ ]\n        },\n        {\n            \"aliasColors\": {\n\n            },\n\
+    \            \"bars\": true,\n            \"dashLength\": 10,\n            \"\
+    dashes\": false,\n            \"datasource\": \"$datasource\",\n            \"\
+    fill\": 2,\n            \"fillGradient\": 0,\n            \"gridPos\": {\n   \
+    \             \"h\": 9,\n                \"w\": 12,\n                \"x\": 12,\n\
+    \                \"y\": 1\n            },\n            \"id\": 4,\n          \
+    \  \"legend\": {\n                \"alignAsTable\": true,\n                \"\
+    avg\": false,\n                \"current\": true,\n                \"hideEmpty\"\
+    : true,\n                \"hideZero\": true,\n                \"max\": false,\n\
+    \                \"min\": false,\n                \"rightSide\": true,\n     \
+    \           \"show\": true,\n                \"sideWidth\": null,\n          \
+    \      \"sort\": \"current\",\n                \"sortDesc\": true,\n         \
+    \       \"total\": false,\n                \"values\": true\n            },\n\
+    \            \"lines\": false,\n            \"linewidth\": 1,\n            \"\
+    links\": [\n\n            ],\n            \"minSpan\": 24,\n            \"nullPointMode\"\
+    : \"null\",\n            \"paceLength\": 10,\n            \"percentage\": false,\n\
+    \            \"pointradius\": 5,\n            \"points\": false,\n           \
+    \ \"renderer\": \"flot\",\n            \"repeat\": null,\n            \"seriesOverrides\"\
+    : [\n\n            ],\n            \"spaceLength\": 10,\n            \"span\"\
+    : 24,\n            \"stack\": false,\n            \"steppedLine\": false,\n  \
+    \          \"targets\": [\n                {\n                    \"expr\": \"\
+    sort_desc(sum(irate(container_network_transmit_bytes_total{cluster=\\\"$cluster\\\
+    \",namespace=~\\\"$namespace\\\"}[$interval:$resolution])\\n* on (namespace,pod)\\\
+    ngroup_left(workload,workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\", workload=~\\\"$workload\\\", workload_type=\\\
+    \"$type\\\"}) by (pod))\\n\",\n                    \"format\": \"time_series\"\
+    ,\n                    \"intervalFactor\": 1,\n                    \"legendFormat\"\
+    : \"{{ pod }}\",\n                    \"refId\": \"A\",\n                    \"\
+    step\": 10\n                }\n            ],\n            \"thresholds\": [\n\
+    \n            ],\n            \"timeFrom\": null,\n            \"timeShift\":\
+    \ null,\n            \"title\": \"Current Rate of Bytes Transmitted\",\n     \
+    \       \"tooltip\": {\n                \"shared\": true,\n                \"\
+    sort\": 2,\n                \"value_type\": \"individual\"\n            },\n \
+    \           \"type\": \"graph\",\n            \"xaxis\": {\n                \"\
+    buckets\": null,\n                \"mode\": \"series\",\n                \"name\"\
+    : null,\n                \"show\": false,\n                \"values\": [\n   \
+    \                 \"current\"\n                ]\n            },\n           \
+    \ \"yaxes\": [\n                {\n                    \"format\": \"Bps\",\n\
+    \                    \"label\": null,\n                    \"logBase\": 1,\n \
+    \                   \"max\": null,\n                    \"min\": 0,\n        \
+    \            \"show\": true\n                },\n                {\n         \
+    \           \"format\": \"Bps\",\n                    \"label\": null,\n     \
+    \               \"logBase\": 1,\n                    \"max\": null,\n        \
+    \            \"min\": 0,\n                    \"show\": true\n               \
+    \ }\n            ]\n        },\n        {\n            \"collapse\": true,\n \
+    \           \"collapsed\": true,\n            \"gridPos\": {\n               \
+    \ \"h\": 1,\n                \"w\": 24,\n                \"x\": 0,\n         \
+    \       \"y\": 10\n            },\n            \"id\": 5,\n            \"panels\"\
+    : [\n                {\n                    \"aliasColors\": {\n\n           \
+    \         },\n                    \"bars\": true,\n                    \"dashLength\"\
+    : 10,\n                    \"dashes\": false,\n                    \"datasource\"\
+    : \"$datasource\",\n                    \"fill\": 2,\n                    \"fillGradient\"\
+    : 0,\n                    \"gridPos\": {\n                        \"h\": 9,\n\
+    \                        \"w\": 12,\n                        \"x\": 0,\n     \
+    \                   \"y\": 11\n                    },\n                    \"\
+    id\": 6,\n                    \"legend\": {\n                        \"alignAsTable\"\
+    : true,\n                        \"avg\": false,\n                        \"current\"\
+    : true,\n                        \"hideEmpty\": true,\n                      \
+    \  \"hideZero\": true,\n                        \"max\": false,\n            \
+    \            \"min\": false,\n                        \"rightSide\": true,\n \
+    \                       \"show\": true,\n                        \"sideWidth\"\
+    : null,\n                        \"sort\": \"current\",\n                    \
+    \    \"sortDesc\": true,\n                        \"total\": false,\n        \
+    \                \"values\": true\n                    },\n                  \
+    \  \"lines\": false,\n                    \"linewidth\": 1,\n                \
+    \    \"links\": [\n\n                    ],\n                    \"minSpan\":\
+    \ 24,\n                    \"nullPointMode\": \"null\",\n                    \"\
+    paceLength\": 10,\n                    \"percentage\": false,\n              \
+    \      \"pointradius\": 5,\n                    \"points\": false,\n         \
+    \           \"renderer\": \"flot\",\n                    \"repeat\": null,\n \
+    \                   \"seriesOverrides\": [\n\n                    ],\n       \
+    \             \"spaceLength\": 10,\n                    \"span\": 24,\n      \
+    \              \"stack\": false,\n                    \"steppedLine\": false,\n\
+    \                    \"targets\": [\n                        {\n             \
+    \               \"expr\": \"sort_desc(avg(irate(container_network_receive_bytes_total{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\"}[$interval:$resolution])\\n* on (namespace,pod)\\\
+    ngroup_left(workload,workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\", workload=~\\\"$workload\\\", workload_type=\\\
+    \"$type\\\"}) by (pod))\\n\",\n                            \"format\": \"time_series\"\
+    ,\n                            \"intervalFactor\": 1,\n                      \
+    \      \"legendFormat\": \"{{ pod }}\",\n                            \"refId\"\
+    : \"A\",\n                            \"step\": 10\n                        }\n\
+    \                    ],\n                    \"thresholds\": [\n\n           \
+    \         ],\n                    \"timeFrom\": null,\n                    \"\
+    timeShift\": null,\n                    \"title\": \"Average Rate of Bytes Received\"\
+    ,\n                    \"tooltip\": {\n                        \"shared\": true,\n\
+    \                        \"sort\": 2,\n                        \"value_type\"\
+    : \"individual\"\n                    },\n                    \"type\": \"graph\"\
+    ,\n                    \"xaxis\": {\n                        \"buckets\": null,\n\
+    \                        \"mode\": \"series\",\n                        \"name\"\
+    : null,\n                        \"show\": false,\n                        \"\
+    values\": [\n                            \"current\"\n                       \
+    \ ]\n                    },\n                    \"yaxes\": [\n              \
+    \          {\n                            \"format\": \"Bps\",\n             \
+    \               \"label\": null,\n                            \"logBase\": 1,\n\
+    \                            \"max\": null,\n                            \"min\"\
+    : 0,\n                            \"show\": true\n                        },\n\
+    \                        {\n                            \"format\": \"Bps\",\n\
+    \                            \"label\": null,\n                            \"\
+    logBase\": 1,\n                            \"max\": null,\n                  \
+    \          \"min\": 0,\n                            \"show\": true\n         \
+    \               }\n                    ]\n                },\n               \
+    \ {\n                    \"aliasColors\": {\n\n                    },\n      \
+    \              \"bars\": true,\n                    \"dashLength\": 10,\n    \
+    \                \"dashes\": false,\n                    \"datasource\": \"$datasource\"\
+    ,\n                    \"fill\": 2,\n                    \"fillGradient\": 0,\n\
+    \                    \"gridPos\": {\n                        \"h\": 9,\n     \
+    \                   \"w\": 12,\n                        \"x\": 12,\n         \
+    \               \"y\": 11\n                    },\n                    \"id\"\
+    : 7,\n                    \"legend\": {\n                        \"alignAsTable\"\
+    : true,\n                        \"avg\": false,\n                        \"current\"\
+    : true,\n                        \"hideEmpty\": true,\n                      \
+    \  \"hideZero\": true,\n                        \"max\": false,\n            \
+    \            \"min\": false,\n                        \"rightSide\": true,\n \
+    \                       \"show\": true,\n                        \"sideWidth\"\
+    : null,\n                        \"sort\": \"current\",\n                    \
+    \    \"sortDesc\": true,\n                        \"total\": false,\n        \
+    \                \"values\": true\n                    },\n                  \
+    \  \"lines\": false,\n                    \"linewidth\": 1,\n                \
+    \    \"links\": [\n\n                    ],\n                    \"minSpan\":\
+    \ 24,\n                    \"nullPointMode\": \"null\",\n                    \"\
+    paceLength\": 10,\n                    \"percentage\": false,\n              \
+    \      \"pointradius\": 5,\n                    \"points\": false,\n         \
+    \           \"renderer\": \"flot\",\n                    \"repeat\": null,\n \
+    \                   \"seriesOverrides\": [\n\n                    ],\n       \
+    \             \"spaceLength\": 10,\n                    \"span\": 24,\n      \
+    \              \"stack\": false,\n                    \"steppedLine\": false,\n\
+    \                    \"targets\": [\n                        {\n             \
+    \               \"expr\": \"sort_desc(avg(irate(container_network_transmit_bytes_total{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\"}[$interval:$resolution])\\n* on (namespace,pod)\\\
+    ngroup_left(workload,workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\", workload=~\\\"$workload\\\", workload_type=\\\
+    \"$type\\\"}) by (pod))\\n\",\n                            \"format\": \"time_series\"\
+    ,\n                            \"intervalFactor\": 1,\n                      \
+    \      \"legendFormat\": \"{{ pod }}\",\n                            \"refId\"\
+    : \"A\",\n                            \"step\": 10\n                        }\n\
+    \                    ],\n                    \"thresholds\": [\n\n           \
+    \         ],\n                    \"timeFrom\": null,\n                    \"\
+    timeShift\": null,\n                    \"title\": \"Average Rate of Bytes Transmitted\"\
+    ,\n                    \"tooltip\": {\n                        \"shared\": true,\n\
+    \                        \"sort\": 2,\n                        \"value_type\"\
+    : \"individual\"\n                    },\n                    \"type\": \"graph\"\
+    ,\n                    \"xaxis\": {\n                        \"buckets\": null,\n\
+    \                        \"mode\": \"series\",\n                        \"name\"\
+    : null,\n                        \"show\": false,\n                        \"\
+    values\": [\n                            \"current\"\n                       \
+    \ ]\n                    },\n                    \"yaxes\": [\n              \
+    \          {\n                            \"format\": \"Bps\",\n             \
+    \               \"label\": null,\n                            \"logBase\": 1,\n\
+    \                            \"max\": null,\n                            \"min\"\
+    : 0,\n                            \"show\": true\n                        },\n\
+    \                        {\n                            \"format\": \"Bps\",\n\
+    \                            \"label\": null,\n                            \"\
+    logBase\": 1,\n                            \"max\": null,\n                  \
+    \          \"min\": 0,\n                            \"show\": true\n         \
+    \               }\n                    ]\n                }\n            ],\n\
+    \            \"repeat\": null,\n            \"repeatIteration\": null,\n     \
+    \       \"repeatRowId\": null,\n            \"showTitle\": true,\n           \
+    \ \"title\": \"Average Bandwidth\",\n            \"titleSize\": \"h6\",\n    \
+    \        \"type\": \"row\"\n        },\n        {\n            \"collapse\": false,\n\
+    \            \"collapsed\": false,\n            \"gridPos\": {\n             \
+    \   \"h\": 1,\n                \"w\": 24,\n                \"x\": 0,\n       \
+    \         \"y\": 11\n            },\n            \"id\": 8,\n            \"panels\"\
+    : [\n\n            ],\n            \"repeat\": null,\n            \"repeatIteration\"\
+    : null,\n            \"repeatRowId\": null,\n            \"showTitle\": true,\n\
+    \            \"title\": \"Bandwidth HIstory\",\n            \"titleSize\": \"\
+    h6\",\n            \"type\": \"row\"\n        },\n        {\n            \"aliasColors\"\
+    : {\n\n            },\n            \"bars\": false,\n            \"dashLength\"\
+    : 10,\n            \"dashes\": false,\n            \"datasource\": \"$datasource\"\
+    ,\n            \"fill\": 2,\n            \"fillGradient\": 0,\n            \"\
+    gridPos\": {\n                \"h\": 9,\n                \"w\": 12,\n        \
+    \        \"x\": 0,\n                \"y\": 12\n            },\n            \"\
+    id\": 9,\n            \"legend\": {\n                \"alignAsTable\": false,\n\
+    \                \"avg\": false,\n                \"current\": false,\n      \
+    \          \"hideEmpty\": true,\n                \"hideZero\": true,\n       \
+    \         \"max\": false,\n                \"min\": false,\n                \"\
+    rightSide\": false,\n                \"show\": true,\n                \"sideWidth\"\
+    : null,\n                \"total\": false,\n                \"values\": false\n\
+    \            },\n            \"lines\": true,\n            \"linewidth\": 2,\n\
+    \            \"links\": [\n\n            ],\n            \"minSpan\": 12,\n  \
+    \          \"nullPointMode\": \"connected\",\n            \"paceLength\": 10,\n\
+    \            \"percentage\": false,\n            \"pointradius\": 5,\n       \
+    \     \"points\": false,\n            \"renderer\": \"flot\",\n            \"\
+    repeat\": null,\n            \"seriesOverrides\": [\n\n            ],\n      \
+    \      \"spaceLength\": 10,\n            \"span\": 12,\n            \"stack\"\
+    : true,\n            \"steppedLine\": false,\n            \"targets\": [\n   \
+    \             {\n                    \"expr\": \"sort_desc(sum(irate(container_network_receive_bytes_total{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\"}[$interval:$resolution])\\n* on (namespace,pod)\\\
+    ngroup_left(workload,workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\", workload=~\\\"$workload\\\", workload_type=\\\
+    \"$type\\\"}) by (pod))\\n\",\n                    \"format\": \"time_series\"\
+    ,\n                    \"intervalFactor\": 1,\n                    \"legendFormat\"\
+    : \"{{pod}}\",\n                    \"refId\": \"A\",\n                    \"\
+    step\": 10\n                }\n            ],\n            \"thresholds\": [\n\
+    \n            ],\n            \"timeFrom\": null,\n            \"timeShift\":\
+    \ null,\n            \"title\": \"Receive Bandwidth\",\n            \"tooltip\"\
+    : {\n                \"shared\": true,\n                \"sort\": 2,\n       \
+    \         \"value_type\": \"individual\"\n            },\n            \"type\"\
+    : \"graph\",\n            \"xaxis\": {\n                \"buckets\": null,\n \
+    \               \"mode\": \"time\",\n                \"name\": null,\n       \
+    \         \"show\": true,\n                \"values\": [\n\n                ]\n\
+    \            },\n            \"yaxes\": [\n                {\n               \
+    \     \"format\": \"Bps\",\n                    \"label\": null,\n           \
+    \         \"logBase\": 1,\n                    \"max\": null,\n              \
+    \      \"min\": 0,\n                    \"show\": true\n                },\n \
+    \               {\n                    \"format\": \"Bps\",\n                \
+    \    \"label\": null,\n                    \"logBase\": 1,\n                 \
+    \   \"max\": null,\n                    \"min\": 0,\n                    \"show\"\
+    : true\n                }\n            ]\n        },\n        {\n            \"\
+    aliasColors\": {\n\n            },\n            \"bars\": false,\n           \
+    \ \"dashLength\": 10,\n            \"dashes\": false,\n            \"datasource\"\
+    : \"$datasource\",\n            \"fill\": 2,\n            \"fillGradient\": 0,\n\
+    \            \"gridPos\": {\n                \"h\": 9,\n                \"w\"\
+    : 12,\n                \"x\": 12,\n                \"y\": 12\n            },\n\
+    \            \"id\": 10,\n            \"legend\": {\n                \"alignAsTable\"\
+    : false,\n                \"avg\": false,\n                \"current\": false,\n\
+    \                \"hideEmpty\": true,\n                \"hideZero\": true,\n \
+    \               \"max\": false,\n                \"min\": false,\n           \
+    \     \"rightSide\": false,\n                \"show\": true,\n               \
+    \ \"sideWidth\": null,\n                \"total\": false,\n                \"\
+    values\": false\n            },\n            \"lines\": true,\n            \"\
+    linewidth\": 2,\n            \"links\": [\n\n            ],\n            \"minSpan\"\
+    : 12,\n            \"nullPointMode\": \"connected\",\n            \"paceLength\"\
+    : 10,\n            \"percentage\": false,\n            \"pointradius\": 5,\n \
+    \           \"points\": false,\n            \"renderer\": \"flot\",\n        \
+    \    \"repeat\": null,\n            \"seriesOverrides\": [\n\n            ],\n\
+    \            \"spaceLength\": 10,\n            \"span\": 12,\n            \"stack\"\
+    : true,\n            \"steppedLine\": false,\n            \"targets\": [\n   \
+    \             {\n                    \"expr\": \"sort_desc(sum(irate(container_network_transmit_bytes_total{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\"}[$interval:$resolution])\\n* on (namespace,pod)\\\
+    ngroup_left(workload,workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\", workload=~\\\"$workload\\\", workload_type=\\\
+    \"$type\\\"}) by (pod))\\n\",\n                    \"format\": \"time_series\"\
+    ,\n                    \"intervalFactor\": 1,\n                    \"legendFormat\"\
+    : \"{{pod}}\",\n                    \"refId\": \"A\",\n                    \"\
+    step\": 10\n                }\n            ],\n            \"thresholds\": [\n\
+    \n            ],\n            \"timeFrom\": null,\n            \"timeShift\":\
+    \ null,\n            \"title\": \"Transmit Bandwidth\",\n            \"tooltip\"\
+    : {\n                \"shared\": true,\n                \"sort\": 2,\n       \
+    \         \"value_type\": \"individual\"\n            },\n            \"type\"\
+    : \"graph\",\n            \"xaxis\": {\n                \"buckets\": null,\n \
+    \               \"mode\": \"time\",\n                \"name\": null,\n       \
+    \         \"show\": true,\n                \"values\": [\n\n                ]\n\
+    \            },\n            \"yaxes\": [\n                {\n               \
+    \     \"format\": \"Bps\",\n                    \"label\": null,\n           \
+    \         \"logBase\": 1,\n                    \"max\": null,\n              \
+    \      \"min\": 0,\n                    \"show\": true\n                },\n \
+    \               {\n                    \"format\": \"Bps\",\n                \
+    \    \"label\": null,\n                    \"logBase\": 1,\n                 \
+    \   \"max\": null,\n                    \"min\": 0,\n                    \"show\"\
+    : true\n                }\n            ]\n        },\n        {\n            \"\
+    collapse\": true,\n            \"collapsed\": true,\n            \"gridPos\":\
+    \ {\n                \"h\": 1,\n                \"w\": 24,\n                \"\
+    x\": 0,\n                \"y\": 21\n            },\n            \"id\": 11,\n\
+    \            \"panels\": [\n                {\n                    \"aliasColors\"\
+    : {\n\n                    },\n                    \"bars\": false,\n        \
+    \            \"dashLength\": 10,\n                    \"dashes\": false,\n   \
+    \                 \"datasource\": \"$datasource\",\n                    \"fill\"\
+    : 2,\n                    \"fillGradient\": 0,\n                    \"gridPos\"\
+    : {\n                        \"h\": 9,\n                        \"w\": 12,\n \
+    \                       \"x\": 0,\n                        \"y\": 22\n       \
+    \             },\n                    \"id\": 12,\n                    \"legend\"\
+    : {\n                        \"alignAsTable\": false,\n                      \
+    \  \"avg\": false,\n                        \"current\": false,\n            \
+    \            \"hideEmpty\": true,\n                        \"hideZero\": true,\n\
+    \                        \"max\": false,\n                        \"min\": false,\n\
+    \                        \"rightSide\": false,\n                        \"show\"\
+    : true,\n                        \"sideWidth\": null,\n                      \
+    \  \"total\": false,\n                        \"values\": false\n            \
+    \        },\n                    \"lines\": true,\n                    \"linewidth\"\
+    : 2,\n                    \"links\": [\n\n                    ],\n           \
+    \         \"minSpan\": 12,\n                    \"nullPointMode\": \"connected\"\
+    ,\n                    \"paceLength\": 10,\n                    \"percentage\"\
+    : false,\n                    \"pointradius\": 5,\n                    \"points\"\
+    : false,\n                    \"renderer\": \"flot\",\n                    \"\
+    repeat\": null,\n                    \"seriesOverrides\": [\n\n              \
+    \      ],\n                    \"spaceLength\": 10,\n                    \"span\"\
+    : 12,\n                    \"stack\": true,\n                    \"steppedLine\"\
+    : false,\n                    \"targets\": [\n                        {\n    \
+    \                        \"expr\": \"sort_desc(sum(irate(container_network_receive_packets_total{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\"}[$interval:$resolution])\\n* on (namespace,pod)\\\
+    ngroup_left(workload,workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\", workload=~\\\"$workload\\\", workload_type=\\\
+    \"$type\\\"}) by (pod))\\n\",\n                            \"format\": \"time_series\"\
+    ,\n                            \"intervalFactor\": 1,\n                      \
+    \      \"legendFormat\": \"{{pod}}\",\n                            \"refId\":\
+    \ \"A\",\n                            \"step\": 10\n                        }\n\
+    \                    ],\n                    \"thresholds\": [\n\n           \
+    \         ],\n                    \"timeFrom\": null,\n                    \"\
+    timeShift\": null,\n                    \"title\": \"Rate of Received Packets\"\
+    ,\n                    \"tooltip\": {\n                        \"shared\": true,\n\
+    \                        \"sort\": 2,\n                        \"value_type\"\
+    : \"individual\"\n                    },\n                    \"type\": \"graph\"\
+    ,\n                    \"xaxis\": {\n                        \"buckets\": null,\n\
+    \                        \"mode\": \"time\",\n                        \"name\"\
+    : null,\n                        \"show\": true,\n                        \"values\"\
+    : [\n\n                        ]\n                    },\n                   \
+    \ \"yaxes\": [\n                        {\n                            \"format\"\
+    : \"pps\",\n                            \"label\": null,\n                   \
+    \         \"logBase\": 1,\n                            \"max\": null,\n      \
+    \                      \"min\": 0,\n                            \"show\": true\n\
+    \                        },\n                        {\n                     \
+    \       \"format\": \"pps\",\n                            \"label\": null,\n \
+    \                           \"logBase\": 1,\n                            \"max\"\
+    : null,\n                            \"min\": 0,\n                           \
+    \ \"show\": true\n                        }\n                    ]\n         \
+    \       },\n                {\n                    \"aliasColors\": {\n\n    \
+    \                },\n                    \"bars\": false,\n                  \
+    \  \"dashLength\": 10,\n                    \"dashes\": false,\n             \
+    \       \"datasource\": \"$datasource\",\n                    \"fill\": 2,\n \
+    \                   \"fillGradient\": 0,\n                    \"gridPos\": {\n\
+    \                        \"h\": 9,\n                        \"w\": 12,\n     \
+    \                   \"x\": 12,\n                        \"y\": 22\n          \
+    \          },\n                    \"id\": 13,\n                    \"legend\"\
+    : {\n                        \"alignAsTable\": false,\n                      \
+    \  \"avg\": false,\n                        \"current\": false,\n            \
+    \            \"hideEmpty\": true,\n                        \"hideZero\": true,\n\
+    \                        \"max\": false,\n                        \"min\": false,\n\
+    \                        \"rightSide\": false,\n                        \"show\"\
+    : true,\n                        \"sideWidth\": null,\n                      \
+    \  \"total\": false,\n                        \"values\": false\n            \
+    \        },\n                    \"lines\": true,\n                    \"linewidth\"\
+    : 2,\n                    \"links\": [\n\n                    ],\n           \
+    \         \"minSpan\": 12,\n                    \"nullPointMode\": \"connected\"\
+    ,\n                    \"paceLength\": 10,\n                    \"percentage\"\
+    : false,\n                    \"pointradius\": 5,\n                    \"points\"\
+    : false,\n                    \"renderer\": \"flot\",\n                    \"\
+    repeat\": null,\n                    \"seriesOverrides\": [\n\n              \
+    \      ],\n                    \"spaceLength\": 10,\n                    \"span\"\
+    : 12,\n                    \"stack\": true,\n                    \"steppedLine\"\
+    : false,\n                    \"targets\": [\n                        {\n    \
+    \                        \"expr\": \"sort_desc(sum(irate(container_network_transmit_packets_total{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\"}[$interval:$resolution])\\n* on (namespace,pod)\\\
+    ngroup_left(workload,workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\", workload=~\\\"$workload\\\", workload_type=\\\
+    \"$type\\\"}) by (pod))\\n\",\n                            \"format\": \"time_series\"\
+    ,\n                            \"intervalFactor\": 1,\n                      \
+    \      \"legendFormat\": \"{{pod}}\",\n                            \"refId\":\
+    \ \"A\",\n                            \"step\": 10\n                        }\n\
+    \                    ],\n                    \"thresholds\": [\n\n           \
+    \         ],\n                    \"timeFrom\": null,\n                    \"\
+    timeShift\": null,\n                    \"title\": \"Rate of Transmitted Packets\"\
+    ,\n                    \"tooltip\": {\n                        \"shared\": true,\n\
+    \                        \"sort\": 2,\n                        \"value_type\"\
+    : \"individual\"\n                    },\n                    \"type\": \"graph\"\
+    ,\n                    \"xaxis\": {\n                        \"buckets\": null,\n\
+    \                        \"mode\": \"time\",\n                        \"name\"\
+    : null,\n                        \"show\": true,\n                        \"values\"\
+    : [\n\n                        ]\n                    },\n                   \
+    \ \"yaxes\": [\n                        {\n                            \"format\"\
+    : \"pps\",\n                            \"label\": null,\n                   \
+    \         \"logBase\": 1,\n                            \"max\": null,\n      \
+    \                      \"min\": 0,\n                            \"show\": true\n\
+    \                        },\n                        {\n                     \
+    \       \"format\": \"pps\",\n                            \"label\": null,\n \
+    \                           \"logBase\": 1,\n                            \"max\"\
+    : null,\n                            \"min\": 0,\n                           \
+    \ \"show\": true\n                        }\n                    ]\n         \
+    \       }\n            ],\n            \"repeat\": null,\n            \"repeatIteration\"\
+    : null,\n            \"repeatRowId\": null,\n            \"showTitle\": true,\n\
+    \            \"title\": \"Packets\",\n            \"titleSize\": \"h6\",\n   \
+    \         \"type\": \"row\"\n        },\n        {\n            \"collapse\":\
+    \ true,\n            \"collapsed\": true,\n            \"gridPos\": {\n      \
+    \          \"h\": 1,\n                \"w\": 24,\n                \"x\": 0,\n\
+    \                \"y\": 22\n            },\n            \"id\": 14,\n        \
+    \    \"panels\": [\n                {\n                    \"aliasColors\": {\n\
+    \n                    },\n                    \"bars\": false,\n             \
+    \       \"dashLength\": 10,\n                    \"dashes\": false,\n        \
+    \            \"datasource\": \"$datasource\",\n                    \"fill\": 2,\n\
+    \                    \"fillGradient\": 0,\n                    \"gridPos\": {\n\
+    \                        \"h\": 9,\n                        \"w\": 12,\n     \
+    \                   \"x\": 0,\n                        \"y\": 23\n           \
+    \         },\n                    \"id\": 15,\n                    \"legend\"\
+    : {\n                        \"alignAsTable\": false,\n                      \
+    \  \"avg\": false,\n                        \"current\": false,\n            \
+    \            \"hideEmpty\": true,\n                        \"hideZero\": true,\n\
+    \                        \"max\": false,\n                        \"min\": false,\n\
+    \                        \"rightSide\": false,\n                        \"show\"\
+    : true,\n                        \"sideWidth\": null,\n                      \
+    \  \"total\": false,\n                        \"values\": false\n            \
+    \        },\n                    \"lines\": true,\n                    \"linewidth\"\
+    : 2,\n                    \"links\": [\n\n                    ],\n           \
+    \         \"minSpan\": 12,\n                    \"nullPointMode\": \"connected\"\
+    ,\n                    \"paceLength\": 10,\n                    \"percentage\"\
+    : false,\n                    \"pointradius\": 5,\n                    \"points\"\
+    : false,\n                    \"renderer\": \"flot\",\n                    \"\
+    repeat\": null,\n                    \"seriesOverrides\": [\n\n              \
+    \      ],\n                    \"spaceLength\": 10,\n                    \"span\"\
+    : 12,\n                    \"stack\": true,\n                    \"steppedLine\"\
+    : false,\n                    \"targets\": [\n                        {\n    \
+    \                        \"expr\": \"sort_desc(sum(irate(container_network_receive_packets_dropped_total{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\"}[$interval:$resolution])\\n* on (namespace,pod)\\\
+    ngroup_left(workload,workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\", workload=~\\\"$workload\\\", workload_type=\\\
+    \"$type\\\"}) by (pod))\\n\",\n                            \"format\": \"time_series\"\
+    ,\n                            \"intervalFactor\": 1,\n                      \
+    \      \"legendFormat\": \"{{pod}}\",\n                            \"refId\":\
+    \ \"A\",\n                            \"step\": 10\n                        }\n\
+    \                    ],\n                    \"thresholds\": [\n\n           \
+    \         ],\n                    \"timeFrom\": null,\n                    \"\
+    timeShift\": null,\n                    \"title\": \"Rate of Received Packets\
+    \ Dropped\",\n                    \"tooltip\": {\n                        \"shared\"\
+    : true,\n                        \"sort\": 2,\n                        \"value_type\"\
+    : \"individual\"\n                    },\n                    \"type\": \"graph\"\
+    ,\n                    \"xaxis\": {\n                        \"buckets\": null,\n\
+    \                        \"mode\": \"time\",\n                        \"name\"\
+    : null,\n                        \"show\": true,\n                        \"values\"\
+    : [\n\n                        ]\n                    },\n                   \
+    \ \"yaxes\": [\n                        {\n                            \"format\"\
+    : \"pps\",\n                            \"label\": null,\n                   \
+    \         \"logBase\": 1,\n                            \"max\": null,\n      \
+    \                      \"min\": 0,\n                            \"show\": true\n\
+    \                        },\n                        {\n                     \
+    \       \"format\": \"pps\",\n                            \"label\": null,\n \
+    \                           \"logBase\": 1,\n                            \"max\"\
+    : null,\n                            \"min\": 0,\n                           \
+    \ \"show\": true\n                        }\n                    ]\n         \
+    \       },\n                {\n                    \"aliasColors\": {\n\n    \
+    \                },\n                    \"bars\": false,\n                  \
+    \  \"dashLength\": 10,\n                    \"dashes\": false,\n             \
+    \       \"datasource\": \"$datasource\",\n                    \"fill\": 2,\n \
+    \                   \"fillGradient\": 0,\n                    \"gridPos\": {\n\
+    \                        \"h\": 9,\n                        \"w\": 12,\n     \
+    \                   \"x\": 12,\n                        \"y\": 23\n          \
+    \          },\n                    \"id\": 16,\n                    \"legend\"\
+    : {\n                        \"alignAsTable\": false,\n                      \
+    \  \"avg\": false,\n                        \"current\": false,\n            \
+    \            \"hideEmpty\": true,\n                        \"hideZero\": true,\n\
+    \                        \"max\": false,\n                        \"min\": false,\n\
+    \                        \"rightSide\": false,\n                        \"show\"\
+    : true,\n                        \"sideWidth\": null,\n                      \
+    \  \"total\": false,\n                        \"values\": false\n            \
+    \        },\n                    \"lines\": true,\n                    \"linewidth\"\
+    : 2,\n                    \"links\": [\n\n                    ],\n           \
+    \         \"minSpan\": 12,\n                    \"nullPointMode\": \"connected\"\
+    ,\n                    \"paceLength\": 10,\n                    \"percentage\"\
+    : false,\n                    \"pointradius\": 5,\n                    \"points\"\
+    : false,\n                    \"renderer\": \"flot\",\n                    \"\
+    repeat\": null,\n                    \"seriesOverrides\": [\n\n              \
+    \      ],\n                    \"spaceLength\": 10,\n                    \"span\"\
+    : 12,\n                    \"stack\": true,\n                    \"steppedLine\"\
+    : false,\n                    \"targets\": [\n                        {\n    \
+    \                        \"expr\": \"sort_desc(sum(irate(container_network_transmit_packets_dropped_total{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\"}[$interval:$resolution])\\n* on (namespace,pod)\\\
+    ngroup_left(workload,workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\", workload=~\\\"$workload\\\", workload_type=\\\
+    \"$type\\\"}) by (pod))\\n\",\n                            \"format\": \"time_series\"\
+    ,\n                            \"intervalFactor\": 1,\n                      \
+    \      \"legendFormat\": \"{{pod}}\",\n                            \"refId\":\
+    \ \"A\",\n                            \"step\": 10\n                        }\n\
+    \                    ],\n                    \"thresholds\": [\n\n           \
+    \         ],\n                    \"timeFrom\": null,\n                    \"\
+    timeShift\": null,\n                    \"title\": \"Rate of Transmitted Packets\
+    \ Dropped\",\n                    \"tooltip\": {\n                        \"shared\"\
+    : true,\n                        \"sort\": 2,\n                        \"value_type\"\
+    : \"individual\"\n                    },\n                    \"type\": \"graph\"\
+    ,\n                    \"xaxis\": {\n                        \"buckets\": null,\n\
+    \                        \"mode\": \"time\",\n                        \"name\"\
+    : null,\n                        \"show\": true,\n                        \"values\"\
+    : [\n\n                        ]\n                    },\n                   \
+    \ \"yaxes\": [\n                        {\n                            \"format\"\
+    : \"pps\",\n                            \"label\": null,\n                   \
+    \         \"logBase\": 1,\n                            \"max\": null,\n      \
+    \                      \"min\": 0,\n                            \"show\": true\n\
+    \                        },\n                        {\n                     \
+    \       \"format\": \"pps\",\n                            \"label\": null,\n \
+    \                           \"logBase\": 1,\n                            \"max\"\
+    : null,\n                            \"min\": 0,\n                           \
+    \ \"show\": true\n                        }\n                    ]\n         \
+    \       }\n            ],\n            \"repeat\": null,\n            \"repeatIteration\"\
+    : null,\n            \"repeatRowId\": null,\n            \"showTitle\": true,\n\
+    \            \"title\": \"Errors\",\n            \"titleSize\": \"h6\",\n    \
+    \        \"type\": \"row\"\n        }\n    ],\n    \"refresh\": \"10s\",\n   \
+    \ \"rows\": [\n\n    ],\n    \"schemaVersion\": 18,\n    \"style\": \"dark\",\n\
+    \    \"tags\": [\n        \"kubernetes-mixin\"\n    ],\n    \"templating\": {\n\
+    \        \"list\": [\n            {\n                \"current\": {\n        \
+    \            \"text\": \"default\",\n                    \"value\": \"default\"\
+    \n                },\n                \"hide\": 0,\n                \"label\"\
+    : null,\n                \"name\": \"datasource\",\n                \"options\"\
+    : [\n\n                ],\n                \"query\": \"prometheus\",\n      \
+    \          \"refresh\": 1,\n                \"regex\": \"\",\n               \
+    \ \"type\": \"datasource\"\n            },\n            {\n                \"\
+    allValue\": null,\n                \"current\": {\n\n                },\n    \
+    \            \"datasource\": \"$datasource\",\n                \"hide\": 2,\n\
+    \                \"includeAll\": false,\n                \"label\": null,\n  \
+    \              \"multi\": false,\n                \"name\": \"cluster\",\n   \
+    \             \"options\": [\n\n                ],\n                \"query\"\
+    : \"label_values(kube_pod_info, cluster)\",\n                \"refresh\": 2,\n\
+    \                \"regex\": \"\",\n                \"sort\": 0,\n            \
+    \    \"tagValuesQuery\": \"\",\n                \"tags\": [\n\n              \
+    \  ],\n                \"tagsQuery\": \"\",\n                \"type\": \"query\"\
+    ,\n                \"useTags\": false\n            },\n            {\n       \
+    \         \"allValue\": \".+\",\n                \"auto\": false,\n          \
+    \      \"auto_count\": 30,\n                \"auto_min\": \"10s\",\n         \
+    \       \"current\": {\n                    \"text\": \"kube-system\",\n     \
+    \               \"value\": \"kube-system\"\n                },\n             \
+    \   \"datasource\": \"$datasource\",\n                \"definition\": \"label_values(container_network_receive_packets_total{cluster=\\\
+    \"$cluster\\\"}, namespace)\",\n                \"hide\": 0,\n               \
+    \ \"includeAll\": true,\n                \"label\": null,\n                \"\
+    multi\": false,\n                \"name\": \"namespace\",\n                \"\
+    options\": [\n\n                ],\n                \"query\": \"label_values(container_network_receive_packets_total{cluster=\\\
+    \"$cluster\\\"}, namespace)\",\n                \"refresh\": 2,\n            \
+    \    \"regex\": \"\",\n                \"skipUrlSync\": false,\n             \
+    \   \"sort\": 1,\n                \"tagValuesQuery\": \"\",\n                \"\
+    tags\": [\n\n                ],\n                \"tagsQuery\": \"\",\n      \
+    \          \"type\": \"query\",\n                \"useTags\": false\n        \
+    \    },\n            {\n                \"allValue\": null,\n                \"\
+    auto\": false,\n                \"auto_count\": 30,\n                \"auto_min\"\
+    : \"10s\",\n                \"current\": {\n                    \"text\": \"\"\
+    ,\n                    \"value\": \"\"\n                },\n                \"\
+    datasource\": \"$datasource\",\n                \"definition\": \"label_values(namespace_workload_pod:kube_pod_owner:relabel{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\"}, workload)\",\n                \"\
+    hide\": 0,\n                \"includeAll\": false,\n                \"label\"\
+    : null,\n                \"multi\": false,\n                \"name\": \"workload\"\
+    ,\n                \"options\": [\n\n                ],\n                \"query\"\
+    : \"label_values(namespace_workload_pod:kube_pod_owner:relabel{cluster=\\\"$cluster\\\
+    \",namespace=~\\\"$namespace\\\"}, workload)\",\n                \"refresh\":\
+    \ 2,\n                \"regex\": \"\",\n                \"skipUrlSync\": false,\n\
+    \                \"sort\": 1,\n                \"tagValuesQuery\": \"\",\n   \
+    \             \"tags\": [\n\n                ],\n                \"tagsQuery\"\
+    : \"\",\n                \"type\": \"query\",\n                \"useTags\": false\n\
+    \            },\n            {\n                \"allValue\": null,\n        \
+    \        \"auto\": false,\n                \"auto_count\": 30,\n             \
+    \   \"auto_min\": \"10s\",\n                \"current\": {\n                 \
+    \   \"text\": \"deployment\",\n                    \"value\": \"deployment\"\n\
+    \                },\n                \"datasource\": \"$datasource\",\n      \
+    \          \"definition\": \"label_values(namespace_workload_pod:kube_pod_owner:relabel{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\", workload=~\\\"$workload\\\"}, workload_type)\"\
+    ,\n                \"hide\": 0,\n                \"includeAll\": false,\n    \
+    \            \"label\": null,\n                \"multi\": false,\n           \
+    \     \"name\": \"type\",\n                \"options\": [\n\n                ],\n\
+    \                \"query\": \"label_values(namespace_workload_pod:kube_pod_owner:relabel{cluster=\\\
+    \"$cluster\\\",namespace=~\\\"$namespace\\\", workload=~\\\"$workload\\\"}, workload_type)\"\
+    ,\n                \"refresh\": 2,\n                \"regex\": \"\",\n       \
+    \         \"skipUrlSync\": false,\n                \"sort\": 0,\n            \
+    \    \"tagValuesQuery\": \"\",\n                \"tags\": [\n\n              \
+    \  ],\n                \"tagsQuery\": \"\",\n                \"type\": \"query\"\
+    ,\n                \"useTags\": false\n            },\n            {\n       \
+    \         \"allValue\": null,\n                \"auto\": false,\n            \
+    \    \"auto_count\": 30,\n                \"auto_min\": \"10s\",\n           \
+    \     \"current\": {\n                    \"text\": \"5m\",\n                \
+    \    \"value\": \"5m\"\n                },\n                \"datasource\": \"\
+    $datasource\",\n                \"hide\": 0,\n                \"includeAll\":\
+    \ false,\n                \"label\": null,\n                \"multi\": false,\n\
+    \                \"name\": \"resolution\",\n                \"options\": [\n \
+    \                   {\n                        \"selected\": false,\n        \
+    \                \"text\": \"30s\",\n                        \"value\": \"30s\"\
+    \n                    },\n                    {\n                        \"selected\"\
+    : true,\n                        \"text\": \"5m\",\n                        \"\
+    value\": \"5m\"\n                    },\n                    {\n             \
+    \           \"selected\": false,\n                        \"text\": \"1h\",\n\
+    \                        \"value\": \"1h\"\n                    }\n          \
+    \      ],\n                \"query\": \"30s,5m,1h\",\n                \"refresh\"\
+    : 2,\n                \"regex\": \"\",\n                \"skipUrlSync\": false,\n\
+    \                \"sort\": 1,\n                \"tagValuesQuery\": \"\",\n   \
+    \             \"tags\": [\n\n                ],\n                \"tagsQuery\"\
+    : \"\",\n                \"type\": \"interval\",\n                \"useTags\"\
+    : false\n            },\n            {\n                \"allValue\": null,\n\
+    \                \"auto\": false,\n                \"auto_count\": 30,\n     \
+    \           \"auto_min\": \"10s\",\n                \"current\": {\n         \
+    \           \"text\": \"5m\",\n                    \"value\": \"5m\"\n       \
+    \         },\n                \"datasource\": \"$datasource\",\n             \
+    \   \"hide\": 2,\n                \"includeAll\": false,\n                \"label\"\
+    : null,\n                \"multi\": false,\n                \"name\": \"interval\"\
+    ,\n                \"options\": [\n                    {\n                   \
+    \     \"selected\": true,\n                        \"text\": \"4h\",\n       \
+    \                 \"value\": \"4h\"\n                    }\n                ],\n\
+    \                \"query\": \"4h\",\n                \"refresh\": 2,\n       \
+    \         \"regex\": \"\",\n                \"skipUrlSync\": false,\n        \
+    \        \"sort\": 1,\n                \"tagValuesQuery\": \"\",\n           \
+    \     \"tags\": [\n\n                ],\n                \"tagsQuery\": \"\",\n\
+    \                \"type\": \"interval\",\n                \"useTags\": false\n\
+    \            }\n        ]\n    },\n    \"time\": {\n        \"from\": \"now-1h\"\
+    ,\n        \"to\": \"now\"\n    },\n    \"timepicker\": {\n        \"refresh_intervals\"\
+    : [\n            \"5s\",\n            \"10s\",\n            \"30s\",\n       \
+    \     \"1m\",\n            \"5m\",\n            \"15m\",\n            \"30m\"\
+    ,\n            \"1h\",\n            \"2h\",\n            \"1d\"\n        ],\n\
+    \        \"time_options\": [\n            \"5m\",\n            \"15m\",\n    \
+    \        \"1h\",\n            \"6h\",\n            \"12h\",\n            \"24h\"\
+    ,\n            \"2d\",\n            \"7d\",\n            \"30d\"\n        ]\n\
+    \    },\n    \"timezone\": \"UTC\",\n    \"title\": \"Kubernetes / Networking\
+    \ / Workload\",\n    \"uid\": \"728bf77cc1166d2f3133bf25846876cc\",\n    \"version\"\
+    : 0\n}"
+kind: ConfigMap
+metadata:
+  annotations: {}
+  labels:
+    app: kube-prometheus-stack-grafana
+    app.kubernetes.io/instance: ocf-prometheus
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 16.0.1
+    chart: kube-prometheus-stack-16.0.1
+    grafana_dashboard: '1'
+    heritage: Helm
+    release: ocf-prometheus
+  name: ocf-prometheus-kube-promet-workload-total
+  namespace: prometheus

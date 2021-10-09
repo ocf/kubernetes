@@ -28,7 +28,7 @@ def write_manifests(objects, appname: str, manifest_dir: Path):
         if obj is None:
             # TODO: Log message with warning
             continue
-        obj = postprocess(obj, dev=False)
+        obj = postprocess(obj, context = {"appname": appname}, dev=False)
         name = obj["metadata"].get("name", obj["metadata"].get("generateName", None))
         kind = obj["kind"]
         namespace = obj["metadata"].get("namespace", appname)

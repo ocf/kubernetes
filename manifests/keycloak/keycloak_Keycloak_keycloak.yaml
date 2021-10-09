@@ -1,0 +1,12 @@
+apiVersion: keycloak.org/v1alpha1
+kind: Keycloak
+metadata:
+  labels:
+    app: sso
+  name: keycloak
+spec:
+  extensions:
+  - https://github.com/aerogear/keycloak-metrics-spi/releases/download/1.0.4/keycloak-metrics-spi-1.0.4.jar
+  externalAccess:
+    enabled: false
+  instances: 1

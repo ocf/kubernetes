@@ -1,0 +1,12 @@
+apiVersion: v1
+data:
+  config: "address-pools:\n- addresses:\n  - 169.229.226.81-169.229.226.89\n  - 2607:f140:8801::1:81-2607:f140:8801::1:89\n\
+    \  name: default\n  protocol: layer2\n"
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/instance: ocf-metallb
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: metallb
+    helm.sh/chart: metallb-2.3.7
+  name: ocf-metallb-config

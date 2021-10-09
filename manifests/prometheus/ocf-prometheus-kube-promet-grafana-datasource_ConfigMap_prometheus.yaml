@@ -1,0 +1,19 @@
+apiVersion: v1
+data:
+  datasource.yaml: "apiVersion: 1\ndatasources:\n- name: Prometheus\n  type: prometheus\n\
+    \  url: http://ocf-prometheus-kube-promet-prometheus:9090/\n  access: proxy\n\
+    \  isDefault: true\n  jsonData:\n    timeInterval: 30s"
+kind: ConfigMap
+metadata:
+  labels:
+    app: kube-prometheus-stack-grafana
+    app.kubernetes.io/instance: ocf-prometheus
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 16.0.1
+    chart: kube-prometheus-stack-16.0.1
+    grafana_datasource: '1'
+    heritage: Helm
+    release: ocf-prometheus
+  name: ocf-prometheus-kube-promet-grafana-datasource
+  namespace: prometheus

@@ -1,0 +1,38 @@
+apiVersion: ceph.rook.io/v1
+kind: CephCluster
+metadata:
+  annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+  name: ceph
+  namespace: rook
+spec:
+  cephVersion:
+    image: ceph/ceph:v15.2.6
+  dashboard:
+    enabled: true
+  dataDirHostPath: /var/lib/rook
+  mon:
+    allowMultiplePerNode: false
+    count: 3
+  storage:
+    nodes:
+    - devices:
+      - config: {}
+        name: /dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K932843P
+      - config: {}
+        name: /dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K933151M
+      - config: {}
+        name: /dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K934154M
+      - config: {}
+        name: /dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K934284J
+      - config: {}
+        name: /dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K934288X
+      - config: {}
+        name: /dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K937582P
+      - config: {}
+        name: /dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K943700W
+      - config: {}
+        name: /dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K944017K
+      name: jaws
+    useAllDevices: false
+    useAllNodes: false

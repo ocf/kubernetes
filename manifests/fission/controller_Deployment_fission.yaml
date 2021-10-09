@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    application: fission-api
+    chart: fission-core-1.12.0
+    svc: controller
+  name: controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      application: fission-api
+      svc: controller
+  template:
+    metadata:
+      labels:
+        application: fission-api
+        svc: controller
+    spec:
+      containers:
+      - args:
+        - --controllerPort
+        - '8888'
+        command:
+        - /fission-bundle
+        env:
+        - name: TRACE_JAEGER_COLLECTOR_ENDPOINT
+          value: ''
+        - name: TRACING_SAMPLING_RATE
+          value: '0.5'
+        - name: FISSION_FUNCTION_NAMESPACE
+          value: fission-function
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        image: index.docker.io/fission/fission-bundle:1.12.0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8888
+          initialDelaySeconds: 35
+          periodSeconds: 5
+        name: controller
+        ports:
+        - containerPort: 8888
+          name: http
+        readinessProbe:
+          failureThreshold: 30
+          httpGet:
+            path: /healthz
+            port: 8888
+          initialDelaySeconds: 1
+          periodSeconds: 1
+        volumeMounts:
+        - mountPath: /etc/config/config.yaml
+          name: config-volume
+          subPath: config.yaml
+      serviceAccountName: fission-svc
+      volumes:
+      - configMap:
+          name: feature-config
+        name: config-volume

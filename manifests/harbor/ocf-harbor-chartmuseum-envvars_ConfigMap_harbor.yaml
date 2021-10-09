@@ -1,0 +1,27 @@
+apiVersion: v1
+data:
+  ALLOW_OVERWRITE: 'true'
+  AUTH_ANONYMOUS_GET: 'false'
+  BASIC_AUTH_USER: chart_controller
+  CACHE: redis
+  CACHE_REDIS_ADDR: ocf-harbor-redis-master:6379
+  CACHE_REDIS_DB: '3'
+  DEBUG: 'true'
+  DEPTH: '1'
+  DISABLE_API: 'false'
+  DISABLE_METRICS: 'false'
+  DISABLE_STATEFILES: 'false'
+  LOG_JSON: 'false'
+  PORT: '9999'
+  STORAGE: local
+  STORAGE_LOCAL_ROOTDIR: /bitnami/data
+  STORAGE_TIMESTAMP_TOLERANCE: 1s
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/component: chartmuseum
+    app.kubernetes.io/instance: ocf-harbor
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: harbor
+    helm.sh/chart: harbor-10.0.4
+  name: ocf-harbor-chartmuseum-envvars

@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    chart: fission-core-1.12.0
+    svc: buildermgr
+  name: buildermgr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      svc: buildermgr
+  template:
+    metadata:
+      labels:
+        svc: buildermgr
+    spec:
+      containers:
+      - args:
+        - --builderMgr
+        - --storageSvcUrl
+        - http://storagesvc.fission
+        - --envbuilder-namespace
+        - fission-builder
+        command:
+        - /fission-bundle
+        env:
+        - name: FETCHER_IMAGE
+          value: fission/fetcher:1.12.0
+        - name: FETCHER_IMAGE_PULL_POLICY
+          value: IfNotPresent
+        - name: BUILDER_IMAGE_PULL_POLICY
+          value: IfNotPresent
+        - name: TRACE_JAEGER_COLLECTOR_ENDPOINT
+          value: ''
+        - name: TRACING_SAMPLING_RATE
+          value: '0.5'
+        - name: ENABLE_ISTIO
+          value: 'false'
+        - name: FETCHER_MINCPU
+          value: 10m
+        - name: FETCHER_MINMEM
+          value: 16Mi
+        - name: FETCHER_MAXCPU
+          value: ''
+        - name: FETCHER_MAXMEM
+          value: ''
+        image: index.docker.io/fission/fission-bundle:1.12.0
+        imagePullPolicy: IfNotPresent
+        name: buildermgr
+      serviceAccountName: fission-svc

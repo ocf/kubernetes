@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: argocd-redis-ha-proxy-network-policy
+spec:
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: argocd-server
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: argocd-repo-server
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: argocd-application-controller
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: argocd-redis-ha
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: argocd-redis-ha-haproxy
+  policyTypes:
+  - Ingress

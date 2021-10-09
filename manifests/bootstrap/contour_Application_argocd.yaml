@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: contour
+  namespace: argocd
+spec:
+  destination:
+    namespace: contour
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: .
+    plugin:
+      name: python
+    repoURL: https://github.com/ocf/kubernetes
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true

@@ -1,0 +1,102 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: chartmuseum
+    app.kubernetes.io/instance: ocf-harbor
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: harbor
+    helm.sh/chart: harbor-10.0.4
+  name: ocf-harbor-chartmuseum
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: chartmuseum
+      app.kubernetes.io/instance: ocf-harbor
+      app.kubernetes.io/name: harbor
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        checksum/configmap-envvars: 44c5cbe7982b2a2b39bf89dccc42a4a40c413436c36d035218cfa421e68d6b2d
+        checksum/secret: 6150cb581862bbc3e22cc63bc80976c1dc5edb7920e2a4cd737bb4a461e2540f
+        checksum/secret-core: a62624694d8a1c78bb6ba1dbb5e88dfa865bd255a0430148bb98411aaa57f3e0
+      labels:
+        app.kubernetes.io/component: chartmuseum
+        app.kubernetes.io/instance: ocf-harbor
+        app.kubernetes.io/name: harbor
+    spec:
+      affinity:
+        nodeAffinity: null
+        podAffinity: null
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/component: chartmuseum
+                  app.kubernetes.io/instance: ocf-harbor
+                  app.kubernetes.io/name: harbor
+              namespaces:
+              - harbor
+              topologyKey: kubernetes.io/hostname
+            weight: 1
+      automountServiceAccountToken: false
+      containers:
+      - env:
+        - name: DEBUG
+          value: '0'
+        - name: BASIC_AUTH_PASS
+          valueFrom:
+            secretKeyRef:
+              key: secret
+              name: ocf-harbor-core
+        envFrom:
+        - configMapRef:
+            name: ocf-harbor-chartmuseum-envvars
+        - secretRef:
+            name: ocf-harbor-chartmuseum-secret
+        image: docker.io/bitnami/chartmuseum:0.13.1-debian-10-r65
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /health
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 20
+        name: chartmuseum
+        ports:
+        - containerPort: 9999
+          name: http
+        readinessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /health
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 20
+        resources:
+          limits: {}
+          requests: {}
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1001
+        volumeMounts:
+        - mountPath: /bitnami/data
+          name: chartmuseum-data
+          subPath: null
+      securityContext:
+        fsGroup: 1001
+      volumes:
+      - name: chartmuseum-data
+        persistentVolumeClaim:
+          claimName: ocf-harbor-chartmuseum
