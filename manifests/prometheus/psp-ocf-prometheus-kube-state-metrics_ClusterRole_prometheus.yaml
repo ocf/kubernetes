@@ -1,0 +1,18 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/instance: ocf-prometheus
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kube-state-metrics
+    helm.sh/chart: kube-state-metrics-3.1.0
+  name: psp-ocf-prometheus-kube-state-metrics
+rules:
+- apiGroups:
+  - policy
+  resourceNames:
+  - ocf-prometheus-kube-state-metrics
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use

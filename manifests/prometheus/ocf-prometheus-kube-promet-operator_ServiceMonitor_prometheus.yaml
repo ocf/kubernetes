@@ -1,0 +1,33 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: kube-prometheus-stack-operator
+    app.kubernetes.io/instance: ocf-prometheus
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 16.0.1
+    chart: kube-prometheus-stack-16.0.1
+    heritage: Helm
+    release: ocf-prometheus
+  name: ocf-prometheus-kube-promet-operator
+  namespace: prometheus
+spec:
+  endpoints:
+  - honorLabels: true
+    port: https
+    scheme: https
+    tlsConfig:
+      ca:
+        secret:
+          key: ca
+          name: ocf-prometheus-kube-promet-admission
+          optional: false
+      serverName: ocf-prometheus-kube-promet-operator
+  namespaceSelector:
+    matchNames:
+    - prometheus
+  selector:
+    matchLabels:
+      app: kube-prometheus-stack-operator
+      release: ocf-prometheus

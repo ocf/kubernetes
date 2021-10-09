@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kube-prometheus-stack-operator
+    app.kubernetes.io/instance: ocf-prometheus
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 16.0.1
+    chart: kube-prometheus-stack-16.0.1
+    heritage: Helm
+    release: ocf-prometheus
+  name: ocf-prometheus-kube-promet-operator
+  namespace: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kube-prometheus-stack-operator
+      release: ocf-prometheus
+  template:
+    metadata:
+      labels:
+        app: kube-prometheus-stack-operator
+        app.kubernetes.io/instance: ocf-prometheus
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/part-of: kube-prometheus-stack
+        app.kubernetes.io/version: 16.0.1
+        chart: kube-prometheus-stack-16.0.1
+        heritage: Helm
+        release: ocf-prometheus
+    spec:
+      containers:
+      - args:
+        - --kubelet-service=kube-system/ocf-prometheus-kube-promet-kubelet
+        - --localhost=127.0.0.1
+        - --prometheus-config-reloader=quay.io/prometheus-operator/prometheus-config-reloader:v0.47.1
+        - --config-reloader-cpu=100m
+        - --config-reloader-memory=50Mi
+        - --web.enable-tls=true
+        - --web.cert-file=/cert/cert
+        - --web.key-file=/cert/key
+        - --web.listen-address=:10250
+        - --web.tls-min-version=VersionTLS13
+        image: quay.io/prometheus-operator/prometheus-operator:v0.47.1
+        imagePullPolicy: IfNotPresent
+        name: kube-prometheus-stack
+        ports:
+        - containerPort: 10250
+          name: https
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /cert
+          name: tls-secret
+          readOnly: true
+      securityContext:
+        fsGroup: 65534
+        runAsGroup: 65534
+        runAsNonRoot: true
+        runAsUser: 65534
+      serviceAccountName: ocf-prometheus-kube-promet-operator
+      volumes:
+      - name: tls-secret
+        secret:
+          defaultMode: 420
+          secretName: ocf-prometheus-kube-promet-admission

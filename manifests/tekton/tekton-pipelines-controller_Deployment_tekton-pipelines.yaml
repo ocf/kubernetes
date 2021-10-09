@@ -1,0 +1,136 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/name: controller
+    app.kubernetes.io/part-of: tekton-pipelines
+    app.kubernetes.io/version: v0.26.0
+    pipeline.tekton.dev/release: v0.26.0
+    version: v0.26.0
+  name: tekton-pipelines-controller
+  namespace: tekton-pipelines
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/instance: default
+      app.kubernetes.io/name: controller
+      app.kubernetes.io/part-of: tekton-pipelines
+  template:
+    metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: 'false'
+      labels:
+        app: tekton-pipelines-controller
+        app.kubernetes.io/component: controller
+        app.kubernetes.io/instance: default
+        app.kubernetes.io/name: controller
+        app.kubernetes.io/part-of: tekton-pipelines
+        app.kubernetes.io/version: v0.26.0
+        pipeline.tekton.dev/release: v0.26.0
+        version: v0.26.0
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: NotIn
+                values:
+                - windows
+      containers:
+      - args:
+        - -version
+        - v0.26.0
+        - -kubeconfig-writer-image
+        - gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/kubeconfigwriter:v0.26.0@sha256:a4471a7ef4bdec4b4f4d08c20df0b762140142701c1197e1f57eca10b741db3a
+        - -git-image
+        - gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.26.0@sha256:8a5ed01f5a0684a90a2f42d247a10a2274f974759562329b200abaed4a804508
+        - -entrypoint-image
+        - gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/entrypoint:v0.26.0@sha256:6a99fea33bb3dd1c20a16837cd88af0a120ba699c3f3e18ea9338fba78387556
+        - -nop-image
+        - gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/nop:v0.26.0@sha256:8c6a241f71b54c39c001c94128013e6abd8693c64aa1231f1d19b2e50f57d3af
+        - -imagedigest-exporter-image
+        - gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/imagedigestexporter:v0.26.0@sha256:92a090944f89a679bb3632ae1b8c8afa30ef5a9eb7d4a3bdbca6f13967db8d3d
+        - -pr-image
+        - gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/pullrequest-init:v0.26.0@sha256:1ab4207300c431f2098e6f6cbdb3fd6c8058900bbf06b398f159668419903b68
+        - -gsutil-image
+        - gcr.io/google.com/cloudsdktool/cloud-sdk@sha256:27b2c22bf259d9bc1a291e99c63791ba0c27a04d2db0a43241ba0f1f20f4067f
+        - -shell-image
+        - gcr.io/distroless/base@sha256:aa4fd987555ea10e1a4ec8765da8158b5ffdfef1e72da512c7ede509bc9966c4
+        env:
+        - name: SYSTEM_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: AWS_ACCESS_KEY_ID
+          value: foobarbaz
+        - name: AWS_SECRET_ACCESS_KEY
+          value: foobarbaz
+        - name: AWS_DEFAULT_REGION
+          value: foobarbaz
+        - name: CONFIG_DEFAULTS_NAME
+          value: config-defaults
+        - name: CONFIG_LOGGING_NAME
+          value: config-logging
+        - name: CONFIG_OBSERVABILITY_NAME
+          value: config-observability
+        - name: CONFIG_ARTIFACT_BUCKET_NAME
+          value: config-artifact-bucket
+        - name: CONFIG_ARTIFACT_PVC_NAME
+          value: config-artifact-pvc
+        - name: CONFIG_FEATURE_FLAGS_NAME
+          value: feature-flags
+        - name: CONFIG_LEADERELECTION_NAME
+          value: config-leader-election
+        - name: SSL_CERT_FILE
+          value: /etc/config-registry-cert/cert
+        - name: SSL_CERT_DIR
+          value: /etc/ssl/certs
+        - name: METRICS_DOMAIN
+          value: tekton.dev/pipeline
+        image: gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/controller:v0.26.0@sha256:db1d486fac10b1eca6d7b8daf4764a15f8c70e67961457c73d8c04964a3e4929
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: probes
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 5
+        name: tekton-pipelines-controller
+        ports:
+        - containerPort: 8080
+          name: probes
+        readinessProbe:
+          httpGet:
+            path: /readiness
+            port: probes
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 5
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - all
+          runAsGroup: 65532
+          runAsUser: 65532
+        volumeMounts:
+        - mountPath: /etc/config-logging
+          name: config-logging
+        - mountPath: /etc/config-registry-cert
+          name: config-registry-cert
+      serviceAccountName: tekton-pipelines-controller
+      volumes:
+      - configMap:
+          name: config-logging
+        name: config-logging
+      - configMap:
+          name: config-registry-cert
+        name: config-registry-cert

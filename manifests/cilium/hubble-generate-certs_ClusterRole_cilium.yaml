@@ -1,0 +1,38 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: hubble-generate-certs
+rules:
+- apiGroups:
+  - ''
+  resources:
+  - secrets
+  - configmaps
+  verbs:
+  - create
+- apiGroups:
+  - ''
+  resourceNames:
+  - hubble-server-certs
+  - hubble-relay-client-certs
+  - hubble-relay-server-certs
+  resources:
+  - secrets
+  verbs:
+  - update
+- apiGroups:
+  - ''
+  resourceNames:
+  - hubble-ca-cert
+  resources:
+  - configmaps
+  verbs:
+  - update
+- apiGroups:
+  - ''
+  resourceNames:
+  - hubble-ca-secret
+  resources:
+  - secrets
+  verbs:
+  - get

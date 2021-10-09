@@ -1,0 +1,31 @@
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  labels:
+    app.kubernetes.io/instance: ocf-prometheus
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kube-state-metrics
+    helm.sh/chart: kube-state-metrics-3.1.0
+  name: ocf-prometheus-kube-state-metrics
+spec:
+  fsGroup:
+    ranges:
+    - max: 65535
+      min: 1
+    rule: MustRunAs
+  hostIPC: false
+  hostNetwork: false
+  hostPID: false
+  privileged: false
+  readOnlyRootFilesystem: false
+  runAsUser:
+    rule: MustRunAsNonRoot
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    ranges:
+    - max: 65535
+      min: 1
+    rule: MustRunAs
+  volumes:
+  - secret

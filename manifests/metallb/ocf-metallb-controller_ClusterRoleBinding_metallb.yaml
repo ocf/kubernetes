@@ -1,0 +1,18 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: ocf-metallb
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: metallb
+    helm.sh/chart: metallb-2.3.7
+  name: ocf-metallb-controller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: ocf-metallb-controller
+subjects:
+- kind: ServiceAccount
+  name: ocf-metallb-controller
+  namespace: metallb

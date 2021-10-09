@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    application: fission-storage
+    chart: fission-core-1.12.0
+    svc: storagesvc
+  name: storagesvc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      application: fission-storage
+      svc: storagesvc
+  template:
+    metadata:
+      labels:
+        application: fission-storage
+        svc: storagesvc
+    spec:
+      containers:
+      - args:
+        - --storageServicePort
+        - '8000'
+        - --storageType
+        - local
+        command:
+        - /fission-bundle
+        env:
+        - name: PRUNE_INTERVAL
+          value: '60'
+        - name: TRACE_JAEGER_COLLECTOR_ENDPOINT
+          value: ''
+        - name: TRACING_SAMPLING_RATE
+          value: '0.5'
+        image: index.docker.io/fission/fission-bundle:1.12.0
+        imagePullPolicy: IfNotPresent
+        name: storagesvc
+        ports:
+        - containerPort: 8000
+          name: http
+        volumeMounts:
+        - mountPath: /fission
+          name: fission-storage
+      serviceAccountName: fission-svc
+      volumes:
+      - name: fission-storage
+        persistentVolumeClaim:
+          claimName: fission-storage-pvc

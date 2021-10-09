@@ -1,0 +1,14 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    operator: rook
+    storage-backend: ceph
+  name: rook-ceph-agent-mount
+rules:
+- apiGroups:
+  - ''
+  resources:
+  - secrets
+  verbs:
+  - get

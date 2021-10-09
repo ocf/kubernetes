@@ -1,0 +1,147 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  annotations: {}
+  labels:
+    app.kubernetes.io/component: redis
+    app.kubernetes.io/name: argocd-redis-ha
+    app.kubernetes.io/part-of: argocd
+  name: argocd-redis-ha-server
+spec:
+  podManagementPolicy: OrderedReady
+  replicas: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: argocd-redis-ha
+  serviceName: argocd-redis-ha
+  template:
+    metadata:
+      annotations:
+        checksum/init-config: 7128bfbb51eafaffe3c33b1b463e15f0cf6514cec570f9d9c4f2396f28c724ac
+      labels:
+        app.kubernetes.io/name: argocd-redis-ha
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                app.kubernetes.io/name: argocd-redis-ha
+            topologyKey: kubernetes.io/hostname
+      automountServiceAccountToken: false
+      containers:
+      - args:
+        - /data/conf/redis.conf
+        command:
+        - redis-server
+        image: redis:6.2.4-alpine
+        imagePullPolicy: IfNotPresent
+        lifecycle: {}
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - /health/redis_liveness.sh
+          failureThreshold: 5
+          initialDelaySeconds: 30
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 15
+        name: redis
+        ports:
+        - containerPort: 6379
+          name: redis
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - /health/redis_readiness.sh
+          failureThreshold: 5
+          initialDelaySeconds: 30
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 15
+        volumeMounts:
+        - mountPath: /data
+          name: data
+        - mountPath: /health
+          name: health
+      - args:
+        - /data/conf/sentinel.conf
+        command:
+        - redis-sentinel
+        image: redis:6.2.4-alpine
+        imagePullPolicy: IfNotPresent
+        lifecycle: {}
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - /health/sentinel_liveness.sh
+          failureThreshold: 5
+          initialDelaySeconds: 30
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 15
+        name: sentinel
+        ports:
+        - containerPort: 26379
+          name: sentinel
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - /health/sentinel_liveness.sh
+          failureThreshold: 5
+          initialDelaySeconds: 30
+          periodSeconds: 15
+          successThreshold: 3
+          timeoutSeconds: 15
+        volumeMounts:
+        - mountPath: /data
+          name: data
+        - mountPath: /health
+          name: health
+      initContainers:
+      - args:
+        - /readonly-config/init.sh
+        command:
+        - sh
+        env:
+        - name: SENTINEL_ID_0
+          value: 3c0d9c0320bb34888c2df5757c718ce6ca992ce6
+        - name: SENTINEL_ID_1
+          value: 40000915ab58c3fa8fd888fb8b24711944e6cbb4
+        - name: SENTINEL_ID_2
+          value: 2bbec7894d954a8af3bb54d13eaec53cb024e2ca
+        image: redis:6.2.4-alpine
+        imagePullPolicy: IfNotPresent
+        name: config-init
+        volumeMounts:
+        - mountPath: /readonly-config
+          name: config
+          readOnly: true
+        - mountPath: /data
+          name: data
+      securityContext:
+        fsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+      serviceAccountName: argocd-redis-ha
+      terminationGracePeriodSeconds: 60
+      volumes:
+      - configMap:
+          name: argocd-redis-ha-configmap
+        name: config
+      - configMap:
+          defaultMode: 493
+          name: argocd-redis-ha-health-configmap
+        name: health
+      - emptyDir: {}
+        name: data
+  updateStrategy:
+    type: RollingUpdate

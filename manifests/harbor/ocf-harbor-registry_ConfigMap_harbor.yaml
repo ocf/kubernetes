@@ -1,0 +1,29 @@
+apiVersion: v1
+data:
+  config.yml: "version: 0.1\nlog:\n  level: debug\n  fields:\n    service: registry\n\
+    storage:\n  filesystem:\n    rootdirectory: /storage\n  cache:\n    layerinfo:\
+    \ redis\n  maintenance:\n    uploadpurging:\n      enabled: false\n  delete:\n\
+    \    enabled: true\n  redirect:\n    disable: false\nredis:\n  addr: \"ocf-harbor-redis-master:6379\"\
+    \n  db: 2\nhttp:\n  relativeurls: false\n  addr: :5000\n  # set via environment\
+    \ variable\n  # secret: placeholder\n  debug:\n    addr: localhost:5001\nauth:\n\
+    \  htpasswd:\n    realm: harbor-registry-basic-realm\n    path: /etc/registry/passwd\n\
+    validation:\n  disabled: true\n"
+  ctl-config.yml: '---
+
+    protocol: "http"
+
+    port: 8080
+
+    log_level: debug
+
+    registry_config: "/etc/registry/config.yml"
+
+    '
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/instance: ocf-harbor
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: harbor
+    helm.sh/chart: harbor-10.0.4
+  name: ocf-harbor-registry

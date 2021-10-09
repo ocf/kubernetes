@@ -1,0 +1,15 @@
+apiVersion: v1
+data:
+  run.sh: "@test \"Test Health\" {\n  url=\"http://ocf-prometheus-grafana/api/health\"\
+    \n\n  code=$(wget --server-response --spider --timeout 10 --tries 1 ${url} 2>&1\
+    \ | awk '/^  HTTP/{print $2}')\n  [ \"$code\" == \"200\" ]\n}"
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/instance: ocf-prometheus
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/version: 7.5.5
+    helm.sh/chart: grafana-6.9.1
+  name: ocf-prometheus-grafana-test
+  namespace: prometheus

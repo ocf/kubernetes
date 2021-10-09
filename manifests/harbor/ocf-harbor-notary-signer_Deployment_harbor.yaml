@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: notary-signer
+    app.kubernetes.io/instance: ocf-harbor
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: harbor
+    helm.sh/chart: harbor-10.0.4
+  name: ocf-harbor-notary-signer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: notary-signer
+      app.kubernetes.io/instance: ocf-harbor
+      app.kubernetes.io/name: harbor
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        checksum/secret: 7582b804dd9bfb107b5b7b8c4334ff2a0dd746a4a06f627db343641b63c3e0c2
+      labels:
+        app.kubernetes.io/component: notary-signer
+        app.kubernetes.io/instance: ocf-harbor
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: harbor
+        helm.sh/chart: harbor-10.0.4
+    spec:
+      affinity:
+        nodeAffinity: null
+        podAffinity: null
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/component: notary-signer
+                  app.kubernetes.io/instance: ocf-harbor
+                  app.kubernetes.io/name: harbor
+              namespaces:
+              - harbor
+              topologyKey: kubernetes.io/hostname
+            weight: 1
+      automountServiceAccountToken: false
+      containers:
+      - env:
+        - name: BITNAMI_DEBUG
+          value: 'false'
+        - name: MIGRATIONS_PATH
+          value: migrations/signer/postgresql
+        - name: DB_URL
+          valueFrom:
+            secretKeyRef:
+              key: signer_db_url
+              name: ocf-harbor-notary-server-envvars
+        - name: NOTARY_SIGNER_DEFAULTALIAS
+          value: defaultalias
+        envFrom: null
+        image: docker.io/bitnami/harbor-notary-signer:2.2.2-debian-10-r2
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 6
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: notary-signer
+          timeoutSeconds: 5
+        name: notary-signer
+        ports:
+        - containerPort: 7899
+          name: notary-signer
+        readinessProbe:
+          failureThreshold: 6
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: notary-signer
+          timeoutSeconds: 5
+        resources:
+          limits: {}
+          requests: {}
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1001
+        volumeMounts:
+        - mountPath: /etc/notary
+          name: notary-config
+      securityContext:
+        fsGroup: 1001
+      volumes:
+      - name: notary-config
+        secret:
+          secretName: ocf-harbor-notary-server

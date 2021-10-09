@@ -1,0 +1,26 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: kube-prometheus-stack-prometheus
+    app.kubernetes.io/instance: ocf-prometheus
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 16.0.1
+    chart: kube-prometheus-stack-16.0.1
+    heritage: Helm
+    release: ocf-prometheus
+  name: ocf-prometheus-kube-promet-prometheus
+  namespace: prometheus
+spec:
+  endpoints:
+  - path: /metrics
+    port: web
+  namespaceSelector:
+    matchNames:
+    - prometheus
+  selector:
+    matchLabels:
+      app: kube-prometheus-stack-prometheus
+      release: ocf-prometheus
+      self-monitor: 'true'

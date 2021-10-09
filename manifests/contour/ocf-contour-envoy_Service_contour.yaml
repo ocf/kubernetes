@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+  labels:
+    app.kubernetes.io/component: envoy
+    app.kubernetes.io/instance: ocf-contour
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: contour
+    helm.sh/chart: contour-4.3.4
+  name: ocf-contour-envoy
+  namespace: contour
+spec:
+  externalTrafficPolicy: Local
+  loadBalancerIP: 169.229.226.81
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: http
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: https
+  selector:
+    app.kubernetes.io/component: envoy
+    app.kubernetes.io/instance: ocf-contour
+    app.kubernetes.io/name: contour
+  type: LoadBalancer

@@ -1,0 +1,59 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: kube-prometheus-stack-kubelet
+    app.kubernetes.io/instance: ocf-prometheus
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 16.0.1
+    chart: kube-prometheus-stack-16.0.1
+    heritage: Helm
+    release: ocf-prometheus
+  name: ocf-prometheus-kube-promet-kubelet
+  namespace: prometheus
+spec:
+  endpoints:
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    honorLabels: true
+    port: https-metrics
+    relabelings:
+    - sourceLabels:
+      - __metrics_path__
+      targetLabel: metrics_path
+    scheme: https
+    tlsConfig:
+      caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      insecureSkipVerify: true
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    honorLabels: true
+    path: /metrics/cadvisor
+    port: https-metrics
+    relabelings:
+    - sourceLabels:
+      - __metrics_path__
+      targetLabel: metrics_path
+    scheme: https
+    tlsConfig:
+      caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      insecureSkipVerify: true
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    honorLabels: true
+    path: /metrics/probes
+    port: https-metrics
+    relabelings:
+    - sourceLabels:
+      - __metrics_path__
+      targetLabel: metrics_path
+    scheme: https
+    tlsConfig:
+      caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      insecureSkipVerify: true
+  jobLabel: k8s-app
+  namespaceSelector:
+    matchNames:
+    - kube-system
+  selector:
+    matchLabels:
+      app.kubernetes.io/managed-by: prometheus-operator
+      k8s-app: kubelet
