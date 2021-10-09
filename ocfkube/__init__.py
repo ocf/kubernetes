@@ -40,4 +40,4 @@ def build(app_name: str) -> str:
     """Returns Kubernetes manifest(s) corresponding with app_name as a YAML string"""
     new_app_name = app_name.replace("-", "_")
     app = importlib.import_module(f"ocfkube.apps.{new_app_name}")
-    return yaml.safe_dump_all([postprocess(x, dev=True) for x in app.build()])
+    return yaml.safe_dump_all([postprocess(x, context=new_app_name, dev=True) for x in app.build()])
