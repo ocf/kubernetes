@@ -46,6 +46,10 @@ github = "https://github.com/keycloak/keycloak"
 version = "2.3.7"
 helm = "https://charts.bitnami.com/bitnami"
 
+[nextcloud]
+version = "2.8.3"
+helm = "https://nextcloud.github.io/helm/"
+
 [postgresql]
 version = "7.5.2"
 helm = "https://charts.bitnami.com/bitnami"
