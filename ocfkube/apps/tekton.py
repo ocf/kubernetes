@@ -36,7 +36,7 @@ helpers = [
                 {
                     "name": "url",
                     "value": "<DOCKER_USERNAME>/sinatra-hello-world-tekton-demo",
-                }
+                },
             ],
         },
     },
@@ -68,7 +68,7 @@ helpers = [
                     "name": "build-and-push",
                     "image": "gcr.io/kaniko-project/executor:v0.17.1",
                     "env": [
-                        {"name": "DOCKER_CONFIG", "value": "/tekton/home/.docker/"}
+                        {"name": "DOCKER_CONFIG", "value": "/tekton/home/.docker/"},
                     ],
                     "command": ["/kaniko/executor"],
                     "args": [
@@ -76,7 +76,7 @@ helpers = [
                         "--destination=$(resources.outputs.builtImage.url)",
                         "--context=$(params.pathToContext)",
                     ],
-                }
+                },
             ],
         },
     },
@@ -93,15 +93,15 @@ helpers = [
                     {
                         "name": "docker-source",
                         "resourceRef": {"name": "sinatra-hello-world-git"},
-                    }
+                    },
                 ],
                 "outputs": [
                     {
                         "name": "builtImage",
                         "resourceRef": {
-                            "name": "sinatra-hello-world-tekton-demo-image"
+                            "name": "sinatra-hello-world-tekton-demo-image",
                         },
-                    }
+                    },
                 ],
             },
         },
@@ -111,9 +111,9 @@ helpers = [
 
 def build() -> object:
     pipeline = requests.get(
-        f"https://storage.googleapis.com/tekton-releases/pipeline/previous/v{versions['tekton-pipeline']['version']}/release.yaml"
+        f"https://storage.googleapis.com/tekton-releases/pipeline/previous/v{versions['tekton-pipeline']['version']}/release.yaml",
     ).text
     dashboard = requests.get(
-        f"https://github.com/tektoncd/dashboard/releases/download/v{versions['tekton-dashboard']['version']}/tekton-dashboard-release.yaml"
+        f"https://github.com/tektoncd/dashboard/releases/download/v{versions['tekton-dashboard']['version']}/tekton-dashboard-release.yaml",
     ).text
     return list(yaml.safe_load_all(pipeline)) + list(yaml.safe_load_all(dashboard))

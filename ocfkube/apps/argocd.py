@@ -1,10 +1,13 @@
+from __future__ import annotations
+
 import textwrap
+from typing import Any
 
 import requests
 import yaml
 
-from ocfkube.utils import versions
 from ocfkube.lib import Ingress
+from ocfkube.utils import versions
 
 base_deployment = {
     "apiVersion": "argoproj.io/v1alpha1",
@@ -22,18 +25,17 @@ base_deployment = {
 }
 
 
-def build() -> object:
+def build() -> list[dict[str, Any]]:
     contents = requests.get(
-        f"https://raw.githubusercontent.com/argoproj/argo-cd/v{versions['argocd']['version']}/manifests/ha/install.yaml"
+        f"https://raw.githubusercontent.com/argoproj/argo-cd/v{versions['argocd']['version']}/manifests/ha/install.yaml",
     )
     contents.raise_for_status()
     base = list(yaml.safe_load_all(contents.text))
     ingress = Ingress.from_service_name("argocd-server", 80, "argo.ocf.berkeley.edu")
+    return [customize(o) for o in base] + [ingress.data, base_deployment]
 
-    return [customize(o) for o in base] + [ingress, base_deployment]
 
-
-def customize(o: object) -> object:
+def customize(o: dict[str, Any]) -> dict[str, Any]:
     if o["kind"] == "ConfigMap" and o["metadata"]["name"] == "argocd-cm":
         o["data"] = {
             "url": "https://argocd.ocf.berkeley.edu",
@@ -45,7 +47,7 @@ def customize(o: object) -> object:
                       - "CiliumIdentity"
                       clusters:
                       - "*"
-                """
+                """,
             ),
             "repositories": "- url: https://github.com/ocf/kubernetes",
             "configManagementPlugins": textwrap.dedent(
@@ -57,7 +59,7 @@ def customize(o: object) -> object:
                       generate:
                         command: ["/bin/sh", "-c"]
                         args: ["~/.local/bin/poetry install >/dev/null && ~/.local/bin/poetry run argocd-build"]
-                """
+                """,
             ),
         }
     if o["kind"] == "ConfigMap" and o["metadata"]["name"] == "argocd-rbac-cm":
@@ -75,7 +77,7 @@ def customize(o: object) -> object:
         pod_spec["containers"][0]["volumeMounts"] += volume_mounts
         pod_spec["containers"][0]["env"] = pod_spec["containers"][0].get("env", [])
         pod_spec["containers"][0]["env"].append(
-            {"name": "LD_LIBRARY_PATH", "value": "/usr/local/lib"}
+            {"name": "LD_LIBRARY_PATH", "value": "/usr/local/lib"},
         )
         volumes = [
             {
@@ -109,8 +111,8 @@ def customize(o: object) -> object:
                         name: usr-local-include
                       - mountPath: /mnt/usr/local/lib
                         name: usr-local-lib
-                """
-            )
+                """,
+            ),
         )
         pod_spec["initContainers"] = init_containers
 

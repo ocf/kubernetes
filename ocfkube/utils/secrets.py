@@ -1,6 +1,7 @@
-from typing import Tuple
 import base64
 import os
+from typing import Tuple
+
 import hvac
 
 
@@ -28,7 +29,7 @@ def convert_secret(secret: dict, context: dict, bootstrap: bool = False) -> dict
     client.token = os.getenv("VAULT_TOKEN")
     if not client.token:
         print(
-            "I couldn't find your VAULT_TOKEN env variable, so I can't push secrets to Vault."
+            "I couldn't find your VAULT_TOKEN env variable, so I can't push secrets to Vault.",
         )
     assert client.is_authenticated()
     client.secrets.kv.v2.configure(mount_point="pwned")
@@ -51,5 +52,9 @@ def convert_secret(secret: dict, context: dict, bootstrap: bool = False) -> dict
         "kind": "VaultSecret",
         "metadata": secret["metadata"],
         # Explicitly puts the key names in the object, so you can tell if a secret changed from `git diff`.
-        "spec": {"keys": [key for key in pairs], "path": f"pwned/{path}", "type": "Opaque"},
+        "spec": {
+            "keys": [key for key in pairs],
+            "path": f"pwned/{path}",
+            "type": "Opaque",
+        },
     }

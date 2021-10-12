@@ -26,7 +26,7 @@ values = {
             },
             "hosts": ["prom.ocf.berkeley.edu"],
             "tls": [{"hosts": ["prom.ocf.berkeley.edu"], "secretName": "prom-tls"}],
-        }
+        },
     },
     "grafana": {
         "ingress": {
@@ -38,7 +38,7 @@ values = {
             },
             "hosts": ["graf.ocf.berkeley.edu"],
             "tls": [{"hosts": ["graf.ocf.berkeley.edu"], "secretName": "graf-tls"}],
-        }
+        },
     },
 }
 
