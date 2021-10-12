@@ -35,7 +35,10 @@ def write_manifests(objects, appname: str, manifest_dir: Path):
         name = obj["metadata"].get("name", obj["metadata"].get("generateName", None))
         kind = obj["kind"]
         namespace = obj["metadata"].get("namespace", appname)
-        with open(appdir / f"{name}_{kind}_{namespace}.yaml", "w") as f:
+        manifest_name = f"{name}_{kind}_{namespace}.yaml"
+        # sanitize for Windows paths :sob:
+        manifest_name = manifest_name.replace(':', '-')
+        with open(appdir / manifest_name, "w") as f:
             yaml.safe_dump(obj, f)
 
 
