@@ -15,7 +15,6 @@ def extract_secret(secret: dict, appname: str) -> Tuple[str, dict]:
     path = (
         f"{secret['metadata'].get('namespace', appname)}/{secret['metadata']['name']}"
     )
-    print(secret)
     return path, {**fix_base64(secret.get("data", {})), **secret.get("stringData", {})}
 
 
