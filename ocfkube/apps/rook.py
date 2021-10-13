@@ -27,38 +27,38 @@ ceph_yaml = {
                     "devices": [
                         {
                             "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K932843P",
-                            "config": {}
+                            "config": {},
                         },
                         {
                             "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K933151M",
-                            "config": {}
+                            "config": {},
                         },
                         {
                             "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K934154M",
-                            "config": {}
+                            "config": {},
                         },
                         {
                             "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K934284J",
-                            "config": {}
+                            "config": {},
                         },
                         {
                             "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K934288X",
-                            "config": {}
+                            "config": {},
                         },
                         {
                             "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K937582P",
-                            "config": {}
+                            "config": {},
                         },
                         {
                             "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K943700W",
-                            "config": {}
+                            "config": {},
                         },
                         {
                             "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K944017K",
-                            "config": {}
+                            "config": {},
                         },
                     ],
-                }
+                },
             ],
         },
     },

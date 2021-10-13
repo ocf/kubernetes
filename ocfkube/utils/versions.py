@@ -1,9 +1,11 @@
-from collections import UserDict
-import ocfkube.apps
 import importlib.resources as pkg_resources
 import sys
-import tomlkit
 import types
+from collections import UserDict
+
+import tomlkit
+
+import ocfkube.apps
 
 
 class ModuleDict(types.ModuleType, UserDict):

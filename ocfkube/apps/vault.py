@@ -19,7 +19,10 @@ values = {
             },
             "hosts": [{"host": "vault.ocf.berkeley.edu", "paths": []}],
             "tls": [
-                {"hosts": ["vault.ocf.berkeley.edu"], "secretName": "vault-ingress-tls"}
+                {
+                    "hosts": ["vault.ocf.berkeley.edu"],
+                    "secretName": "vault-ingress-tls",
+                },
             ],
         },
         "standalone": {"enabled": False},

@@ -1,5 +1,3 @@
-import yaml
-
 from ocfkube.utils import helm
 from ocfkube.utils import versions
 

@@ -20,17 +20,17 @@ then
     kubectl create namespace cilium --dry-run=client -o yaml | kubectl apply -f -
     python3 -m ocfkube cilium | kubectl apply -n cilium -f -
     read -p "Now wait for Cilium to come up, press enter once it's healthy... " -n 1 -r
-    
+
     echo "Installing CoreDNS..."
     kubectl create namespace coredns --dry-run=client -o yaml | kubectl apply -f -
     python3 -m ocfkube coredns | kubectl apply -n coredns -f -
     read -p "Now wait for CoreDNS to come up, press enter once it's healthy... " -n 1 -r
-    
+
     echo "Installing ArgoCD..."
     kubectl create namespace argocd --dry-run=client -o yaml | kubectl apply -f -
     python3 -m ocfkube argocd | kubectl apply -n argocd -f -
     read -p "Now wait for ArgoCD to come up, press enter once it's healthy... " -n 1 -r
-    
+
     echo -n "USERNAME: admin, PASSWORD: "
     kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
     kubectl -n argocd get pods

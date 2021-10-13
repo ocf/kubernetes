@@ -1,8 +1,13 @@
+from __future__ import annotations
+
 import os
 import shutil
 import tempfile
+from subprocess import PIPE
+from subprocess import run
+from typing import Any
+
 import yaml
-from subprocess import run, PIPE
 
 # TODO: This is hardcoded, but we can grab it from the k8s API instead.
 capabilities = [
@@ -65,7 +70,7 @@ capabilities = [
 
 def build_chart_from_versions(
     name: str,
-    versions: object,
+    versions: dict[str, Any],
     values: dict,
 ):
     return build_chart(

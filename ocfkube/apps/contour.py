@@ -5,8 +5,8 @@ values = {
     "envoy": {
         "service": {
             "loadBalancerIP": "169.229.226.81",
-        }
-    }
+        },
+    },
 }
 
 

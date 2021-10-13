@@ -1,32 +1,33 @@
+from __future__ import annotations
+
+from collections import UserDict
 from typing import Any
+
 import yaml
 
 
-class Resource:
-    _obj: dict
+class Resource(UserDict):
+    name: str
+    namespace: str
 
-    def __init__(self, obj: object) -> "Resource":
-        self._obj = obj
+    def __init__(self, obj: dict[str, Any], check_namespace: bool = True):
+        super().__init__(obj)
         try:
-            self.name = self._obj["metadata"]["name"]
-        except ValueError:
+            self.name = obj["metadata"]["name"]
+        except KeyError:
             raise ValueError(f"Expected a name for Resource {obj}")
 
-        try:
-            self.namespace = self._obj["metadata"]["namespace"]
-        except ValueError:
-            raise ValueError(f"Expected a namespace for Resource {obj}")
+        if check_namespace:
+            try:
+                self.namespace = obj["metadata"]["namespace"]
+            except KeyError:
+                raise ValueError(f"Expected a namespace for Resource {obj}")
 
-        if "apiVersion" not in self.obj_.keys():
+        if "apiVersion" not in obj.keys():
             raise ValueError(f"Expected an apiVersion for Resource {obj}")
 
-        if "kind" not in self.obj_.keys():
+        if "kind" not in obj.keys():
             raise ValueError(f"Expected a kind for Resource {obj}")
 
-    def __getitem__(self, name: str) -> Any:
-        if isinstance(self, dict):
-            return Resource(self)
-        return getattr(self._obj, name)
-
     def to_yaml(self) -> str:
-        return yaml.dump(self._obj)
+        return yaml.dump(self)
