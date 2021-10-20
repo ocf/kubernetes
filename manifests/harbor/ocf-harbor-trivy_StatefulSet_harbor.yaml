@@ -20,7 +20,6 @@ spec:
     metadata:
       annotations:
         checksum/configmap-env: cd7efefdfa1d39195c8e4fe6791675b1943ed31ac9fdf668ea0767181bc145f5
-        checksum/secret-env: 3b9c37a7e3e06ea4cb65cc5920e672d422b13bb23696e3b88a16ce287f581a2d
       labels:
         app.kubernetes.io/component: trivy
         app.kubernetes.io/instance: ocf-harbor

@@ -22,9 +22,6 @@ spec:
       annotations:
         checksum/configmap: defa3bf0da02ec0e1452f19e547b02db46800fbb760c1465c6856d2bcac401e0
         checksum/configmap-env: 50006a26f4cbe1856df9756d1b1e84f6e5276b06448e77d7fc43a115a28a1d50
-        checksum/secret: 1c6cdde529c9ad79195beda2c58946ce3cc1782e5dedf50fb0aa371b8b7d8733
-        checksum/secret-core: a62624694d8a1c78bb6ba1dbb5e88dfa865bd255a0430148bb98411aaa57f3e0
-        checksum/secret-env: 84c62e5340ae9700946d293ce693684d1b673c9dc3dadf093bcb152c6ff751d0
       labels:
         app.kubernetes.io/component: jobservice
         app.kubernetes.io/instance: ocf-harbor
