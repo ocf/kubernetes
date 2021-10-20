@@ -35,7 +35,12 @@ values = {
     "ui": {"enabled": True},
 }
 
-values_vso = {"vault": {"authMethod": "kubernetes"}}
+values_vso = {
+    "vault": {
+        "authMethod": "kubernetes",
+        "address": "http://ocf-vault:8200",
+    },
+}
 
 
 def build() -> object:
@@ -45,6 +50,7 @@ def build() -> object:
         values=values,
     ) + helm.build_chart_from_versions(
         name="vault-secrets-operator",
+        namespace="vault",
         versions=versions,
         values=values_vso,
     )
