@@ -50,17 +50,6 @@ def customize(o: dict[str, Any]) -> dict[str, Any]:
                 """,
             ),
             "repositories": "- url: https://github.com/ocf/kubernetes",
-            "configManagementPlugins": textwrap.dedent(
-                """
-                    - name: python
-                      init:
-                        command: ["/bin/sh", "-c"]
-                        args: ["python -m pip install poetry"]
-                      generate:
-                        command: ["/bin/sh", "-c"]
-                        args: ["~/.local/bin/poetry install >/dev/null && ~/.local/bin/poetry run argocd-build"]
-                """,
-            ),
         }
     if o["kind"] == "ConfigMap" and o["metadata"]["name"] == "argocd-rbac-cm":
         o["data"] = {}
