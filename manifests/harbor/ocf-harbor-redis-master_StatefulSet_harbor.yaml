@@ -22,7 +22,6 @@ spec:
         checksum/configmap: 948b8e6326edf71e01ceb60ccd28b969b833d0e80188187dbdab5504c588362c
         checksum/health: 92353c2e04ad7273ded92617a1237e1a4e91cc385db687e1842537720d1ea254
         checksum/scripts: d18997e7547c7efc210c23a4f40e561f43feb43dae5dfdbb1d017c19c22b7e95
-        checksum/secret: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
       labels:
         app.kubernetes.io/component: master
         app.kubernetes.io/instance: ocf-harbor

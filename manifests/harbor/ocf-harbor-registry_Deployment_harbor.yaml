@@ -21,9 +21,6 @@ spec:
     metadata:
       annotations:
         checksum/configmap: e33a881fb69efbb172f5b683bd7a9acc26b0e6bf279fd034db891fb7b0c47915
-        checksum/secret: 32adfafa2cb65c913e4b8c9168a9c146fd00a5c6caa84344f843c34582c73f27
-        checksum/secret-core: a62624694d8a1c78bb6ba1dbb5e88dfa865bd255a0430148bb98411aaa57f3e0
-        checksum/secret-jobservice: 82782c132c4ea59ac330ee394be53bd10d75a8d48f065a21b9727949ae2e8126
       labels:
         app.kubernetes.io/component: registry
         app.kubernetes.io/instance: ocf-harbor

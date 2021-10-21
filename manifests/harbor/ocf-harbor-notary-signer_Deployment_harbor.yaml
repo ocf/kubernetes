@@ -19,8 +19,7 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      annotations:
-        checksum/secret: 7582b804dd9bfb107b5b7b8c4334ff2a0dd746a4a06f627db343641b63c3e0c2
+      annotations: {}
       labels:
         app.kubernetes.io/component: notary-signer
         app.kubernetes.io/instance: ocf-harbor
