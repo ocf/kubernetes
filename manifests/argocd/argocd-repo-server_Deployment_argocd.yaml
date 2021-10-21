@@ -110,8 +110,6 @@ spec:
               key: reposerver.default.cache.expiration
               name: argocd-cmd-params-cm
               optional: true
-        - name: LD_LIBRARY_PATH
-          value: /usr/local/lib
         image: quay.io/argoproj/argocd:v2.1.2
         imagePullPolicy: Always
         livenessProbe:
@@ -151,28 +149,6 @@ spec:
           name: argocd-repo-server-tls
         - mountPath: /tmp
           name: tmp
-        - mountPath: /usr/local/sbin
-          name: usr-local-bin
-        - mountPath: /usr/local/include
-          name: usr-local-include
-        - mountPath: /usr/local/lib
-          name: usr-local-lib
-      initContainers:
-      - args:
-        - cp -r /usr/local/bin/. /mnt/usr/local/bin/ && cp -r /usr/local/include/.
-          /mnt/usr/local/include/ && cp -r /usr/local/lib/. /mnt/usr/local/lib/
-        command:
-        - sh
-        - -c
-        image: python:3.9-buster
-        name: python
-        volumeMounts:
-        - mountPath: /mnt/usr/local/bin
-          name: usr-local-bin
-        - mountPath: /mnt/usr/local/include
-          name: usr-local-include
-        - mountPath: /mnt/usr/local/lib
-          name: usr-local-lib
       volumes:
       - configMap:
           name: argocd-ssh-known-hosts-cm
@@ -198,9 +174,3 @@ spec:
             path: ca.crt
           optional: true
           secretName: argocd-repo-server-tls
-      - emptyDir: {}
-        name: usr-local-lib
-      - emptyDir: {}
-        name: usr-local-include
-      - emptyDir: {}
-        name: usr-local-bin
