@@ -16,8 +16,7 @@ def application_for_name(app_name: str) -> object:
             },
             "source": {
                 "repoURL": "https://github.com/ocf/kubernetes",
-                "path": ".",
-                "plugin": {"name": "python"},
+                "path": f"manifests/{app_name}",
             },
             "syncPolicy": {
                 "syncOptions": [

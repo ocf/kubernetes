@@ -18,8 +18,7 @@ base_deployment = {
         "destination": {"server": "https://kubernetes.default.svc"},
         "source": {
             "repoURL": "https://github.com/ocf/kubernetes",
-            "path": ".",
-            "plugin": {"name": "python"},
+            "path": "manifests/bootstrap",
         },
     },
 }

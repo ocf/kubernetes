@@ -9,9 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: .
-    plugin:
-      name: python
+    path: manifests/vault
     repoURL: https://github.com/ocf/kubernetes
   syncPolicy:
     syncOptions:

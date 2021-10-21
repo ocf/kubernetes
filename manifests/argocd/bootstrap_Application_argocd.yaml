@@ -8,7 +8,5 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: .
-    plugin:
-      name: python
+    path: manifests/bootstrap
     repoURL: https://github.com/ocf/kubernetes
