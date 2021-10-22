@@ -53,5 +53,9 @@ def customize(o: dict[str, Any]) -> dict[str, Any]:
     if o["kind"] == "ConfigMap" and o["metadata"]["name"] == "argocd-rbac-cm":
         o["data"] = {}
         o["data"]["policy.csv"] = "g, ocfroot, role:admin"
+    if o["kind"] == "Deployment" and o["metadata"]["name"] == "argocd-server":
+        o["spec"]["template"]["spec"]["containers"][0]["command"].extend(
+            ("--insecure",)
+        )
 
     return o
