@@ -72,11 +72,12 @@ def build_chart_from_versions(
     name: str,
     versions: dict[str, Any],
     values: dict,
+    namespace: str = None,
 ):
     return build_chart(
         repo_url=versions[name]["helm"],
         chart_name=versions[name].get("chart", name),
-        namespace=name,
+        namespace=namespace or name,
         version=versions[name]["version"],
         values=values,
     )
