@@ -10,7 +10,12 @@ values = {
         "integration": "containerd",
         "socketPath": "/run/containerd/containerd.sock",
     },
-    "hubble": {"tls": {"auto": {"method": "cronJob"}}},
+    "hubble": {
+        "tls": {"auto": {"method": "cronJob"}},
+        "listenAddress": ":4244",
+        "relay": {"enabled": True},
+        "ui": {"enabled": True},
+    },
 }
 
 
