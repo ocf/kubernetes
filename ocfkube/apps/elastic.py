@@ -13,11 +13,38 @@ license = [
         },
         "type": "Opaque",
         "stringData": {"license": "this is a dummy value, *not* a real license"},
-    }
+    },
+    {
+        "apiVersion": "elasticsearch.k8s.elastic.co/v1",
+        "kind": "Elasticsearch",
+        "metadata": {"name": "elastic"},
+        "spec": {
+            "version": "7.15.1",
+            "nodeSets": [
+                {
+                    "name": "default",
+                    "count": 1,
+                    # TODO: This is bad! https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-virtual-memory.html
+                    "config": {"node.store.allow_mmap": False},
+                }
+            ],
+        },
+    },
+    {
+        "apiVersion": "kibana.k8s.elastic.co/v1",
+        "kind": "Kibana",
+        "metadata": {"name": "elastic"},
+        "spec": {
+            "version": "7.15.1",
+            "count": 1,
+            "elasticsearchRef": {"name": "elastic"},
+        },
+    },
 ]
 
 
 def build() -> object:
-    return helm.build_chart_from_versions(
-        name="elastic", versions=versions, values=values, namespace="eck-operator"
-    ) + license
+    return (
+        helm.build_chart_from_versions(name="elastic", versions=versions, values=values)
+        + license
+    )

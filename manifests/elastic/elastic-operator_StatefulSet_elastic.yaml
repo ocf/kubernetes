@@ -2,27 +2,27 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   labels:
-    app.kubernetes.io/instance: ocf-eck-operator
+    app.kubernetes.io/instance: ocf-elastic
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: elastic-operator
     app.kubernetes.io/version: 1.8.0
     helm.sh/chart: eck-operator-1.8.0
   name: elastic-operator
-  namespace: eck-operator
+  namespace: elastic
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/instance: ocf-eck-operator
+      app.kubernetes.io/instance: ocf-elastic
       app.kubernetes.io/name: elastic-operator
   serviceName: elastic-operator
   template:
     metadata:
       annotations:
-        checksum/config: 9ccef354a12429dad3ac3d1f9a836550be22f0f6b4f144e1935f0f12825cb233
+        checksum/config: 9455b285fab11d1043e797b4369668e2bdcc6710f9cb128b9a98589ba63557d5
         co.elastic.logs/raw: '[{"type":"container","json.keys_under_root":true,"paths":["/var/log/containers/*${data.kubernetes.container.id}.log"],"processors":[{"convert":{"mode":"rename","ignore_missing":true,"fields":[{"from":"error","to":"_error"}]}},{"convert":{"mode":"rename","ignore_missing":true,"fields":[{"from":"_error","to":"error.message"}]}},{"convert":{"mode":"rename","ignore_missing":true,"fields":[{"from":"source","to":"_source"}]}},{"convert":{"mode":"rename","ignore_missing":true,"fields":[{"from":"_source","to":"event.source"}]}}]}]'
       labels:
-        app.kubernetes.io/instance: ocf-eck-operator
+        app.kubernetes.io/instance: ocf-elastic
         app.kubernetes.io/name: elastic-operator
     spec:
       containers:

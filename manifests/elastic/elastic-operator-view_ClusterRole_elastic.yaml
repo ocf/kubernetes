@@ -2,7 +2,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
-    app.kubernetes.io/instance: ocf-eck-operator
+    app.kubernetes.io/instance: ocf-elastic
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: elastic-operator
     app.kubernetes.io/version: 1.8.0

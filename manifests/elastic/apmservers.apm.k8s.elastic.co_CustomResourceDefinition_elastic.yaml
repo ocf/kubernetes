@@ -5,7 +5,7 @@ metadata:
     controller-gen.kubebuilder.io/version: v0.6.2
   creationTimestamp: null
   labels:
-    app.kubernetes.io/instance: ocf-eck-operator
+    app.kubernetes.io/instance: ocf-elastic
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: eck-operator-crds
     app.kubernetes.io/version: 1.8.0

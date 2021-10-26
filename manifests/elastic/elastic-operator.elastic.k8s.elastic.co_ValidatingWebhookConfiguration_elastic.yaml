@@ -2,12 +2,12 @@ apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
   labels:
-    app.kubernetes.io/instance: ocf-eck-operator
+    app.kubernetes.io/instance: ocf-elastic
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: elastic-operator
     app.kubernetes.io/version: 1.8.0
     helm.sh/chart: eck-operator-1.8.0
-  name: elastic-operator.eck-operator.k8s.elastic.co
+  name: elastic-operator.elastic.k8s.elastic.co
 webhooks:
 - admissionReviewVersions:
   - v1beta1
@@ -15,7 +15,7 @@ webhooks:
     caBundle: Cg==
     service:
       name: elastic-operator-webhook
-      namespace: eck-operator
+      namespace: elastic
       path: /validate-agent-k8s-elastic-co-v1alpha1-agent
   failurePolicy: Ignore
   matchPolicy: Exact
@@ -37,7 +37,7 @@ webhooks:
     caBundle: Cg==
     service:
       name: elastic-operator-webhook
-      namespace: eck-operator
+      namespace: elastic
       path: /validate-apm-k8s-elastic-co-v1-apmserver
   failurePolicy: Ignore
   matchPolicy: Exact
@@ -59,7 +59,7 @@ webhooks:
     caBundle: Cg==
     service:
       name: elastic-operator-webhook
-      namespace: eck-operator
+      namespace: elastic
       path: /validate-apm-k8s-elastic-co-v1beta1-apmserver
   failurePolicy: Ignore
   matchPolicy: Exact
@@ -81,7 +81,7 @@ webhooks:
     caBundle: Cg==
     service:
       name: elastic-operator-webhook
-      namespace: eck-operator
+      namespace: elastic
       path: /validate-beat-k8s-elastic-co-v1beta1-beat
   failurePolicy: Ignore
   matchPolicy: Exact
@@ -103,7 +103,7 @@ webhooks:
     caBundle: Cg==
     service:
       name: elastic-operator-webhook
-      namespace: eck-operator
+      namespace: elastic
       path: /validate-enterprisesearch-k8s-elastic-co-v1-enterprisesearch
   failurePolicy: Ignore
   matchPolicy: Exact
@@ -125,7 +125,7 @@ webhooks:
     caBundle: Cg==
     service:
       name: elastic-operator-webhook
-      namespace: eck-operator
+      namespace: elastic
       path: /validate-enterprisesearch-k8s-elastic-co-v1beta1-enterprisesearch
   failurePolicy: Ignore
   matchPolicy: Exact
@@ -147,7 +147,7 @@ webhooks:
     caBundle: Cg==
     service:
       name: elastic-operator-webhook
-      namespace: eck-operator
+      namespace: elastic
       path: /validate-elasticsearch-k8s-elastic-co-v1-elasticsearch
   failurePolicy: Ignore
   matchPolicy: Exact
@@ -169,7 +169,7 @@ webhooks:
     caBundle: Cg==
     service:
       name: elastic-operator-webhook
-      namespace: eck-operator
+      namespace: elastic
       path: /validate-elasticsearch-k8s-elastic-co-v1beta1-elasticsearch
   failurePolicy: Ignore
   matchPolicy: Exact
@@ -191,7 +191,7 @@ webhooks:
     caBundle: Cg==
     service:
       name: elastic-operator-webhook
-      namespace: eck-operator
+      namespace: elastic
       path: /validate-kibana-k8s-elastic-co-v1-kibana
   failurePolicy: Ignore
   matchPolicy: Exact
@@ -213,7 +213,7 @@ webhooks:
     caBundle: Cg==
     service:
       name: elastic-operator-webhook
-      namespace: eck-operator
+      namespace: elastic
       path: /validate-kibana-k8s-elastic-co-v1beta1-kibana
   failurePolicy: Ignore
   matchPolicy: Exact
