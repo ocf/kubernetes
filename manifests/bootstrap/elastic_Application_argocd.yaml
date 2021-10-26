@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: elastic
+  namespace: argocd
+spec:
+  destination:
+    namespace: elastic
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: manifests/elastic
+    repoURL: https://github.com/ocf/kubernetes
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true

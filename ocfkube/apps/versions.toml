@@ -25,6 +25,11 @@ helm = "https://charts.bitnami.com/bitnami"
 version = "1.15.0"
 helm = "https://coredns.github.io/helm"
 
+[elastic]
+version = "1.8.0"
+helm = "https://helm.elastic.co"
+chart = "eck-operator"
+
 [falco]
 version = "1.11.1"
 helm = "https://falcosecurity.github.io/charts"
