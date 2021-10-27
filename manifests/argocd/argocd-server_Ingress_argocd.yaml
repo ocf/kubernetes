@@ -5,7 +5,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     ingress.kubernetes.io/force-ssl-redirect: 'true'
     kubernetes.io/tls-acme: 'true'
-  name: argocd-server-ingress
+  name: argocd-server
 spec:
   rules:
   - host: argo.ocf.berkeley.edu
@@ -15,7 +15,7 @@ spec:
           service:
             name: argocd-server
             port:
-              number: 80
+              name: https
         pathType: ImplementationSpecific
   tls:
   - hosts:
