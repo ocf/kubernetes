@@ -35,7 +35,6 @@ spec:
         - argocd-server
         - --redis
         - argocd-redis-ha-haproxy:6379
-        - --insecure
         env:
         - name: ARGOCD_API_SERVER_REPLICAS
           value: '2'
