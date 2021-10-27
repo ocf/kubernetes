@@ -33,8 +33,8 @@ def shelve(
         if curr is None:
             if create_parents:
                 curr = dict()
-                if prev is not None:
-                    prev[prev_key] = curr
+                assert prev is not None
+                prev[prev_key] = curr
             else:
                 raise KeyError(prev_key)
         prev, prev_key = curr, key
