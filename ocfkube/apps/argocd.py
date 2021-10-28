@@ -6,7 +6,7 @@ import requests
 import yaml
 
 from ocfkube.lib import Ingress
-from ocfkube.lib.surgery import edit_manifests
+from ocfkube.lib.surgery import edit_manifests, make_edit_manifest
 from ocfkube.utils.json import shelve
 from ocfkube.utils import versions
 
@@ -65,6 +65,18 @@ def build() -> list[dict[str, Any]]:
                         "projectcontour.io/upstream-protocol.tls",
                     ),
                     "https",
+                    create_parents=True,
+                ),
+                ("Deployment", "argocd-redis-ha-haproxy"): make_edit_manifest(
+                    {
+                        # Run 3 replicas...
+                        ("spec", "replicas"): 3,
+                        # ...but make sure we never surge above 3 because we only
+                        # have 3 nodes (otherwise we would be unable to progress
+                        # the deployment because of the node antiaffinity)
+                        ("spec", "strategy", "rollingUpdate", "maxSurge"): 0,
+                        ("spec", "strategy", "rollingUpdate", "maxUnavailable"): 1,
+                    },
                     create_parents=True,
                 ),
             },
