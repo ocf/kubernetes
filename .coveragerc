@@ -1,0 +1,5 @@
+[run]
+source = ocfkube
+branch = True
+
+omit = ocfkube/apps/*

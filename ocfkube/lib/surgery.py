@@ -49,9 +49,12 @@ def edit_manifests(
     return result
 
 
-def make_edit_manifest(edits: Dict[Iterable[str], Any]) -> Callable[[dict], dict]:
+def make_edit_manifest(
+    edits: Dict[Iterable[str], Any], *, create_parents: bool = False
+) -> Callable[[dict], dict]:
     def edit(m):
         for path, val in edits.items():
-            shelve(m, path, val)
+            shelve(m, path, val, create_parents=create_parents)
+        return m
 
     return edit
