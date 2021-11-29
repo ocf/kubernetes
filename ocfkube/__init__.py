@@ -25,8 +25,9 @@ def write_manifests(objects, appname: str, manifest_dir: Path):
     """Generates every possible Kubernetes manifest in this repository and writes it to {manifest_dir}"""
     appdir = manifest_dir / appname
     if appdir.exists():
-        shutil.rmtree(appdir)
-    appdir.mkdir()
+        for p in set(appdir.glob("*")) - set(appdir.glob("*_SyncedSecret_*")):
+            p.unlink()
+    appdir.mkdir(exist_ok=True)
     for obj in objects:
         if obj is None:
             # TODO: Log message with warning
@@ -35,6 +36,8 @@ def write_manifests(objects, appname: str, manifest_dir: Path):
         name = obj["metadata"].get("name", obj["metadata"].get("generateName", None))
         kind = obj["kind"]
         namespace = obj["metadata"].get("namespace", appname)
+        if obj["kind"] == "SyncedSecret" and (appdir / f"{name}_{kind}_{namespace}.yaml").exists():
+            continue
         with open(appdir / f"{name}_{kind}_{namespace}.yaml", "w") as f:
             yaml.safe_dump(obj, f)
 

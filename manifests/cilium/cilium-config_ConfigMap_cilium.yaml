@@ -1,6 +1,7 @@
 apiVersion: v1
 data:
-  auto-direct-node-routes: 'false'
+  auto-direct-node-routes: 'true'
+  bpf-lb-algorithm: maglev
   bpf-lb-map-max: '65536'
   bpf-map-dynamic-size-ratio: '0.0025'
   bpf-policy-map-max: '16384'
@@ -47,11 +48,13 @@ data:
   monitor-aggregation-flags: all
   monitor-aggregation-interval: 5s
   native-routing-cidr: 10.0.0.0/8
+  node-port-acceleration: native
   node-port-bind-protection: 'true'
+  node-port-mode: hybrid
   operator-api-serve-addr: 127.0.0.1:9234
   preallocate-bpf-maps: 'false'
   sidecar-istio-proxy-image: cilium/istio_proxy
-  tunnel: vxlan
+  tunnel: disabled
   wait-bpf-mount: 'false'
 kind: ConfigMap
 metadata:
