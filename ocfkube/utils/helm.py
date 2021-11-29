@@ -77,6 +77,7 @@ def build_chart_from_versions(
     return build_chart(
         repo_url=versions[name]["helm"],
         chart_name=versions[name].get("chart", name),
+        name=name,
         namespace=namespace or name,
         version=versions[name]["version"],
         values=values,
@@ -86,6 +87,7 @@ def build_chart_from_versions(
 def build_chart(
     repo_url: str,
     chart_name: str,
+    name: str,
     namespace: str,
     version: str,
     values: dict,
@@ -112,7 +114,7 @@ def build_chart(
         "--name-template",
         # the helm release name
         # sometimes used in resource names
-        f"ocf-{namespace}",
+        f"ocf-{name}",
         "--api-versions",
         ", ".join(capabilities),
         chart_name,
