@@ -5,7 +5,7 @@ import click
 
 
 @click.group()
-def cli(debug):
+def cli():
     pass
 
 
