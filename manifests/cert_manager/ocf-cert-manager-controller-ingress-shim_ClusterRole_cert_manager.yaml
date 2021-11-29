@@ -7,7 +7,8 @@ metadata:
     app.kubernetes.io/instance: ocf-cert-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cert-manager
-    helm.sh/chart: cert-manager-v1.1.0
+    app.kubernetes.io/version: v1.6.1
+    helm.sh/chart: cert-manager-v1.6.1
   name: ocf-cert-manager-controller-ingress-shim
 rules:
 - apiGroups:
@@ -31,7 +32,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - extensions
+  - networking.k8s.io
   resources:
   - ingresses
   verbs:
@@ -39,9 +40,25 @@ rules:
   - list
   - watch
 - apiGroups:
-  - extensions
+  - networking.k8s.io
   resources:
   - ingresses/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - networking.x-k8s.io
+  resources:
+  - gateways
+  - httproutes
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - networking.x-k8s.io
+  resources:
+  - gateways/finalizers
+  - httproutes/finalizers
   verbs:
   - update
 - apiGroups:

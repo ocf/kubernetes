@@ -8,7 +8,8 @@ metadata:
     app.kubernetes.io/instance: ocf-cert-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cert-manager
-    helm.sh/chart: cert-manager-v1.1.0
+    app.kubernetes.io/version: v1.6.1
+    helm.sh/chart: cert-manager-v1.6.1
   name: certificaterequests.cert-manager.io
 spec:
   conversion:
@@ -24,6 +25,8 @@ spec:
       - v1beta1
   group: cert-manager.io
   names:
+    categories:
+    - cert-manager
     kind: CertificateRequest
     listKind: CertificateRequestList
     plural: certificaterequests
@@ -34,12 +37,20 @@ spec:
   scope: Namespaced
   versions:
   - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=="Approved")].status
+      name: Approved
+      type: string
+    - jsonPath: .status.conditions[?(@.type=="Denied")].status
+      name: Denied
+      type: string
     - jsonPath: .status.conditions[?(@.type=="Ready")].status
       name: Ready
       type: string
     - jsonPath: .spec.issuerRef.name
       name: Issuer
-      priority: 1
+      type: string
+    - jsonPath: .spec.username
+      name: Requestor
       type: string
     - jsonPath: .status.conditions[?(@.type=="Ready")].message
       name: Status
@@ -59,8 +70,8 @@ spec:
           \ from one of the configured issuers. \n All fields within the CertificateRequest's\
           \ `spec` are immutable after creation. A CertificateRequest will either\
           \ succeed or fail, as denoted by its `status.state` field. \n A CertificateRequest\
-          \ is a 'one-shot' resource, meaning it represents a single point in time\
-          \ request for a certificate and cannot be re-used."
+          \ is a one-shot resource, meaning it represents a single point in time request\
+          \ for a certificate and cannot be re-used."
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -86,6 +97,23 @@ spec:
                 description: The requested 'duration' (i.e. lifetime) of the Certificate.
                   This option may be ignored/overridden by some issuer types.
                 type: string
+              extra:
+                additionalProperties:
+                  items:
+                    type: string
+                  type: array
+                description: Extra contains extra attributes of the user that created
+                  the CertificateRequest. Populated by the cert-manager webhook on
+                  creation and immutable.
+                type: object
+              groups:
+                description: Groups contains group membership of the user that created
+                  the CertificateRequest. Populated by the cert-manager webhook on
+                  creation and immutable.
+                items:
+                  type: string
+                type: array
+                x-kubernetes-list-type: atomic
               isCA:
                 description: IsCA will request to mark the certificate as valid for
                   certificate signing when submitting to the issuer. This will automatically
@@ -93,12 +121,12 @@ spec:
                 type: boolean
               issuerRef:
                 description: IssuerRef is a reference to the issuer for this CertificateRequest.  If
-                  the 'kind' field is not set, or set to 'Issuer', an Issuer resource
+                  the `kind` field is not set, or set to `Issuer`, an Issuer resource
                   with the given name in the same namespace as the CertificateRequest
-                  will be used.  If the 'kind' field is set to 'ClusterIssuer', a
-                  ClusterIssuer with the provided name will be used. The 'name' field
+                  will be used.  If the `kind` field is set to `ClusterIssuer`, a
+                  ClusterIssuer with the provided name will be used. The `name` field
                   in this stanza is required at all times. The group field refers
-                  to the API group of the issuer which defaults to 'cert-manager.io'
+                  to the API group of the issuer which defaults to `cert-manager.io`
                   if empty.
                 properties:
                   group:
@@ -113,6 +141,10 @@ spec:
                 required:
                 - name
                 type: object
+              uid:
+                description: UID contains the uid of the user that created the CertificateRequest.
+                  Populated by the cert-manager webhook on creation and immutable.
+                type: string
               usages:
                 description: Usages is the set of x509 usages that are requested for
                   the certificate. Defaults to `digital signature` and `key encipherment`
@@ -153,6 +185,11 @@ spec:
                   - netscape sgc
                   type: string
                 type: array
+              username:
+                description: Username contains the name of the user that created the
+                  CertificateRequest. Populated by the cert-manager webhook on creation
+                  and immutable.
+                type: string
             required:
             - csr
             - issuerRef
@@ -196,16 +233,16 @@ spec:
                         for the condition's last transition.
                       type: string
                     status:
-                      description: Status of the condition, one of ('True', 'False',
-                        'Unknown').
+                      description: Status of the condition, one of (`True`, `False`,
+                        `Unknown`).
                       enum:
                       - 'True'
                       - 'False'
                       - Unknown
                       type: string
                     type:
-                      description: Type of the condition, known values are ('Ready',
-                        'InvalidRequest').
+                      description: Type of the condition, known values are (`Ready`,
+                        `InvalidRequest`, `Approved`, `Denied`).
                       type: string
                   required:
                   - status
@@ -219,17 +256,25 @@ spec:
                 type: string
             type: object
         type: object
-    served: true
+    served: false
     storage: false
     subresources:
       status: {}
   - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=="Approved")].status
+      name: Approved
+      type: string
+    - jsonPath: .status.conditions[?(@.type=="Denied")].status
+      name: Denied
+      type: string
     - jsonPath: .status.conditions[?(@.type=="Ready")].status
       name: Ready
       type: string
     - jsonPath: .spec.issuerRef.name
       name: Issuer
-      priority: 1
+      type: string
+    - jsonPath: .spec.username
+      name: Requestor
       type: string
     - jsonPath: .status.conditions[?(@.type=="Ready")].message
       name: Status
@@ -249,8 +294,8 @@ spec:
           \ from one of the configured issuers. \n All fields within the CertificateRequest's\
           \ `spec` are immutable after creation. A CertificateRequest will either\
           \ succeed or fail, as denoted by its `status.state` field. \n A CertificateRequest\
-          \ is a 'one-shot' resource, meaning it represents a single point in time\
-          \ request for a certificate and cannot be re-used."
+          \ is a one-shot resource, meaning it represents a single point in time request\
+          \ for a certificate and cannot be re-used."
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -276,6 +321,23 @@ spec:
                 description: The requested 'duration' (i.e. lifetime) of the Certificate.
                   This option may be ignored/overridden by some issuer types.
                 type: string
+              extra:
+                additionalProperties:
+                  items:
+                    type: string
+                  type: array
+                description: Extra contains extra attributes of the user that created
+                  the CertificateRequest. Populated by the cert-manager webhook on
+                  creation and immutable.
+                type: object
+              groups:
+                description: Groups contains group membership of the user that created
+                  the CertificateRequest. Populated by the cert-manager webhook on
+                  creation and immutable.
+                items:
+                  type: string
+                type: array
+                x-kubernetes-list-type: atomic
               isCA:
                 description: IsCA will request to mark the certificate as valid for
                   certificate signing when submitting to the issuer. This will automatically
@@ -283,12 +345,12 @@ spec:
                 type: boolean
               issuerRef:
                 description: IssuerRef is a reference to the issuer for this CertificateRequest.  If
-                  the 'kind' field is not set, or set to 'Issuer', an Issuer resource
+                  the `kind` field is not set, or set to `Issuer`, an Issuer resource
                   with the given name in the same namespace as the CertificateRequest
-                  will be used.  If the 'kind' field is set to 'ClusterIssuer', a
-                  ClusterIssuer with the provided name will be used. The 'name' field
+                  will be used.  If the `kind` field is set to `ClusterIssuer`, a
+                  ClusterIssuer with the provided name will be used. The `name` field
                   in this stanza is required at all times. The group field refers
-                  to the API group of the issuer which defaults to 'cert-manager.io'
+                  to the API group of the issuer which defaults to `cert-manager.io`
                   if empty.
                 properties:
                   group:
@@ -303,6 +365,10 @@ spec:
                 required:
                 - name
                 type: object
+              uid:
+                description: UID contains the uid of the user that created the CertificateRequest.
+                  Populated by the cert-manager webhook on creation and immutable.
+                type: string
               usages:
                 description: Usages is the set of x509 usages that are requested for
                   the certificate. Defaults to `digital signature` and `key encipherment`
@@ -343,6 +409,11 @@ spec:
                   - netscape sgc
                   type: string
                 type: array
+              username:
+                description: Username contains the name of the user that created the
+                  CertificateRequest. Populated by the cert-manager webhook on creation
+                  and immutable.
+                type: string
             required:
             - csr
             - issuerRef
@@ -386,16 +457,16 @@ spec:
                         for the condition's last transition.
                       type: string
                     status:
-                      description: Status of the condition, one of ('True', 'False',
-                        'Unknown').
+                      description: Status of the condition, one of (`True`, `False`,
+                        `Unknown`).
                       enum:
                       - 'True'
                       - 'False'
                       - Unknown
                       type: string
                     type:
-                      description: Type of the condition, known values are ('Ready',
-                        'InvalidRequest').
+                      description: Type of the condition, known values are (`Ready`,
+                        `InvalidRequest`, `Approved`, `Denied`).
                       type: string
                   required:
                   - status
@@ -409,17 +480,25 @@ spec:
                 type: string
             type: object
         type: object
-    served: true
+    served: false
     storage: false
     subresources:
       status: {}
   - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=="Approved")].status
+      name: Approved
+      type: string
+    - jsonPath: .status.conditions[?(@.type=="Denied")].status
+      name: Denied
+      type: string
     - jsonPath: .status.conditions[?(@.type=="Ready")].status
       name: Ready
       type: string
     - jsonPath: .spec.issuerRef.name
       name: Issuer
-      priority: 1
+      type: string
+    - jsonPath: .spec.username
+      name: Requestor
       type: string
     - jsonPath: .status.conditions[?(@.type=="Ready")].message
       name: Status
@@ -439,8 +518,8 @@ spec:
           \ from one of the configured issuers. \n All fields within the CertificateRequest's\
           \ `spec` are immutable after creation. A CertificateRequest will either\
           \ succeed or fail, as denoted by its `status.state` field. \n A CertificateRequest\
-          \ is a 'one-shot' resource, meaning it represents a single point in time\
-          \ request for a certificate and cannot be re-used."
+          \ is a one-shot resource, meaning it represents a single point in time request\
+          \ for a certificate and cannot be re-used."
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -461,6 +540,23 @@ spec:
                 description: The requested 'duration' (i.e. lifetime) of the Certificate.
                   This option may be ignored/overridden by some issuer types.
                 type: string
+              extra:
+                additionalProperties:
+                  items:
+                    type: string
+                  type: array
+                description: Extra contains extra attributes of the user that created
+                  the CertificateRequest. Populated by the cert-manager webhook on
+                  creation and immutable.
+                type: object
+              groups:
+                description: Groups contains group membership of the user that created
+                  the CertificateRequest. Populated by the cert-manager webhook on
+                  creation and immutable.
+                items:
+                  type: string
+                type: array
+                x-kubernetes-list-type: atomic
               isCA:
                 description: IsCA will request to mark the certificate as valid for
                   certificate signing when submitting to the issuer. This will automatically
@@ -468,12 +564,12 @@ spec:
                 type: boolean
               issuerRef:
                 description: IssuerRef is a reference to the issuer for this CertificateRequest.  If
-                  the 'kind' field is not set, or set to 'Issuer', an Issuer resource
+                  the `kind` field is not set, or set to `Issuer`, an Issuer resource
                   with the given name in the same namespace as the CertificateRequest
-                  will be used.  If the 'kind' field is set to 'ClusterIssuer', a
-                  ClusterIssuer with the provided name will be used. The 'name' field
+                  will be used.  If the `kind` field is set to `ClusterIssuer`, a
+                  ClusterIssuer with the provided name will be used. The `name` field
                   in this stanza is required at all times. The group field refers
-                  to the API group of the issuer which defaults to 'cert-manager.io'
+                  to the API group of the issuer which defaults to `cert-manager.io`
                   if empty.
                 properties:
                   group:
@@ -492,6 +588,10 @@ spec:
                 description: The PEM-encoded x509 certificate signing request to be
                   submitted to the CA for signing.
                 format: byte
+                type: string
+              uid:
+                description: UID contains the uid of the user that created the CertificateRequest.
+                  Populated by the cert-manager webhook on creation and immutable.
                 type: string
               usages:
                 description: Usages is the set of x509 usages that are requested for
@@ -533,6 +633,11 @@ spec:
                   - netscape sgc
                   type: string
                 type: array
+              username:
+                description: Username contains the name of the user that created the
+                  CertificateRequest. Populated by the cert-manager webhook on creation
+                  and immutable.
+                type: string
             required:
             - issuerRef
             - request
@@ -576,16 +681,16 @@ spec:
                         for the condition's last transition.
                       type: string
                     status:
-                      description: Status of the condition, one of ('True', 'False',
-                        'Unknown').
+                      description: Status of the condition, one of (`True`, `False`,
+                        `Unknown`).
                       enum:
                       - 'True'
                       - 'False'
                       - Unknown
                       type: string
                     type:
-                      description: Type of the condition, known values are ('Ready',
-                        'InvalidRequest').
+                      description: Type of the condition, known values are (`Ready`,
+                        `InvalidRequest`, `Approved`, `Denied`).
                       type: string
                   required:
                   - status
@@ -601,17 +706,25 @@ spec:
         required:
         - spec
         type: object
-    served: true
+    served: false
     storage: false
     subresources:
       status: {}
   - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=="Approved")].status
+      name: Approved
+      type: string
+    - jsonPath: .status.conditions[?(@.type=="Denied")].status
+      name: Denied
+      type: string
     - jsonPath: .status.conditions[?(@.type=="Ready")].status
       name: Ready
       type: string
     - jsonPath: .spec.issuerRef.name
       name: Issuer
-      priority: 1
+      type: string
+    - jsonPath: .spec.username
+      name: Requestor
       type: string
     - jsonPath: .status.conditions[?(@.type=="Ready")].message
       name: Status
@@ -631,8 +744,8 @@ spec:
           \ from one of the configured issuers. \n All fields within the CertificateRequest's\
           \ `spec` are immutable after creation. A CertificateRequest will either\
           \ succeed or fail, as denoted by its `status.state` field. \n A CertificateRequest\
-          \ is a 'one-shot' resource, meaning it represents a single point in time\
-          \ request for a certificate and cannot be re-used."
+          \ is a one-shot resource, meaning it represents a single point in time request\
+          \ for a certificate and cannot be re-used."
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -653,6 +766,23 @@ spec:
                 description: The requested 'duration' (i.e. lifetime) of the Certificate.
                   This option may be ignored/overridden by some issuer types.
                 type: string
+              extra:
+                additionalProperties:
+                  items:
+                    type: string
+                  type: array
+                description: Extra contains extra attributes of the user that created
+                  the CertificateRequest. Populated by the cert-manager webhook on
+                  creation and immutable.
+                type: object
+              groups:
+                description: Groups contains group membership of the user that created
+                  the CertificateRequest. Populated by the cert-manager webhook on
+                  creation and immutable.
+                items:
+                  type: string
+                type: array
+                x-kubernetes-list-type: atomic
               isCA:
                 description: IsCA will request to mark the certificate as valid for
                   certificate signing when submitting to the issuer. This will automatically
@@ -660,12 +790,12 @@ spec:
                 type: boolean
               issuerRef:
                 description: IssuerRef is a reference to the issuer for this CertificateRequest.  If
-                  the 'kind' field is not set, or set to 'Issuer', an Issuer resource
+                  the `kind` field is not set, or set to `Issuer`, an Issuer resource
                   with the given name in the same namespace as the CertificateRequest
-                  will be used.  If the 'kind' field is set to 'ClusterIssuer', a
-                  ClusterIssuer with the provided name will be used. The 'name' field
+                  will be used.  If the `kind` field is set to `ClusterIssuer`, a
+                  ClusterIssuer with the provided name will be used. The `name` field
                   in this stanza is required at all times. The group field refers
-                  to the API group of the issuer which defaults to 'cert-manager.io'
+                  to the API group of the issuer which defaults to `cert-manager.io`
                   if empty.
                 properties:
                   group:
@@ -684,6 +814,10 @@ spec:
                 description: The PEM-encoded x509 certificate signing request to be
                   submitted to the CA for signing.
                 format: byte
+                type: string
+              uid:
+                description: UID contains the uid of the user that created the CertificateRequest.
+                  Populated by the cert-manager webhook on creation and immutable.
                 type: string
               usages:
                 description: Usages is the set of x509 usages that are requested for
@@ -726,6 +860,11 @@ spec:
                   - netscape sgc
                   type: string
                 type: array
+              username:
+                description: Username contains the name of the user that created the
+                  CertificateRequest. Populated by the cert-manager webhook on creation
+                  and immutable.
+                type: string
             required:
             - issuerRef
             - request
@@ -769,16 +908,16 @@ spec:
                         for the condition's last transition.
                       type: string
                     status:
-                      description: Status of the condition, one of ('True', 'False',
-                        'Unknown').
+                      description: Status of the condition, one of (`True`, `False`,
+                        `Unknown`).
                       enum:
                       - 'True'
                       - 'False'
                       - Unknown
                       type: string
                     type:
-                      description: Type of the condition, known values are ('Ready',
-                        'InvalidRequest').
+                      description: Type of the condition, known values are (`Ready`,
+                        `InvalidRequest`, `Approved`, `Denied`).
                       type: string
                   required:
                   - status
@@ -798,9 +937,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ''
-    plural: ''
-  conditions: []
-  storedVersions: []

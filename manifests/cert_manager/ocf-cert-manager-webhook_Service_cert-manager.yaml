@@ -7,13 +7,15 @@ metadata:
     app.kubernetes.io/instance: ocf-cert-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: webhook
-    helm.sh/chart: cert-manager-v1.1.0
+    app.kubernetes.io/version: v1.6.1
+    helm.sh/chart: cert-manager-v1.6.1
   name: ocf-cert-manager-webhook
   namespace: cert-manager
 spec:
   ports:
   - name: https
     port: 443
+    protocol: TCP
     targetPort: 10250
   selector:
     app.kubernetes.io/component: webhook

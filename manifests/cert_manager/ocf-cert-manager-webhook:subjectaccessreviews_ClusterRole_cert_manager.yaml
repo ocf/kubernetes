@@ -1,5 +1,5 @@
 apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
+kind: ClusterRole
 metadata:
   labels:
     app: webhook
@@ -9,23 +9,11 @@ metadata:
     app.kubernetes.io/name: webhook
     app.kubernetes.io/version: v1.6.1
     helm.sh/chart: cert-manager-v1.6.1
-  name: ocf-cert-manager-webhook:dynamic-serving
-  namespace: cert-manager
+  name: ocf-cert-manager-webhook:subjectaccessreviews
 rules:
 - apiGroups:
-  - ''
-  resourceNames:
-  - ocf-cert-manager-webhook-ca
+  - authorization.k8s.io
   resources:
-  - secrets
-  verbs:
-  - get
-  - list
-  - watch
-  - update
-- apiGroups:
-  - ''
-  resources:
-  - secrets
+  - subjectaccessreviews
   verbs:
   - create

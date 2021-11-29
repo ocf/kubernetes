@@ -8,7 +8,8 @@ metadata:
     app.kubernetes.io/instance: ocf-cert-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cert-manager
-    helm.sh/chart: cert-manager-v1.1.0
+    app.kubernetes.io/version: v1.6.1
+    helm.sh/chart: cert-manager-v1.6.1
   name: orders.acme.cert-manager.io
 spec:
   conversion:
@@ -24,6 +25,9 @@ spec:
       - v1beta1
   group: acme.cert-manager.io
   names:
+    categories:
+    - cert-manager
+    - cert-manager-acme
     kind: Order
     listKind: OrderList
     plural: orders
@@ -245,7 +249,7 @@ spec:
         required:
         - metadata
         type: object
-    served: true
+    served: false
     storage: false
     subresources:
       status: {}
@@ -464,7 +468,7 @@ spec:
         required:
         - metadata
         type: object
-    served: true
+    served: false
     storage: false
     subresources:
       status: {}
@@ -684,7 +688,7 @@ spec:
         - metadata
         - spec
         type: object
-    served: true
+    served: false
     storage: false
     subresources:
       status: {}
@@ -908,9 +912,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ''
-    plural: ''
-  conditions: []
-  storedVersions: []

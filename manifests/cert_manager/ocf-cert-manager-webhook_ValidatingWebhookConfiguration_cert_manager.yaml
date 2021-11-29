@@ -9,7 +9,8 @@ metadata:
     app.kubernetes.io/instance: ocf-cert-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: webhook
-    helm.sh/chart: cert-manager-v1.1.0
+    app.kubernetes.io/version: v1.6.1
+    helm.sh/chart: cert-manager-v1.6.1
   name: ocf-cert-manager-webhook
 webhooks:
 - admissionReviewVersions:
@@ -21,6 +22,7 @@ webhooks:
       namespace: cert-manager
       path: /validate
   failurePolicy: Fail
+  matchPolicy: Equivalent
   name: webhook.cert-manager.io
   namespaceSelector:
     matchExpressions:
@@ -37,7 +39,7 @@ webhooks:
     - cert-manager.io
     - acme.cert-manager.io
     apiVersions:
-    - '*'
+    - v1
     operations:
     - CREATE
     - UPDATE
