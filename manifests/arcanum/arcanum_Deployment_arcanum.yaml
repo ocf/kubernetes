@@ -40,7 +40,7 @@ spec:
             secretKeyRef:
               key: ARCANUM_ENC_KEY
               name: arcanum-secret
-        image: ghcr.io/nikhiljha/arcanum:v0.1.0
+        image: ghcr.io/nikhiljha/arcanum:v0.1.0@sha256:ff0f313bf03454fbd372ad9318c4fa6dd7b9d1bcf7921180e24622f30389e653
         imagePullPolicy: IfNotPresent
         name: arcanum
         ports:

@@ -29,7 +29,7 @@ def convert_secret(secret: dict, context: dict, bootstrap: bool = False) -> dict
     pub_key = "08TiLEIqvq2yDWSx1yGNwI5ICtld+ZyMzuvxqXxkA8M="
 
     return {
-        "apiVersion": "njha.dev/v1",
+        "apiVersion": "arcanum.njha.dev/v1",
         "kind": "SyncedSecret",
         "metadata": secret["metadata"],
         # Explicitly puts the key names in the object, so you can tell if a secret changed from `git diff`.

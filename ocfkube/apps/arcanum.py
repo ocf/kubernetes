@@ -13,7 +13,7 @@ def build() -> object:
             "metadata": {"name": "arcanum-cr"},
             "rules": [
                 {
-                    "apiGroups": ["njha.dev"],
+                    "apiGroups": ["arcanum.njha.dev"],
                     "resources": ["syncedsecrets", "syncedsecrets/status"],
                     "verbs": ["get", "watch", "list", "patch"],
                 },
@@ -81,7 +81,7 @@ def build() -> object:
                         "containers": [
                             {
                                 "name": "arcanum",
-                                "image": "ghcr.io/nikhiljha/arcanum:v0.1.0",
+                                "image": "ghcr.io/nikhiljha/arcanum:v0.1.0@sha256:ff0f313bf03454fbd372ad9318c4fa6dd7b9d1bcf7921180e24622f30389e653",
                                 "env": [
                                     {
                                         "name": "ARCANUM_VLT_HOST",
@@ -147,9 +147,9 @@ def build() -> object:
         {
             "apiVersion": "apiextensions.k8s.io/v1",
             "kind": "CustomResourceDefinition",
-            "metadata": {"name": "syncedsecrets.njha.dev"},
+            "metadata": {"name": "syncedsecrets.arcanum.njha.dev"},
             "spec": {
-                "group": "njha.dev",
+                "group": "arcanum.njha.dev",
                 "names": {
                     "categories": [],
                     "kind": "SyncedSecret",

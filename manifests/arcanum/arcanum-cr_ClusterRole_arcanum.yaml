@@ -4,7 +4,7 @@ metadata:
   name: arcanum-cr
 rules:
 - apiGroups:
-  - njha.dev
+  - arcanum.njha.dev
   resources:
   - syncedsecrets
   - syncedsecrets/status
