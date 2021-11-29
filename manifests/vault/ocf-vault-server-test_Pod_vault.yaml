@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    helm.sh/hook: test
+  name: ocf-vault-server-test
+  namespace: vault
+spec:
+  containers:
+  - command:
+    - /bin/sh
+    - -c
+    - "echo \"Checking for sealed info in 'vault status' output\"\nATTEMPTS=10\nn=0\n\
+      until [ \"$n\" -ge $ATTEMPTS ]\ndo\n  echo \"Attempt\" $n...\n  vault status\
+      \ -format yaml | grep -E '^sealed: (true|false)' && break\n  n=$((n+1))\n  sleep\
+      \ 5\ndone\nif [ $n -ge $ATTEMPTS ]; then\n  echo \"timed out looking for sealed\
+      \ info in 'vault status' output\"\n  exit 1\nfi\n\nexit 0\n"
+    env:
+    - name: VAULT_ADDR
+      value: https://ocf-vault.vault.svc:8200
+    image: hashicorp/vault:1.6.0
+    imagePullPolicy: IfNotPresent
+    name: ocf-vault-server-test
+  restartPolicy: Never

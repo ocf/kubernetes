@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/instance: ocf-vault
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: vault-ui
-    helm.sh/chart: vault-0.12.0
+    helm.sh/chart: vault-0.18.0
   name: ocf-vault-ui
   namespace: vault
 spec:

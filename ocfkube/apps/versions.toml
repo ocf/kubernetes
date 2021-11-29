@@ -34,11 +34,6 @@ chart = "eck-operator"
 version = "1.11.1"
 helm = "https://falcosecurity.github.io/charts"
 
-[fission]
-version = "1.12.0"
-helm = "https://fission.github.io/fission-charts/"
-chart = "fission-core"
-
 [harbor]
 version = "10.0.4"
 helm = "https://charts.bitnami.com/bitnami"
@@ -75,12 +70,8 @@ version = "0.18.1"
 github = "https://github.com/tektoncd/dashboard"
 
 [vault]
-version = "0.12.0"
+version = "0.18.0"
 helm = "https://helm.releases.hashicorp.com"
-
-[vault-secrets-operator]
-version = "1.14.5"
-helm = "https://ricoberger.github.io/helm-charts"
 
 
 # Stakeholder Services & Client Applications

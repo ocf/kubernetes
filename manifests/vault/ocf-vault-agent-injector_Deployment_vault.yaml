@@ -45,7 +45,7 @@ spec:
         - name: AGENT_INJECT_VAULT_AUTH_PATH
           value: auth/kubernetes
         - name: AGENT_INJECT_VAULT_IMAGE
-          value: vault:1.7.2
+          value: hashicorp/vault:1.9.0
         - name: AGENT_INJECT_TLS_AUTO
           value: ocf-vault-agent-injector-cfg
         - name: AGENT_INJECT_TLS_AUTO_HOSTS
@@ -64,7 +64,13 @@ spec:
           value: 128Mi
         - name: AGENT_INJECT_DEFAULT_TEMPLATE
           value: map
-        image: hashicorp/vault-k8s:0.10.1
+        - name: AGENT_INJECT_TEMPLATE_CONFIG_EXIT_ON_RETRY_FAILURE
+          value: 'true'
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        image: hashicorp/vault-k8s:0.14.1
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 2

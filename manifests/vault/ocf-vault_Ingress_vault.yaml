@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/instance: ocf-vault
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: vault
-    helm.sh/chart: vault-0.12.0
+    helm.sh/chart: vault-0.18.0
   name: ocf-vault
   namespace: vault
 spec:
@@ -19,9 +19,12 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: ocf-vault-active
-          servicePort: 8200
+          service:
+            name: ocf-vault-active
+            port:
+              number: 8200
         path: /
+        pathType: Prefix
   tls:
   - hosts:
     - vault.ocf.berkeley.edu
