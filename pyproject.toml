@@ -19,6 +19,7 @@ kubernetes = "^17.17.0"
 PyYAML = "^5.4.1"
 tomlkit = "^0.7.2"
 hvac = "^0.11.2"
+click = "^8.0.3"
 
 [tool.poetry.scripts]
 argocd-build = "ocfkube:argocd_build"
