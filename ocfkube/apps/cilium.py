@@ -9,17 +9,6 @@ values = {
     "containerRuntime": {
         "integration": "crio",
     },
-    "autoDirectNodeRoutes": True,
-    "tunnel": "disabled",
-    "loadBalancer": {
-        "algorithm": "maglev",
-        # TODO: Look into switching to full DSR...
-        "mode": "hybrid",
-        "acceleration": "native",
-    },
-    "config": {
-        "sessionAffinity": True,
-    },
     "hubble": {
         "tls": {"auto": {"method": "cronJob"}},
         "listenAddress": ":4244",
