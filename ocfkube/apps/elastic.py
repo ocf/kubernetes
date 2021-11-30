@@ -53,6 +53,13 @@ license = [
             "count": 1,
             "elasticsearchRef": {"name": "elastic"},
             "enterpriseSearchRef": {"name": "ocf"},
+            "http": {
+                "tls": {
+                    "selfSignedCertificate": {
+                        "disabled": True,
+                    },
+                },
+            },
         },
     },
     {

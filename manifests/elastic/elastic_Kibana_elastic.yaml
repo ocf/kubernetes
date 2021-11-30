@@ -8,4 +8,8 @@ spec:
     name: elastic
   enterpriseSearchRef:
     name: ocf
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true
   version: 7.15.1
