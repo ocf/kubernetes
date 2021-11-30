@@ -70,7 +70,7 @@ license = [
 
 def build() -> object:
     ingress = Ingress.from_service_name(
-        "elastic-kb-http", "5601", "kibana.ocf.berkeley.edu"
+        "elastic-kb-http", 5601, "kibana.ocf.berkeley.edu"
     ).data
 
     return (
