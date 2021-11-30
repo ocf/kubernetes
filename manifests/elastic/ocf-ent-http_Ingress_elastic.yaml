@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    ingress.kubernetes.io/force-ssl-redirect: 'true'
+    kubernetes.io/tls-acme: 'true'
+  name: ocf-ent-http
+spec:
+  rules:
+  - host: finder.ocf.berkeley.edu
+    http:
+      paths:
+      - backend:
+          service:
+            name: ocf-ent-http
+            port:
+              number: 3002
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - finder.ocf.berkeley.edu
+    secretName: ocf-ent-http-ingress-tls

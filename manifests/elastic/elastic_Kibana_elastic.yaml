@@ -3,6 +3,9 @@ kind: Kibana
 metadata:
   name: elastic
 spec:
+  config:
+    enterpriseSearch.host: https://finder.ocf.berkeley.edu
+    server.publicBaseUrl: https://kibana.ocf.berkeley.edu
   count: 1
   elasticsearchRef:
     name: elastic

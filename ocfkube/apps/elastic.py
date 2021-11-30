@@ -60,6 +60,10 @@ license = [
                     },
                 },
             },
+            "config": {
+                "server.publicBaseUrl": "https://kibana.ocf.berkeley.edu",
+                "enterpriseSearch.host": "https://finder.ocf.berkeley.edu",
+            },
         },
     },
     {
@@ -70,18 +74,32 @@ license = [
             "version": "7.15.1",
             "count": 1,
             "elasticsearchRef": {"name": "elastic"},
+            "http": {
+                "tls": {
+                    "selfSignedCertificate": {
+                        "disabled": True,
+                    },
+                },
+            },
+            "config": {
+                "ent_search.external_url": "https://finder.ocf.berkeley.edu",
+                "kibana.external_url": "https://kibana.ocf.berkeley.edu",
+            },
         },
     },
 ]
 
 
 def build() -> object:
-    ingress = Ingress.from_service_name(
-        "elastic-kb-http", 5601, "kibana.ocf.berkeley.edu"
-    ).data
+    ingresses = [
+        Ingress.from_service_name(
+            "elastic-kb-http", 5601, "kibana.ocf.berkeley.edu"
+        ).data,
+        Ingress.from_service_name("ocf-ent-http", 3002, "finder.ocf.berkeley.edu").data,
+    ]
 
     return (
         helm.build_chart_from_versions(name="elastic", versions=versions, values=values)
         + license
-        + [ingress]
+        + ingresses
     )
