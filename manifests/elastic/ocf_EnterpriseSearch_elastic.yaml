@@ -1,0 +1,9 @@
+apiVersion: enterprisesearch.k8s.elastic.co/v1
+kind: EnterpriseSearch
+metadata:
+  name: ocf
+spec:
+  count: 1
+  elasticsearchRef:
+    name: elastic
+  version: 7.15.1

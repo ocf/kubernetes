@@ -6,4 +6,6 @@ spec:
   count: 1
   elasticsearchRef:
     name: elastic
+  enterpriseSearchRef:
+    name: ocf
   version: 7.15.1

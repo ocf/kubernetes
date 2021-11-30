@@ -1,3 +1,4 @@
+from ocfkube.lib.ingress import Ingress
 from ocfkube.utils import helm
 from ocfkube.utils import versions
 
@@ -51,13 +52,29 @@ license = [
             "version": "7.15.1",
             "count": 1,
             "elasticsearchRef": {"name": "elastic"},
+            "enterpriseSearchRef": {"name": "ocf"},
+        },
+    },
+    {
+        "apiVersion": "enterprisesearch.k8s.elastic.co/v1",
+        "kind": "EnterpriseSearch",
+        "metadata": {"name": "ocf"},
+        "spec": {
+            "version": "7.15.1",
+            "count": 1,
+            "elasticsearchRef": {"name": "elastic"},
         },
     },
 ]
 
 
 def build() -> object:
+    ingress = Ingress.from_service_name(
+        "elastic-kb-http", "5601", "kibana.ocf.berkeley.edu"
+    ).data
+
     return (
         helm.build_chart_from_versions(name="elastic", versions=versions, values=values)
         + license
+        + [ingress]
     )
