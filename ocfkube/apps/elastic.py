@@ -26,6 +26,19 @@ license = [
                     "count": 1,
                     # TODO: This is bad! https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-virtual-memory.html
                     "config": {"node.store.allow_mmap": False},
+                    # workaround for https://github.com/elastic/cloud-on-k8s/issues/4334
+                    "podTemplate": {
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "elasticsearch",
+                                    "securityContext": {
+                                        "capabilities": {"add": ["SYS_CHROOT"]}
+                                    },
+                                }
+                            ]
+                        }
+                    },
                 }
             ],
         },

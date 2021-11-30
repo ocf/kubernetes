@@ -8,4 +8,12 @@ spec:
       node.store.allow_mmap: false
     count: 1
     name: default
+    podTemplate:
+      spec:
+        containers:
+        - name: elasticsearch
+          securityContext:
+            capabilities:
+              add:
+              - SYS_CHROOT
   version: 7.15.1
