@@ -81,7 +81,7 @@ def build() -> object:
                         "containers": [
                             {
                                 "name": "arcanum",
-                                "image": "ghcr.io/nikhiljha/arcanum:v0.1.0@sha256:ff0f313bf03454fbd372ad9318c4fa6dd7b9d1bcf7921180e24622f30389e653",
+                                "image": "ghcr.io/nikhiljha/arcanum:v0.1.1@sha256:1c81c5d008f85bde4dde0aec4d28b08fde58aa4b2d905b5483f8ee8aaf75207f",
                                 "env": [
                                     {
                                         "name": "ARCANUM_VLT_HOST",
