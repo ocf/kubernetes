@@ -62,7 +62,6 @@ license = [
             },
             "config": {
                 "server.publicBaseUrl": "https://kibana.ocf.berkeley.edu",
-                "enterpriseSearch.host": "https://finder.ocf.berkeley.edu",
             },
         },
     },
