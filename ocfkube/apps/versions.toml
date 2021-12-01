@@ -61,13 +61,9 @@ version = "1.6.3"
 helm = "https://charts.rook.io/release"
 chart = "rook-ceph"
 
-[tekton-pipeline]
-version = "0.26.0"
-github = "https://github.com/tektoncd/pipeline"
-
-[tekton-dashboard]
-version = "0.18.1"
-github = "https://github.com/tektoncd/dashboard"
+[tekton]
+version = "0.52.0"
+github = "https://github.com/tektoncd/operator"
 
 [vault]
 version = "0.18.0"

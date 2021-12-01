@@ -108,12 +108,25 @@ helpers = [
     },
 ]
 
+cfg = {
+    "apiVersion": "operator.tekton.dev/v1alpha1",
+    "kind": "TektonConfig",
+    "metadata": {"name": "config"},
+    "spec": {
+        # installs Tekton into 
+        "profile": "all",
+        "targetNamespace": "tekton",
+        "pruner": {
+            "resources": ["pipelinerun", "taskrun"],
+            "keep": 100,
+            "schedule": "0 8 * * *",
+        },
+    },
+}
+
 
 def build() -> object:
-    pipeline = requests.get(
-        f"https://storage.googleapis.com/tekton-releases/pipeline/previous/v{versions['tekton-pipeline']['version']}/release.yaml",
+    operator = requests.get(
+        f"https://storage.googleapis.com/tekton-releases/operator/previous/v{versions['tekton']['version']}/release.yaml",
     ).text
-    dashboard = requests.get(
-        f"https://github.com/tektoncd/dashboard/releases/download/v{versions['tekton-dashboard']['version']}/tekton-dashboard-release.yaml",
-    ).text
-    return list(yaml.safe_load_all(pipeline)) + list(yaml.safe_load_all(dashboard))
+    return [x for x in list(yaml.safe_load_all(operator)) if x is not None] + [cfg]
