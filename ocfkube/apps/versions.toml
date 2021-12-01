@@ -79,7 +79,7 @@ helm = "https://helm.releases.hashicorp.com"
 # -> be sure to point adelie at the upstream repository!
 
 [arcanum]
-image = "ghcr.io/nikhiljha/arcanum:v0.1.1@sha256:9f74a14e3f01b12b2eb19d79f2fef38011d4debe2e4cee4c61e90a11a6d529ca"
+image = "ghcr.io/nikhiljha/arcanum:v0.1.1@sha256:4841e268815aa4020a29450020731e831ea968733a52d99e6642d31f0d109b65"
 
 [codimd]
 image = "harbor.ocf.berkeley.edu/ocf/codimd:latest"
