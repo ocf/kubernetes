@@ -1,3 +1,5 @@
+from ocfkube.utils import versions
+
 def build() -> object:
     # NOTE: arcanum-secret is manually created, as it has a secret key that we need for bootstrap.
     return [
@@ -81,7 +83,7 @@ def build() -> object:
                         "containers": [
                             {
                                 "name": "arcanum",
-                                "image": "ghcr.io/nikhiljha/arcanum:v0.1.1@sha256:1c81c5d008f85bde4dde0aec4d28b08fde58aa4b2d905b5483f8ee8aaf75207f",
+                                "image": str(versions['arcanum']['image']),
                                 "env": [
                                     {
                                         "name": "ARCANUM_VLT_HOST",
