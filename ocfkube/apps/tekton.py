@@ -111,11 +111,11 @@ helpers = [
 cfg = {
     "apiVersion": "operator.tekton.dev/v1alpha1",
     "kind": "TektonConfig",
-    "metadata": {"name": "config"},
+    "metadata": {"name": "config", "namespace": "tekton-operator"},
     "spec": {
         # installs Tekton into 
         "profile": "all",
-        "targetNamespace": "tekton",
+        "targetNamespace": "tekton-operator",
         "pruner": {
             "resources": ["pipelinerun", "taskrun"],
             "keep": 100,

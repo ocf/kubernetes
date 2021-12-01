@@ -2,6 +2,7 @@ apiVersion: operator.tekton.dev/v1alpha1
 kind: TektonConfig
 metadata:
   name: config
+  namespace: tekton-operator
 spec:
   profile: all
   pruner:
@@ -10,4 +11,4 @@ spec:
     - pipelinerun
     - taskrun
     schedule: 0 8 * * *
-  targetNamespace: tekton
+  targetNamespace: tekton-operator
