@@ -6,7 +6,7 @@ spec:
   nodeSets:
   - config:
       node.store.allow_mmap: false
-    count: 1
+    count: 3
     name: default
     podTemplate:
       spec:
@@ -16,4 +16,13 @@ spec:
             capabilities:
               add:
               - SYS_CHROOT
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 64Gi
   version: 7.15.1

@@ -24,9 +24,18 @@ license = [
             "nodeSets": [
                 {
                     "name": "default",
-                    "count": 1,
+                    "count": 3,
                     # TODO: This is bad! https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-virtual-memory.html
                     "config": {"node.store.allow_mmap": False},
+                    "volumeClaimTemplates": [
+                        {
+                            "metadata": {"name": "elasticsearch-data"},
+                            "spec": {
+                                "accessModes": ["ReadWriteOnce"],
+                                "resources": {"requests": {"storage": "64Gi"}},
+                            },
+                        }
+                    ],
                     # workaround for https://github.com/elastic/cloud-on-k8s/issues/4334
                     "podTemplate": {
                         "spec": {
