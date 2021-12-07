@@ -16,13 +16,4 @@ spec:
             capabilities:
               add:
               - SYS_CHROOT
-    volumeClaimTemplates:
-    - metadata:
-        name: elasticsearch-data
-      spec:
-        accessModes:
-        - ReadWriteOnce
-        resources:
-          requests:
-            storage: 64Gi
   version: 7.15.1
