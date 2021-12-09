@@ -1,9 +1,11 @@
 apiVersion: v1
 data:
   auto-direct-node-routes: 'false'
+  bpf-lb-external-clusterip: 'false'
   bpf-lb-map-max: '65536'
   bpf-map-dynamic-size-ratio: '0.0025'
   bpf-policy-map-max: '16384'
+  cgroup-root: /run/cilium/cgroupv2
   cilium-endpoint-gc-interval: 5m0s
   cluster-id: ''
   cluster-name: default
@@ -12,10 +14,10 @@ data:
   custom-cni-conf: 'false'
   debug: 'false'
   disable-cnp-status-updates: 'true'
+  disable-endpoint-crd: 'false'
   enable-auto-protect-node-port-range: 'true'
-  enable-bandwidth-manager: 'true'
+  enable-bandwidth-manager: 'false'
   enable-bpf-clock-probe: 'true'
-  enable-bpf-masquerade: 'true'
   enable-endpoint-health-checking: 'true'
   enable-health-check-nodeport: 'true'
   enable-health-checking: 'true'
@@ -24,6 +26,8 @@ data:
   enable-ipv4-masquerade: 'true'
   enable-ipv6: 'false'
   enable-ipv6-masquerade: 'true'
+  enable-k8s-terminating-endpoint: 'true'
+  enable-l2-neigh-discovery: 'true'
   enable-l7-proxy: 'true'
   enable-local-redirect-policy: 'false'
   enable-policy: default
@@ -41,18 +45,17 @@ data:
   install-iptables-rules: 'true'
   install-no-conntrack-iptables-rules: 'false'
   ipam: cluster-pool
+  ipv4-native-routing-cidr: 10.0.0.0/8
   kube-proxy-replacement: strict
   kube-proxy-replacement-healthz-bind-address: ''
   monitor-aggregation: medium
   monitor-aggregation-flags: all
   monitor-aggregation-interval: 5s
-  native-routing-cidr: 10.0.0.0/8
   node-port-bind-protection: 'true'
   operator-api-serve-addr: 127.0.0.1:9234
   preallocate-bpf-maps: 'false'
   sidecar-istio-proxy-image: cilium/istio_proxy
   tunnel: vxlan
-  wait-bpf-mount: 'false'
 kind: ConfigMap
 metadata:
   name: cilium-config

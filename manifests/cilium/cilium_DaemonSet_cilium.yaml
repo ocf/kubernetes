@@ -73,7 +73,7 @@ spec:
           value: 127.0.0.1
         - name: KUBERNETES_SERVICE_PORT
           value: '6443'
-        image: quay.io/cilium/cilium:v1.10.0@sha256:587627d909ffe0418c0bd907516496844867a21812946af82096d367760e4c1e
+        image: quay.io/cilium/cilium:v1.11.0@sha256:ea677508010800214b0b5497055f38ed3bff57963fa2399bcb1c69cf9476453a
         imagePullPolicy: IfNotPresent
         lifecycle:
           postStart:
@@ -114,13 +114,9 @@ spec:
           successThreshold: 1
           timeoutSeconds: 5
         securityContext:
-          capabilities:
-            add:
-            - NET_ADMIN
-            - SYS_MODULE
           privileged: true
         startupProbe:
-          failureThreshold: 24
+          failureThreshold: 105
           httpGet:
             host: 127.0.0.1
             httpHeaders:
@@ -155,6 +151,32 @@ spec:
       hostNetwork: true
       initContainers:
       - command:
+        - sh
+        - -ec
+        - 'cp /usr/bin/cilium-mount /hostbin/cilium-mount;
+
+          nsenter --cgroup=/hostproc/1/ns/cgroup --mount=/hostproc/1/ns/mnt "${BIN_PATH}/cilium-mount"
+          $CGROUP_ROOT;
+
+          rm /hostbin/cilium-mount
+
+          '
+        env:
+        - name: CGROUP_ROOT
+          value: /run/cilium/cgroupv2
+        - name: BIN_PATH
+          value: /opt/cni/bin
+        image: quay.io/cilium/cilium:v1.11.0@sha256:ea677508010800214b0b5497055f38ed3bff57963fa2399bcb1c69cf9476453a
+        imagePullPolicy: IfNotPresent
+        name: mount-cgroup
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: /hostproc
+          name: hostproc
+        - mountPath: /hostbin
+          name: cni-path
+      - command:
         - /init-container.sh
         env:
         - name: CILIUM_ALL_STATE
@@ -169,17 +191,11 @@ spec:
               key: clean-cilium-bpf-state
               name: cilium-config
               optional: true
-        - name: CILIUM_WAIT_BPF_MOUNT
-          valueFrom:
-            configMapKeyRef:
-              key: wait-bpf-mount
-              name: cilium-config
-              optional: true
         - name: KUBERNETES_SERVICE_HOST
           value: 127.0.0.1
         - name: KUBERNETES_SERVICE_PORT
           value: '6443'
-        image: quay.io/cilium/cilium:v1.10.0@sha256:587627d909ffe0418c0bd907516496844867a21812946af82096d367760e4c1e
+        image: quay.io/cilium/cilium:v1.11.0@sha256:ea677508010800214b0b5497055f38ed3bff57963fa2399bcb1c69cf9476453a
         imagePullPolicy: IfNotPresent
         name: clean-cilium-state
         resources:
@@ -187,11 +203,11 @@ spec:
             cpu: 100m
             memory: 100Mi
         securityContext:
-          capabilities:
-            add:
-            - NET_ADMIN
           privileged: true
         volumeMounts:
+        - mountPath: /run/cilium/cgroupv2
+          mountPropagation: HostToContainer
+          name: cilium-cgroup
         - mountPath: /var/run/cilium
           name: cilium-run
       priorityClassName: system-node-critical
@@ -206,6 +222,14 @@ spec:
           path: /var/run/cilium
           type: DirectoryOrCreate
         name: cilium-run
+      - hostPath:
+          path: /proc
+          type: Directory
+        name: hostproc
+      - hostPath:
+          path: /run/cilium/cgroupv2
+          type: DirectoryOrCreate
+        name: cilium-cgroup
       - hostPath:
           path: /opt/cni/bin
           type: DirectoryOrCreate
@@ -223,7 +247,7 @@ spec:
         name: xtables-lock
       - name: clustermesh-secrets
         secret:
-          defaultMode: 420
+          defaultMode: 256
           optional: true
           secretName: cilium-clustermesh
       - configMap:
@@ -231,6 +255,7 @@ spec:
         name: cilium-config-path
       - name: hubble-tls
         projected:
+          defaultMode: 256
           sources:
           - secret:
               items:

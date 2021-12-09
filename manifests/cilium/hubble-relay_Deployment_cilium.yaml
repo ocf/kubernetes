@@ -30,12 +30,13 @@ spec:
                 values:
                 - cilium
             topologyKey: kubernetes.io/hostname
+      automountServiceAccountToken: false
       containers:
       - args:
         - serve
         command:
         - hubble-relay
-        image: quay.io/cilium/hubble-relay:v1.10.0@sha256:e92e6778c71aa9e181618d61e9403761ad061c3960a9203aa2cf8e6cde95c9d7
+        image: quay.io/cilium/hubble-relay:v1.11.0@sha256:306ce38354a0a892b0c175ae7013cf178a46b79f51c52adb5465d87f14df0838
         imagePullPolicy: IfNotPresent
         livenessProbe:
           tcpSocket:
@@ -57,6 +58,7 @@ spec:
         - mountPath: /var/lib/hubble-relay/tls
           name: tls
           readOnly: true
+      priorityClassName: null
       restartPolicy: Always
       serviceAccount: hubble-relay
       serviceAccountName: hubble-relay
@@ -74,6 +76,7 @@ spec:
         name: hubble-sock-dir
       - name: tls
         projected:
+          defaultMode: 256
           sources:
           - secret:
               items:

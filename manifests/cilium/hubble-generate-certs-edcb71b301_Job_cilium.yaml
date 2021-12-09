@@ -3,7 +3,7 @@ kind: Job
 metadata:
   labels:
     k8s-app: hubble-generate-certs
-  name: hubble-generate-certs
+  name: hubble-generate-certs-edcb71b301
   namespace: cilium
 spec:
   template:
@@ -14,23 +14,16 @@ spec:
       containers:
       - args:
         - --cilium-namespace=cilium
-        - --hubble-ca-reuse-secret=true
-        - --hubble-ca-secret-name=hubble-ca-secret
-        - --hubble-ca-generate=true
-        - --hubble-ca-validity-duration=94608000s
-        - --hubble-ca-config-map-create=true
-        - --hubble-ca-config-map-name=hubble-ca-cert
-        - --hubble-server-cert-generate=true
+        - --hubble-ca-generate
+        - --hubble-ca-reuse-secret
+        - --hubble-server-cert-generate
         - --hubble-server-cert-common-name=*.default.hubble-grpc.cilium.io
         - --hubble-server-cert-validity-duration=94608000s
-        - --hubble-server-cert-secret-name=hubble-server-certs
-        - --hubble-relay-client-cert-generate=true
+        - --hubble-relay-client-cert-generate
         - --hubble-relay-client-cert-validity-duration=94608000s
-        - --hubble-relay-client-cert-secret-name=hubble-relay-client-certs
-        - --hubble-relay-server-cert-generate=false
         command:
         - /usr/bin/cilium-certgen
-        image: quay.io/cilium/certgen:v0.1.4
+        image: quay.io/cilium/certgen:v0.1.5
         imagePullPolicy: IfNotPresent
         name: certgen
       hostNetwork: true

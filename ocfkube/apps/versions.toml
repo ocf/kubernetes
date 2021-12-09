@@ -14,7 +14,7 @@ version = "1.6.1"
 helm = "https://charts.jetstack.io"
 
 [cilium]
-version = "1.10.0"
+version = "1.11.0"
 helm = "https://helm.cilium.io/"
 
 [contour]
