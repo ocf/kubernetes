@@ -51,6 +51,15 @@ def build() -> list[dict[str, Any]]:
                                 }
                             ]
                         ),
+                        "oidc.config": yaml.dump(
+                            {
+                                "name": "Keycloak",
+                                "issuer": "https://auth.ocf.berkeley.edu/auth/realms/ocf",
+                                "clientID": "argocd",
+                                "clientSecret": "$oidc.keycloak.clientSecret",
+                                "requestedScopes": ["openid", "profile", "email", "groups"],
+                            }
+                        ),
                         "repositories": "- url: https://github.com/ocf/kubernetes",
                     },
                 ),
