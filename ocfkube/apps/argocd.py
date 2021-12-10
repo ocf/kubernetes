@@ -41,7 +41,7 @@ def build() -> list[dict[str, Any]]:
                     m,
                     ("data",),
                     {
-                        "url": "https://argocd.ocf.berkeley.edu",
+                        "url": "https://argo.ocf.berkeley.edu",
                         "resource.exclusions": yaml.dump(
                             [
                                 {

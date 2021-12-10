@@ -22,7 +22,7 @@ data:
   repositories: '- url: https://github.com/ocf/kubernetes'
   resource.exclusions: "- apiGroups:\n  - cilium*\n  clusters:\n  - '*'\n  kinds:\n\
     \  - CiliumIdentity\n"
-  url: https://argocd.ocf.berkeley.edu
+  url: https://argo.ocf.berkeley.edu
 kind: ConfigMap
 metadata:
   labels:
