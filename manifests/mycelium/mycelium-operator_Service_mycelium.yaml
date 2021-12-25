@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mycelium-operator
+  name: mycelium-operator
+  namespace: mycelium
+spec:
+  ports:
+  - name: api
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: mycelium-operator

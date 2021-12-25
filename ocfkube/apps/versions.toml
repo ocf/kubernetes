@@ -46,6 +46,10 @@ github = "https://github.com/keycloak/keycloak"
 version = "2.3.7"
 helm = "https://charts.bitnami.com/bitnami"
 
+[mycelium]
+version = "0.2.0"
+helm = "https://harbor.ocf.berkeley.edu/chartrepo/mycelium"
+
 [postgresql]
 version = "7.5.2"
 helm = "https://charts.bitnami.com/bitnami"
