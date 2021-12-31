@@ -27,7 +27,14 @@ spec:
               name: mycelium-operator
         - name: MYCELIUM_ENDPOINT
           value: mycelium-operator.mycelium.svc.cluster.local:8080
-        image: harbor.ocf.berkeley.edu/mycelium/operator:0.2.0
+        - name: MYCELIUM_RUNNER_IMAGE
+          value: harbor.ocf.berkeley.edu/mycelium/runner:0.3.0
+        - name: MYCELIUM_PLUGIN_VELOCITY
+          value: https://www.ocf.berkeley.edu/~njha/artifacts/mycelium-velocity-0.3.0.jar
+        - name: MYCELIUM_PLUGIN_PAPER
+          value: https://www.ocf.berkeley.edu/~njha/artifacts/mycelium-paper-0.3.0.jar
+        image: harbor.ocf.berkeley.edu/mycelium/operator:0.3.0
+        imagePullPolicy: IfNotPresent
         name: operator
         ports:
         - containerPort: 8080

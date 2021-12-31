@@ -4,8 +4,16 @@ metadata:
   name: mycelium-operator
 rules:
 - apiGroups:
-  - '*'
+  - mycelium.njha.dev
   resources:
   - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - '*'
+  resources:
+  - statefulsets
+  - services
+  - events
   verbs:
   - '*'

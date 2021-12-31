@@ -47,7 +47,7 @@ version = "2.3.7"
 helm = "https://charts.bitnami.com/bitnami"
 
 [mycelium]
-version = "0.2.0"
+version = "0.3.0"
 helm = "https://harbor.ocf.berkeley.edu/chartrepo/mycelium"
 
 [postgresql]
