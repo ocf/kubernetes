@@ -9,7 +9,8 @@ values = {
         },
         "grafana": {
             "enabled": True
-        }
+        },
+        "edition": "ce"
     },
     "ldap": {
         "preventSignin": False,
