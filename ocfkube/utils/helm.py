@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import os
 import shutil
-from sys import stdout
 import tempfile
 from subprocess import PIPE
 from subprocess import run
