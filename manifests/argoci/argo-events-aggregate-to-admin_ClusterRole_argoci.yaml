@@ -1,0 +1,28 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-admin: 'true'
+  name: argo-events-aggregate-to-admin
+rules:
+- apiGroups:
+  - argoproj.io
+  resources:
+  - sensors
+  - sensors/finalizers
+  - sensors/status
+  - eventsources
+  - eventsources/finalizers
+  - eventsources/status
+  - eventbus
+  - eventbus/finalizers
+  - eventbus/status
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - get
+  - list
+  - patch
+  - update
+  - watch

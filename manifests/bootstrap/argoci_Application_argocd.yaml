@@ -1,15 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tekton
+  name: argoci
   namespace: argocd
 spec:
   destination:
-    namespace: tekton
+    namespace: argoci
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: manifests/tekton
+    path: manifests/argoci
     repoURL: https://github.com/ocf/kubernetes
   syncPolicy:
     syncOptions:
