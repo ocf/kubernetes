@@ -1,6 +1,8 @@
 import requests
 import yaml
 
+from transpire.dsl import emit
+
 base_url = (
     "https://raw.githubusercontent.com/keycloak/keycloak-operator/11.0.3/deploy/{}"
 )
@@ -29,8 +31,7 @@ settings = {
 }
 
 
-def build() -> object:
-    yamls = []
+def build() -> None:
     for path in paths:
-        yamls += list(yaml.safe_load_all(requests.get(base_url.format(path)).text))
-    return yamls + [settings]
+        emit(yaml.safe_load_all(requests.get(base_url.format(path)).text))
+    emit(settings)

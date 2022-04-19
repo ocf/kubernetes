@@ -1,5 +1,7 @@
-from ocfkube.utils import helm
-from ocfkube.utils import versions
+from transpire.dsl import helm
+from apps.versions import versions
+
+from transpire.dsl import emit
 
 values = {
     "configInline": {
@@ -17,9 +19,11 @@ values = {
 }
 
 
-def build() -> object:
-    return helm.build_chart_from_versions(
-        name="metallb",
-        versions=versions,
-        values=values,
+def build() -> None:
+    emit(
+        helm.build_chart_from_versions(
+            name="metallb",
+            versions=versions,
+            values=values,
+        )
     )

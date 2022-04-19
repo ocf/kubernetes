@@ -1,8 +1,7 @@
-from ocfkube.lib.ingress import Ingress
-from ocfkube.utils import helm
-from ocfkube.utils import versions
-
-values = {}
+from transpire.resources import Ingress
+from transpire.dsl import helm
+from transpire.dsl import emit
+from apps.versions import versions
 
 license = [
     {
@@ -99,16 +98,16 @@ license = [
 ]
 
 
-def build() -> object:
+def build() -> None:
     ingresses = [
-        Ingress.from_service_name(
-            "elastic-kb-http", 5601, "kibana.ocf.berkeley.edu"
-        ).data,
-        Ingress.from_service_name("ocf-ent-http", 3002, "finder.ocf.berkeley.edu").data,
+        Ingress.simple(
+            "kibana.ocf.berkeley.edu", "elastic-kb-http", 5601, "elastic-kb-http"
+        ),
+        Ingress.simple("finder.ocf.berkeley.edu", "ocf-ent-http", 3002, "ocf-ent-http"),
     ]
 
-    return (
-        helm.build_chart_from_versions(name="elastic", versions=versions, values=values)
+    emit(
+        helm.build_chart_from_versions(name="elastic", versions=versions, values={})
         + license
         + ingresses
     )

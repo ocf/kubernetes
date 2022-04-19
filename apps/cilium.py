@@ -1,5 +1,6 @@
-from ocfkube.utils import helm
-from ocfkube.utils import versions
+from transpire.dsl import helm
+from transpire.dsl import emit
+from apps.versions import versions
 
 values = {
     "kubeProxyReplacement": "strict",
@@ -18,9 +19,11 @@ values = {
 }
 
 
-def build() -> object:
-    return helm.build_chart_from_versions(
-        name="cilium",
-        versions=versions,
-        values=values,
+def build() -> None:
+    emit(
+        helm.build_chart_from_versions(
+            name="cilium",
+            versions=versions,
+            values=values,
+        )
     )

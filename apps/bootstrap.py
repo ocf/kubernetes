@@ -1,7 +1,8 @@
 from pkgutil import iter_modules
+from transpire.dsl import emit
 
 
-def application_for_name(app_name: str) -> object:
+def application_for_name(app_name: str) -> dict:
     new_app_name = app_name.replace("_", "-")
 
     return {
@@ -27,9 +28,7 @@ def application_for_name(app_name: str) -> object:
     }
 
 
-def build() -> object:
-    return [
-        application_for_name(module.name)
-        for module in iter_modules(__import__("ocfkube").apps.__path__)
-        if module.name != "bootstrap"
-    ]
+def build() -> None:
+    for module in iter_modules(__import__("apps").__path__):
+        if module.name != "bootstrap":
+            emit(application_for_name(module.name))

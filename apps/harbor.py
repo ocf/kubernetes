@@ -1,6 +1,7 @@
-from ocfkube.utils import helm
-from ocfkube.utils import versions
-from ocfkube.utils.json import delve
+from transpire.dsl import helm
+from apps.versions import versions
+from transpire.dsl import json
+from transpire.dsl import emit
 
 values = {
     "service": {
@@ -36,7 +37,7 @@ def strip_secret_checksum(m):
     vault, and the chart autogenerates certificates which change each run
     """
     # spec.template.metadata.annotations['checksum/secret*']
-    annotations = delve(m, ("spec", "template", "metadata", "annotations"))
+    annotations = json.delve(m, ("spec", "template", "metadata", "annotations"))
     if annotations is not None:
         for key, value in list(annotations.items()):
             if key.startswith("checksum/secret"):
@@ -44,12 +45,14 @@ def strip_secret_checksum(m):
     return m
 
 
-def build() -> object:
-    return [
-        strip_secret_checksum(m)
-        for m in helm.build_chart_from_versions(
-            name="harbor",
-            versions=versions,
-            values=values,
-        )
-    ]
+def build() -> None:
+    emit(
+        [
+            strip_secret_checksum(m)
+            for m in helm.build_chart_from_versions(
+                name="harbor",
+                versions=versions,
+                values=values,
+            )
+        ]
+    )

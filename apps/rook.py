@@ -1,5 +1,7 @@
-from ocfkube.utils import helm
-from ocfkube.utils import versions
+from transpire.dsl import helm
+from apps.versions import versions
+
+from transpire.dsl import emit
 
 values = {"image": {"tag": "v1.5.1"}}
 
@@ -100,8 +102,8 @@ storageclass_yaml = [
 ]
 
 
-def build() -> object:
-    return (
+def build() -> None:
+    emit(
         helm.build_chart_from_versions(
             name="rook",
             versions=versions,

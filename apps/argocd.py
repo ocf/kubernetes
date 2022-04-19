@@ -1,14 +1,11 @@
-from __future__ import annotations
-
-from typing import Any
-
 import requests
 import yaml
 
-from ocfkube.lib import Ingress
-from ocfkube.lib.surgery import edit_manifests, make_edit_manifest
-from ocfkube.utils.json import shelve
-from ocfkube.utils import versions
+from transpire.resources.ingress import Ingress
+from transpire.dsl import surgery
+from transpire.dsl import emit
+from transpire.dsl import json
+from apps.versions import versions
 
 base_deployment = {
     "apiVersion": "argoproj.io/v1alpha1",
@@ -25,19 +22,15 @@ base_deployment = {
 }
 
 
-def build() -> list[dict[str, Any]]:
+def build() -> None:
     contents = requests.get(
         f"https://raw.githubusercontent.com/argoproj/argo-cd/v{versions['argocd']['version']}/manifests/ha/install.yaml",
     )
     contents.raise_for_status()
-    base = list(yaml.safe_load_all(contents.text))
-    ingress = Ingress.from_service_name(
-        "argocd-server", "https", "argo.ocf.berkeley.edu"
-    )
-    return (
-        edit_manifests(
+    emit(
+        surgery.edit_manifests(
             {
-                ("ConfigMap", "argocd-cm"): lambda m: shelve(
+                ("ConfigMap", "argocd-cm"): lambda m: json.shelve(
                     m,
                     ("data",),
                     {
@@ -57,16 +50,21 @@ def build() -> list[dict[str, Any]]:
                                 "issuer": "https://auth.ocf.berkeley.edu/auth/realms/ocf",
                                 "clientID": "argocd",
                                 "clientSecret": "$oidc.keycloak.clientSecret",
-                                "requestedScopes": ["openid", "profile", "email", "groups"],
+                                "requestedScopes": [
+                                    "openid",
+                                    "profile",
+                                    "email",
+                                    "groups",
+                                ],
                             }
                         ),
                         "repositories": "- url: https://github.com/ocf/kubernetes",
                     },
                 ),
-                ("ConfigMap", "argocd-rbac-cm"): lambda m: shelve(
+                ("ConfigMap", "argocd-rbac-cm"): lambda m: json.shelve(
                     m, ("data",), {"policy.csv": "g, ocfroot, role:admin"}
                 ),
-                ("Service", "argocd-server"): lambda m: shelve(
+                ("Service", "argocd-server"): lambda m: json.shelve(
                     m,
                     (
                         "metadata",
@@ -76,7 +74,7 @@ def build() -> list[dict[str, Any]]:
                     "https",
                     create_parents=True,
                 ),
-                ("Deployment", "argocd-redis-ha-haproxy"): make_edit_manifest(
+                ("Deployment", "argocd-redis-ha-haproxy"): surgery.make_edit_manifest(
                     {
                         # Run 3 replicas...
                         ("spec", "replicas"): 3,
@@ -89,7 +87,11 @@ def build() -> list[dict[str, Any]]:
                     create_parents=True,
                 ),
             },
-            base,
+            yaml.safe_load_all(contents.text),
         )
-        + [ingress.data, base_deployment]
     )
+
+    ingress = Ingress.simple(
+        "argo.ocf.berkeley.edu", "argocd-server", "https", "argocd-server"
+    )
+    emit(ingress)
