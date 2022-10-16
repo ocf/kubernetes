@@ -1,8 +1,9 @@
 import importlib.resources as pkg_resources
-import tomlkit
-import apps
-
 from typing import Dict, cast
+
+import tomlkit
+
+import apps
 
 versions = cast(
     Dict[str, Dict[str, str]],

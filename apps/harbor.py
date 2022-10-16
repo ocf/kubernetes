@@ -1,7 +1,8 @@
-from transpire.dsl import helm
+from transpire import emit, helm, surgery
+
 from apps.versions import versions
-from transpire.dsl import json
-from transpire.dsl import emit
+
+name = "harbor"
 
 values = {
     "service": {
@@ -37,7 +38,7 @@ def strip_secret_checksum(m):
     vault, and the chart autogenerates certificates which change each run
     """
     # spec.template.metadata.annotations['checksum/secret*']
-    annotations = json.delve(m, ("spec", "template", "metadata", "annotations"))
+    annotations = surgery.delve(m, ("spec", "template", "metadata", "annotations"))
     if annotations is not None:
         for key, value in list(annotations.items()):
             if key.startswith("checksum/secret"):
@@ -45,7 +46,7 @@ def strip_secret_checksum(m):
     return m
 
 
-def build() -> None:
+def objects() -> None:
     emit(
         [
             strip_secret_checksum(m)

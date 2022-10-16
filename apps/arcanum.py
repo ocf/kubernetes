@@ -1,8 +1,9 @@
-from transpire.dsl import emit
+from transpire import emit
 from apps.versions import versions
 
+name = "arcanum"
 
-def build() -> None:
+def objects() -> None:
     # NOTE: arcanum-secret is manually created, as it has a secret key that we need for bootstrap.
     emit(
         [

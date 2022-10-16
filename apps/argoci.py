@@ -2,12 +2,14 @@ from __future__ import annotations
 
 import requests
 import yaml
+from transpire import emit
+
 from apps.versions import versions
 
-from transpire.dsl import emit
 
+name = "argoci"
 
-def build() -> None:
+def objects() -> None:
     # TODO: Create argo-events namespace.
 
     argo_workflows = requests.get(

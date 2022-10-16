@@ -1,8 +1,8 @@
-from transpire.dsl import helm
+from transpire import emit, helm
+
 from apps.versions import versions
 
-from transpire.dsl import emit
-
+name = "prometheus"
 values = {
     "alertmanager": {
         "enabled": True,
@@ -45,7 +45,7 @@ values = {
 }
 
 
-def build() -> None:
+def objects() -> None:
     emit(
         helm.build_chart_from_versions(
             name="prometheus",

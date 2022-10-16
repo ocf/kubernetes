@@ -1,10 +1,10 @@
-from transpire.dsl import helm
-from apps.versions import versions
+from transpire import emit, helm
 
-from transpire.dsl import emit
+from apps.versions import versions
 
 values = {"image": {"tag": "v1.5.1"}}
 
+name = "rook"
 ceph_yaml = {
     "apiVersion": "ceph.rook.io/v1",
     "kind": "CephCluster",
@@ -102,7 +102,7 @@ storageclass_yaml = [
 ]
 
 
-def build() -> None:
+def objects() -> None:
     emit(
         helm.build_chart_from_versions(
             name="rook",

@@ -1,7 +1,9 @@
+from transpire import emit, helm
 from transpire.resources import Ingress
-from transpire.dsl import helm
-from transpire.dsl import emit
+
 from apps.versions import versions
+
+name = "elastic"
 
 license = [
     {
@@ -98,7 +100,7 @@ license = [
 ]
 
 
-def build() -> None:
+def objects() -> None:
     ingresses = [
         Ingress.simple(
             "kibana.ocf.berkeley.edu", "elastic-kb-http", 5601, "elastic-kb-http"

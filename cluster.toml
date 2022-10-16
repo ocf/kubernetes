@@ -1,0 +1,44 @@
+[modules.arcanum]
+path = "apps/arcanum.py"
+
+[modules.argocd]
+path = "apps/argocd.py"
+
+[modules.argoci]
+path = "apps/argoci.py"
+
+[modules.cert-manager]
+path = "apps/cert_manager.py"
+
+[modules.cilium]
+path = "apps/cilium.py"
+
+[modules.contour]
+path = "apps/contour.py"
+
+[modules.coredns]
+path = "apps/coredns.py"
+
+[modules.elastic]
+path = "apps/elastic.py"
+
+[modules.harbor]
+path = "apps/harbor.py"
+
+[modules.keycloak]
+path = "apps/keycloak.py"
+
+[modules.metallb]
+path = "apps/metallb.py"
+
+[modules.postgresql]
+path = "apps/postgresql.py"
+
+[modules.prometheus]
+path = "apps/prometheus.py"
+
+[modules.rook]
+path = "apps/rook.py"
+
+[modules.vault]
+path = "apps/vault.py"

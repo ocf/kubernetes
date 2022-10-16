@@ -1,5 +1,5 @@
-from transpire.dsl import helm
-from transpire.dsl import emit
+from transpire import emit, helm
+
 from apps.versions import versions
 
 values = {
@@ -18,8 +18,8 @@ values = {
     },
 }
 
-
-def build() -> None:
+name = "cilium"
+def objects() -> None:
     emit(
         helm.build_chart_from_versions(
             name="cilium",

@@ -1,6 +1,6 @@
+from transpire import emit, helm
+
 from apps.versions import versions
-from transpire.dsl import emit
-from transpire.dsl import helm
 
 values = {
     "installCRDs": True,
@@ -20,8 +20,9 @@ cluster_issuer = {
     },
 }
 
+name = "cert-manager"
 
-def build() -> None:
+def objects() -> None:
     helm_contents = helm.build_chart_from_versions(
         name="cert-manager",
         versions=versions,

@@ -1,11 +1,11 @@
 import requests
 import yaml
-
+from transpire import emit, surgery
 from transpire.resources.ingress import Ingress
-from transpire.dsl import surgery
-from transpire.dsl import emit
-from transpire.dsl import json
+
 from apps.versions import versions
+
+name = "argocd"
 
 base_deployment = {
     "apiVersion": "argoproj.io/v1alpha1",
@@ -22,7 +22,7 @@ base_deployment = {
 }
 
 
-def build() -> None:
+def objects() -> None:
     contents = requests.get(
         f"https://raw.githubusercontent.com/argoproj/argo-cd/v{versions['argocd']['version']}/manifests/ha/install.yaml",
     )
@@ -30,7 +30,7 @@ def build() -> None:
     emit(
         surgery.edit_manifests(
             {
-                ("ConfigMap", "argocd-cm"): lambda m: json.shelve(
+                ("ConfigMap", "argocd-cm"): lambda m: surgery.shelve(
                     m,
                     ("data",),
                     {
@@ -61,10 +61,10 @@ def build() -> None:
                         "repositories": "- url: https://github.com/ocf/kubernetes",
                     },
                 ),
-                ("ConfigMap", "argocd-rbac-cm"): lambda m: json.shelve(
+                ("ConfigMap", "argocd-rbac-cm"): lambda m: surgery.shelve(
                     m, ("data",), {"policy.csv": "g, ocfroot, role:admin"}
                 ),
-                ("Service", "argocd-server"): lambda m: json.shelve(
+                ("Service", "argocd-server"): lambda m: surgery.shelve(
                     m,
                     (
                         "metadata",

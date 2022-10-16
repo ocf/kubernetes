@@ -1,8 +1,8 @@
-from transpire.dsl import helm
+from transpire import emit, helm
+
 from apps.versions import versions
 
-from transpire.dsl import emit
-
+name = "metallb"
 values = {
     "configInline": {
         "address-pools": [
@@ -19,7 +19,7 @@ values = {
 }
 
 
-def build() -> None:
+def objects() -> None:
     emit(
         helm.build_chart_from_versions(
             name="metallb",
