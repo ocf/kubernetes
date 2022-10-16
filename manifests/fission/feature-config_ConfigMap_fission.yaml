@@ -1,7 +1,0 @@
-apiVersion: v1
-data:
-  config.yaml: Y2FuYXJ5OgogIGVuYWJsZWQ6IHRydWUKICBwcm9tZXRoZXVzU3ZjOiAiIgo=
-kind: ConfigMap
-metadata:
-  name: feature-config
-  namespace: fission
