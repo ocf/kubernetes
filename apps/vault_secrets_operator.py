@@ -2,19 +2,17 @@ from transpire import helm
 
 from apps.versions import versions
 
+name = "vault-secrets-operator"
 values = {
-    "envoy": {
-        "service": {
-            "loadBalancerIP": "169.229.226.81",
-        },
+    "vault": {
+        "authMethod": "kubernetes",
+        "address": "http://ocf-vault.vault:8200",
     },
 }
 
-name = "contour"
-
 def objects():
     yield from helm.build_chart_from_versions(
-        name="contour",
+        name="vault-secrets-operator",
         versions=versions,
         values=values,
     )

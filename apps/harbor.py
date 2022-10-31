@@ -1,4 +1,4 @@
-from transpire import emit, helm, surgery
+from transpire import helm, surgery
 
 from apps.versions import versions
 
@@ -46,9 +46,8 @@ def strip_secret_checksum(m):
     return m
 
 
-def objects() -> None:
-    emit(
-        [
+def objects():
+        yield from [
             strip_secret_checksum(m)
             for m in helm.build_chart_from_versions(
                 name="harbor",
@@ -56,4 +55,3 @@ def objects() -> None:
                 values=values,
             )
         ]
-    )

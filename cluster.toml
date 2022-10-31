@@ -1,5 +1,13 @@
-[modules.arcanum]
-path = "apps/arcanum.py"
+apiVersion = "v1"
+
+[secrets]
+provider = "vault"
+
+[secrets.vault]
+kvstore = "kvv1"
+
+[ci]
+webhook_url="https://ocf.io/wtf"
 
 [modules.argocd]
 path = "apps/argocd.py"
@@ -19,9 +27,6 @@ path = "apps/contour.py"
 [modules.coredns]
 path = "apps/coredns.py"
 
-[modules.elastic]
-path = "apps/elastic.py"
-
 [modules.harbor]
 path = "apps/harbor.py"
 
@@ -31,9 +36,6 @@ path = "apps/keycloak.py"
 [modules.metallb]
 path = "apps/metallb.py"
 
-[modules.postgresql]
-path = "apps/postgresql.py"
-
 [modules.prometheus]
 path = "apps/prometheus.py"
 
@@ -42,3 +44,7 @@ path = "apps/rook.py"
 
 [modules.vault]
 path = "apps/vault.py"
+
+[modules.vault-secrets-operator]
+path = "apps/vault_secrets_operator.py"
+

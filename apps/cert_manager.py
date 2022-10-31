@@ -1,4 +1,4 @@
-from transpire import emit, helm
+from transpire import helm
 
 from apps.versions import versions
 
@@ -22,11 +22,11 @@ cluster_issuer = {
 
 name = "cert-manager"
 
-def objects() -> None:
-    helm_contents = helm.build_chart_from_versions(
+def objects():
+    yield from helm.build_chart_from_versions(
         name="cert-manager",
         versions=versions,
         values=values,
     )
-    emit(helm_contents)
-    emit(cluster_issuer)
+    yield cluster_issuer
+

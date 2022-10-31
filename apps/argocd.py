@@ -1,6 +1,6 @@
 import requests
 import yaml
-from transpire import emit, surgery
+from transpire import surgery
 from transpire.resources.ingress import Ingress
 
 from apps.versions import versions
@@ -22,12 +22,12 @@ base_deployment = {
 }
 
 
-def objects() -> None:
+def objects():
     contents = requests.get(
         f"https://raw.githubusercontent.com/argoproj/argo-cd/v{versions['argocd']['version']}/manifests/ha/install.yaml",
     )
     contents.raise_for_status()
-    emit(
+    yield from (
         surgery.edit_manifests(
             {
                 ("ConfigMap", "argocd-cm"): lambda m: surgery.shelve(
@@ -91,7 +91,6 @@ def objects() -> None:
         )
     )
 
-    ingress = Ingress.simple(
+    yield Ingress.simple(
         "argo.ocf.berkeley.edu", "argocd-server", "https", "argocd-server"
     )
-    emit(ingress)

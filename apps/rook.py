@@ -1,4 +1,4 @@
-from transpire import emit, helm
+from transpire import helm
 
 from apps.versions import versions
 
@@ -102,8 +102,8 @@ storageclass_yaml = [
 ]
 
 
-def objects() -> None:
-    emit(
+def objects():
+    yield from (
         helm.build_chart_from_versions(
             name="rook",
             versions=versions,

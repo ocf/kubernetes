@@ -1,4 +1,4 @@
-from transpire import emit, helm
+from transpire import helm
 
 from apps.versions import versions
 
@@ -7,17 +7,16 @@ values = {
     # TODO: This is a hardcoded variable from the kubelet configuration.
     # Consider automatically grabbing this value.
     "service": {
-        "clusterIP": "10.32.0.10",
+        "clusterIP": "10.96.0.10",
     },
 }
 
 name = "coredns"
+namespace = "kube-system"
 
-def objects() -> None:
-    emit(
-        helm.build_chart_from_versions(
-            name="coredns",
-            versions=versions,
-            values=values,
-        )
+def objects():
+    yield from helm.build_chart_from_versions(
+        name="coredns",
+        versions=versions,
+        values=values,
     )

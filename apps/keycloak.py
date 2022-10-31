@@ -1,6 +1,5 @@
 import requests
 import yaml
-from transpire import emit
 
 name = "keycloak"
 base_url = (
@@ -31,7 +30,7 @@ settings = {
 }
 
 
-def objects() -> None:
+def objects():
     for path in paths:
-        emit(yaml.safe_load_all(requests.get(base_url.format(path)).text))
-    emit(settings)
+        yield from yaml.safe_load_all(requests.get(base_url.format(path)).text)
+    yield settings

@@ -1,4 +1,4 @@
-from transpire import emit, helm
+from transpire import helm
 
 from apps.versions import versions
 
@@ -19,11 +19,9 @@ values = {
 }
 
 
-def objects() -> None:
-    emit(
-        helm.build_chart_from_versions(
-            name="metallb",
-            versions=versions,
-            values=values,
-        )
+def objects():
+    yield from helm.build_chart_from_versions(
+        name="metallb",
+        versions=versions,
+        values=values,
     )

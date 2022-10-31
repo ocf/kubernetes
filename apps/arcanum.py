@@ -1,12 +1,10 @@
-from transpire import emit
 from apps.versions import versions
 
 name = "arcanum"
 
-def objects() -> None:
+def objects():
     # NOTE: arcanum-secret is manually created, as it has a secret key that we need for bootstrap.
-    emit(
-        [
+    manifests = [
             {
                 "apiVersion": "v1",
                 "kind": "ServiceAccount",
@@ -159,10 +157,11 @@ def objects() -> None:
                 },
             },
         ]
-    )
+    
+    for manifest in manifests:
+        yield manifest
 
-    emit(
-        [
+    manifests = [
             {
                 "apiVersion": "apiextensions.k8s.io/v1",
                 "kind": "CustomResourceDefinition",
@@ -228,4 +227,7 @@ def objects() -> None:
                 },
             }
         ]
-    )
+    
+    for manifest in manifests:
+        yield manifest
+
