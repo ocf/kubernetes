@@ -17,6 +17,10 @@ github = "https://github.com/argoproj/argo-workflows"
 version = "1.6.3"
 github = "https://github.com/argoproj/argo-events"
 
+[buildkit]
+version = "v0.10"
+github = "https://github.com/moby/buildkit"
+
 [cert-manager]
 version = "1.6.1"
 helm = "https://charts.jetstack.io"
