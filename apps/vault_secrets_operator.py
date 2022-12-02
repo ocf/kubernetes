@@ -6,7 +6,7 @@ name = "vault-secrets-operator"
 values = {
     "vault": {
         "authMethod": "kubernetes",
-        "address": "http://ocf-vault.vault:8200",
+        "address": "http://vault.vault.svc.cluster.local:8200",
     },
 }
 

@@ -15,8 +15,7 @@ base_deployment = {
         "project": "default",
         "destination": {"server": "https://kubernetes.default.svc"},
         "source": {
-            "repoURL": "https://github.com/ocf/kubernetes",
-            "path": "manifests/bootstrap",
+            "repoURL": "https://github.com/ocf/cluster",
         },
     },
 }
@@ -58,7 +57,7 @@ def objects():
                                 ],
                             }
                         ),
-                        "repositories": "- url: https://github.com/ocf/kubernetes",
+                        "repositories": "- url: https://github.com/ocf/cluster",
                     },
                 ),
                 ("ConfigMap", "argocd-rbac-cm"): lambda m: surgery.shelve(
@@ -78,9 +77,8 @@ def objects():
                     {
                         # Run 3 replicas...
                         ("spec", "replicas"): 3,
-                        # ...but make sure we never surge above 3 because we only
-                        # have 3 nodes (otherwise we would be unable to progress
-                        # the deployment because of the node antiaffinity)
+                        # ...but make sure we never surge above 3 because... why would we
+                        # ever need more than 3 copies?
                         ("spec", "strategy", "rollingUpdate", "maxSurge"): 0,
                         ("spec", "strategy", "rollingUpdate", "maxUnavailable"): 1,
                     },
@@ -94,3 +92,5 @@ def objects():
     yield Ingress.simple(
         "argo.ocf.berkeley.edu", "argocd-server", "https", "argocd-server"
     )
+
+    yield base_deployment

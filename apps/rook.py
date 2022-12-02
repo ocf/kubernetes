@@ -2,7 +2,46 @@ from transpire import helm
 
 from apps.versions import versions
 
-values = {"image": {"tag": "v1.5.1"}}
+values = {
+    "image": {
+        "tag": "v1.10.6",
+    },
+
+    # <https://rook.io/docs/rook/v1.10/CRDs/Cluster/ceph-cluster-crd/?h=stack#network-configuration-settings>
+    "network": {
+        "dualStack": True,
+    },
+
+    # <https://rook.io/docs/rook/v1.10/Storage-Configuration/Monitoring/ceph-dashboard/?h=dashboard#enable-the-ceph-dashboard>
+    "dashboard": {
+        "enabled": True,
+    },
+
+    # <https://rook.io/docs/rook/v1.10/Getting-Started/Prerequisites/prerequisites/?h=nixos#nixos>
+    # <https://github.com/rook/rook/blob/v1.10.6/deploy/charts/rook-ceph/values.yaml#L141>
+    "csi": {
+        "csiRBDPluginVolume": [
+            {
+                "name": "lib-modules",
+                "hostPath": {"path": "/run/booted-system/kernel-modules/lib/modules/"},
+            },
+            {"name": "host-nix", "hostPath": {"path": "/nix"}},
+        ],
+        "csiRBDPluginVolumeMount": [
+            {"name": "host-nix", "mountPath": "/nix", "readOnly": True}
+        ],
+        "csiCephFSPluginVolume": [
+            {
+                "name": "lib-modules",
+                "hostPath": {"path": "/run/booted-system/kernel-modules/lib/modules/"},
+            },
+            {"name": "host-nix", "hostPath": {"path": "/nix"}},
+        ],
+        "csiCephFSPluginVolumeMount": [
+            {"name": "host-nix", "mountPath": "/nix", "readOnly": True}
+        ],
+    },
+}
 
 name = "rook"
 ceph_yaml = {
@@ -14,7 +53,7 @@ ceph_yaml = {
         "annotations": {"argocd.argoproj.io/compare-options": "IgnoreExtraneous"},
     },
     "spec": {
-        "cephVersion": {"image": "ceph/ceph:v15.2.6"},
+        "cephVersion": {"image": "quay.io/ceph/ceph:v17.2.5"},
         "dataDirHostPath": "/var/lib/rook",
         "mon": {"count": 3, "allowMultiplePerNode": False},
         "dashboard": {
@@ -22,44 +61,21 @@ ceph_yaml = {
         },
         "storage": {
             "useAllNodes": False,
-            "useAllDevices": False,
+            # This is safe for the strategy with nodes A-D, but revisit this
+            # if new nodes are added!
+            "useAllDevices": True,
             "nodes": [
                 {
-                    "name": "jaws",
-                    "devices": [
-                        {
-                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K932843P",
-                            "config": {},
-                        },
-                        {
-                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K933151M",
-                            "config": {},
-                        },
-                        {
-                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K934154M",
-                            "config": {},
-                        },
-                        {
-                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K934284J",
-                            "config": {},
-                        },
-                        {
-                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K934288X",
-                            "config": {},
-                        },
-                        {
-                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K937582P",
-                            "config": {},
-                        },
-                        {
-                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K943700W",
-                            "config": {},
-                        },
-                        {
-                            "name": "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_1TB_S3Z8NB0K944017K",
-                            "config": {},
-                        },
-                    ],
+                    "name": "adenine",
+                },
+                {
+                    "name": "guanine",
+                },
+                {
+                    "name": "cytosine",
+                },
+                {
+                    "name": "thymine",
                 },
             ],
         },
@@ -73,6 +89,7 @@ storageclass_yaml = [
         "spec": {
             "failureDomain": "host",
             "replicated": {"size": 2, "requireSafeReplicaSize": True},
+            "deviceClass": "ssd",
         },
     },
     {
@@ -87,7 +104,6 @@ storageclass_yaml = [
             "clusterID": "rook",
             "pool": "replicapool",
             "imageFormat": "2",
-            "imageFeatures": "layering",
             "csi.storage.k8s.io/provisioner-secret-name": "rook-csi-rbd-provisioner",
             "csi.storage.k8s.io/provisioner-secret-namespace": "rook",
             "csi.storage.k8s.io/controller-expand-secret-name": "rook-csi-rbd-provisioner",
@@ -95,6 +111,8 @@ storageclass_yaml = [
             "csi.storage.k8s.io/node-stage-secret-name": "rook-csi-rbd-node",
             "csi.storage.k8s.io/node-stage-secret-namespace": "rook",
             "csi.storage.k8s.io/fstype": "ext4",
+            # <https://rook.io/docs/rook/v1.10/Getting-Started/Prerequisites/prerequisites/#rbd>
+            "imageFeatures": "layering,fast-diff,object-map,deep-flatten,exclusive-lock",
         },
         "allowVolumeExpansion": True,
         "reclaimPolicy": "Delete",

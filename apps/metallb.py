@@ -32,4 +32,5 @@ def objects():
     )
 
     yield pool
+    yield method
 
