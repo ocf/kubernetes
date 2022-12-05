@@ -1,13 +1,57 @@
-import requests
+from transpire import helm
 import yaml
-from transpire import surgery
-from transpire.resources.ingress import Ingress
 
 from apps.versions import versions
 
 name = "argocd"
 
-base_deployment = {
+values = {
+    "redis-ha": {"enabled": True},
+    "controller": {"replicas": 1},
+    "server": {
+        "replicas": 2,
+        "ingress": {
+            "enabled": True,
+            "ingressClassName": "cilium",
+            "hosts": ["argo.ocf.berkeley.edu"],
+            "tls": [
+                {"secretName": "argocd-server-tls", "hosts": ["argo.ocf.berkeley.edu"]},
+            ],
+        },
+    },
+    "repoServer": {"replicas": 2},
+    "applicationSet": {"replicaCount": 2},
+    "configs": {
+        "cm": {
+            "url": "https://argo.ocf.berkeley.edu",
+            "oidc.config": yaml.dump(
+                {
+                    "name": "Keycloak",
+                    "issuer": "https://auth.ocf.berkeley.edu/auth/realms/ocf",
+                    "clientID": "argocd",
+                    "clientSecret": "$oidc.keycloak.clientSecret",
+                    "requestedScopes": [
+                        "openid",
+                        "profile",
+                        "email",
+                        "groups",
+                    ],
+                }
+            ),
+        },
+        "params": {
+            "server.insecure": True,
+        },
+        "repositories": {
+            "cluster": {
+                "url": "https://github.com/ocf/cluster",
+            },
+        },
+        "rbac": {"policy.csv": "g, ocfroot, role:admin"},
+    },
+}
+
+bootstrap_app = {
     "apiVersion": "argoproj.io/v1alpha1",
     "kind": "Application",
     "metadata": {"name": "bootstrap", "namespace": "argocd"},
@@ -22,75 +66,9 @@ base_deployment = {
 
 
 def objects():
-    contents = requests.get(
-        f"https://raw.githubusercontent.com/argoproj/argo-cd/v{versions['argocd']['version']}/manifests/ha/install.yaml",
+    yield from helm.build_chart_from_versions(
+        name="argocd",
+        versions=versions,
+        values=values,
     )
-    contents.raise_for_status()
-    yield from (
-        surgery.edit_manifests(
-            {
-                ("ConfigMap", "argocd-cm"): lambda m: surgery.shelve(
-                    m,
-                    ("data",),
-                    {
-                        "url": "https://argo.ocf.berkeley.edu",
-                        "resource.exclusions": yaml.dump(
-                            [
-                                {
-                                    "apiGroups": ["cilium*"],
-                                    "kinds": ["CiliumIdentity"],
-                                    "clusters": ["*"],
-                                }
-                            ]
-                        ),
-                        "oidc.config": yaml.dump(
-                            {
-                                "name": "Keycloak",
-                                "issuer": "https://auth.ocf.berkeley.edu/auth/realms/ocf",
-                                "clientID": "argocd",
-                                "clientSecret": "$oidc.keycloak.clientSecret",
-                                "requestedScopes": [
-                                    "openid",
-                                    "profile",
-                                    "email",
-                                    "groups",
-                                ],
-                            }
-                        ),
-                        "repositories": "- url: https://github.com/ocf/cluster",
-                    },
-                ),
-                ("ConfigMap", "argocd-rbac-cm"): lambda m: surgery.shelve(
-                    m, ("data",), {"policy.csv": "g, ocfroot, role:admin"}
-                ),
-                ("Service", "argocd-server"): lambda m: surgery.shelve(
-                    m,
-                    (
-                        "metadata",
-                        "annotations",
-                        "projectcontour.io/upstream-protocol.tls",
-                    ),
-                    "https",
-                    create_parents=True,
-                ),
-                ("Deployment", "argocd-redis-ha-haproxy"): surgery.make_edit_manifest(
-                    {
-                        # Run 3 replicas...
-                        ("spec", "replicas"): 3,
-                        # ...but make sure we never surge above 3 because... why would we
-                        # ever need more than 3 copies?
-                        ("spec", "strategy", "rollingUpdate", "maxSurge"): 0,
-                        ("spec", "strategy", "rollingUpdate", "maxUnavailable"): 1,
-                    },
-                    create_parents=True,
-                ),
-            },
-            yaml.safe_load_all(contents.text),
-        )
-    )
-
-    yield Ingress.simple(
-        "argo.ocf.berkeley.edu", "argocd-server", "https", "argocd-server"
-    )
-
-    yield base_deployment
+    yield bootstrap_app

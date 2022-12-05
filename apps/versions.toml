@@ -6,15 +6,16 @@
 # Cluster Services & Core Applications
 
 [argocd]
-version = "2.5.0"
-github = "https://github.com/argoproj/argo-cd"
+version = "5.16.1"
+helm = "https://argoproj.github.io/argo-helm"
+chart = "argo-cd"
 
 [argo-workflows]
-version = "3.3.1"
+version = "3.3.10"
 github = "https://github.com/argoproj/argo-workflows"
 
 [argo-events]
-version = "1.6.3"
+version = "1.7.3"
 github = "https://github.com/argoproj/argo-events"
 
 [cert-manager]
@@ -22,12 +23,8 @@ version = "1.10.1"
 helm = "https://charts.jetstack.io"
 
 [cilium]
-version = "1.13.0-rc2"
+version = "1.13.0-rc3"
 helm = "https://helm.cilium.io/"
-
-[contour]
-version = "9.1.6"
-helm = "https://charts.bitnami.com/bitnami"
 
 [coredns]
 version = "1.19.7"
@@ -43,7 +40,7 @@ version = "1.11.1"
 helm = "https://falcosecurity.github.io/charts"
 
 [harbor]
-version = "15.2.5"
+version = "16.0.4"
 helm = "https://charts.bitnami.com/bitnami"
 
 [keycloak]
@@ -51,7 +48,7 @@ version = "11.0.3"
 github = "https://github.com/keycloak/keycloak"
 
 [metallb]
-version = "4.1.10"
+version = "4.1.12"
 helm = "https://charts.bitnami.com/bitnami"
 
 [mycelium]
@@ -73,28 +70,11 @@ version = "1.10.6"
 helm = "https://charts.rook.io/release"
 chart = "rook-ceph"
 
-[tekton]
-version = "0.52.0"
-github = "https://github.com/tektoncd/operator"
-
 [vault]
-version = "0.22.1"
+version = "0.23.0"
 helm = "https://helm.releases.hashicorp.com"
 
 [vault-secrets-operator]
 version = "1.19.8"
 helm = "https://ricoberger.github.io/helm-charts"
 
-
-# Stakeholder Services & Client Applications
-# items without `version` won't get checked by adelie here
-# -> be sure to point adelie at the upstream repository!
-
-[arcanum]
-image = "ghcr.io/nikhiljha/arcanum:v0.1.1@sha256:4841e268815aa4020a29450020731e831ea968733a52d99e6642d31f0d109b65"
-
-[codimd]
-image = "harbor.ocf.berkeley.edu/ocf/codimd:latest"
-
-[templates]
-image = "harbor.ocf.berkeley.edu/ocf/templates:latest"
