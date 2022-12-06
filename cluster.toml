@@ -4,7 +4,7 @@ apiVersion = "v1"
 provider = "vault"
 
 [secrets.vault]
-kvstore = "kvv1"
+kvstore = "kvv2"
 
 [ci]
 webhook_url="https://ocf.io/wtf"
@@ -20,9 +20,6 @@ path = "apps/cert_manager.py"
 
 [modules.cilium]
 path = "apps/cilium.py"
-
-[modules.contour]
-path = "apps/contour.py"
 
 [modules.coredns]
 path = "apps/coredns.py"

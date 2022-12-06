@@ -60,6 +60,7 @@ bootstrap_app = {
         "destination": {"server": "https://kubernetes.default.svc"},
         "source": {
             "repoURL": "https://github.com/ocf/cluster",
+            "path": "base",
         },
     },
 }

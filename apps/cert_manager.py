@@ -72,3 +72,13 @@ def objects():
     yield make_le_issuer(
         "letsencrypt-staging", "https://acme-staging-v02.api.letsencrypt.org/directory"
     )
+    yield {
+        "apiVersion": "ricoberger.de/v1alpha1",
+        "kind": "VaultSecret",
+        "metadata": {"name": "ocf-tsig"},
+        "spec": {
+            "keys": ["key"],
+            "path": "kvv2/cert-manager/ocf-tsig",
+            "type": "Opaque",
+        },
+    }
