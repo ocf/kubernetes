@@ -8,3 +8,4 @@ coverage.xml
 htmlcov/
 # VSCode lol
 .vscode
+out/

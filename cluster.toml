@@ -7,7 +7,7 @@ provider = "vault"
 kvstore = "kvv2"
 
 [ci]
-webhook_url="https://ocf.io/wtf"
+webhook_url = "https://hozer-81.ocf.berkeley.edu/github"
 
 [modules.argocd]
 path = "apps/argocd.py"
@@ -44,4 +44,3 @@ path = "apps/vault.py"
 
 [modules.vault-secrets-operator]
 path = "apps/vault_secrets_operator.py"
-
