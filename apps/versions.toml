@@ -11,12 +11,14 @@ helm = "https://argoproj.github.io/argo-helm"
 chart = "argo-cd"
 
 [argo-workflows]
-version = "3.3.10"
-github = "https://github.com/argoproj/argo-workflows"
+version = "0.22.0"
+helm = "https://argoproj.github.io/argo-helm"
+chart = "argo-workflows"
 
 [argo-events]
-version = "1.7.3"
-github = "https://github.com/argoproj/argo-events"
+version = "2.0.6"
+helm = "https://argoproj.github.io/argo-helm"
+chart = "argo-events"
 
 [cert-manager]
 version = "1.10.1"
@@ -77,4 +79,3 @@ helm = "https://helm.releases.hashicorp.com"
 [vault-secrets-operator]
 version = "1.19.8"
 helm = "https://ricoberger.github.io/helm-charts"
-
