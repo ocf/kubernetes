@@ -39,6 +39,9 @@ path = "apps/prometheus.py"
 [modules.rook]
 path = "apps/rook.py"
 
+[modules.teleport]
+path = "apps/teleport.py"
+
 [modules.vault]
 path = "apps/vault.py"
 

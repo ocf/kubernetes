@@ -42,22 +42,7 @@ def make_le_issuer(name: str, endpoint: str) -> dict:
     }
 
 
-cluster_issuer = {
-    "apiVersion": "cert-manager.io/v1",
-    "kind": "ClusterIssuer",
-    "metadata": {"name": "letsencrypt", "namespace": "cert-manager"},
-    "spec": {
-        "acme": {
-            "email": "root@ocf.berkeley.edu",
-            "privateKeySecretRef": {"name": "letsencrypt"},
-            "server": "https://acme-v02.api.letsencrypt.org/directory",
-            "solvers": [{"http01": {"ingress": {"class": "cilium"}}}],
-        }
-    },
-}
-
 name = "cert-manager"
-
 
 def objects():
     yield from helm.build_chart_from_versions(
