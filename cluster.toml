@@ -7,13 +7,16 @@ provider = "vault"
 kvstore = "kvv2"
 
 [ci]
-webhook_url="https://ocf.io/wtf"
+webhook_url = "https://ocf.io/wtf"
+
+[modules.argo-events]
+path = "apps/argo_events.py"
+
+[modules.argo-workflows]
+path = "apps/argo_workflows.py"
 
 [modules.argocd]
 path = "apps/argocd.py"
-
-[modules.argoci]
-path = "apps/argoci.py"
 
 [modules.cert-manager]
 path = "apps/cert_manager.py"
@@ -47,4 +50,3 @@ path = "apps/vault.py"
 
 [modules.vault-secrets-operator]
 path = "apps/vault_secrets_operator.py"
-
