@@ -12,20 +12,24 @@ values = {
             "hostname": "harbor.ocf.berkeley.edu",
             "annotations": {
                 "cert-manager.io/cluster-issuer": "letsencrypt",
-                "ingress.kubernetes.io/force-ssl-redirect": "true",
                 "kubernetes.io/tls-acme": "true",
             },
             "tls": True,
+            # Default is ImplementationSpecific, which does regex match for Cilium.
+            # Regex match does not work because it takes the path as a literal regex,
+            # and the regex `/foo` does not match `/`.
+            "pathType": "Prefix",
         },
         "notary": {
             "ingressClassName": "cilium",
             "hostname": "harbor-notary.ocf.berkeley.edu",
             "annotations": {
                 "cert-manager.io/cluster-issuer": "letsencrypt",
-                "ingress.kubernetes.io/force-ssl-redirect": "true",
                 "kubernetes.io/tls-acme": "true",
             },
             "tls": True,
+            # See above.
+            "pathType": "Prefix",
         },
     },
     "externalURL": "https://harbor.ocf.berkeley.edu",
