@@ -4,7 +4,7 @@ from transpire import helm
 
 from apps.versions import versions
 
-name = "argoci"
+name = "argo-workflows"
 
 
 def objects() -> Generator[dict, None, None]:

@@ -5,28 +5,33 @@ from apps.versions import versions
 name = "harbor"
 
 values = {
-    "service": {
-        "type": "Ingress",
-        "tls": {
-            "enabled": True,
-            "existingSecret": "harbor-tls",
-            "notaryExistingSecret": "harbor-notary-tls",
-        },
-    },
+    "exposureType": "ingress",
     "ingress": {
-        "enabled": True,
-        "hosts": {
-            "core": "harbor.ocf.berkeley.edu",
-            "notary": "harbor-notary.ocf.berkeley.edu",
+        "core": {
+            "ingressClassName": "cilium",
+            "hostname": "harbor.ocf.berkeley.edu",
+            "annotations": {
+                "cert-manager.io/cluster-issuer": "letsencrypt",
+                "ingress.kubernetes.io/force-ssl-redirect": "true",
+                "kubernetes.io/tls-acme": "true",
+            },
+            "tls": True,
         },
-        "annotations": {
-            "cert-manager.io/cluster-issuer": "letsencrypt",
-            "ingress.kubernetes.io/force-ssl-redirect": "true",
-            "kubernetes.io/tls-acme": "true",
+        "notary": {
+            "ingressClassName": "cilium",
+            "hostname": "harbor-notary.ocf.berkeley.edu",
+            "annotations": {
+                "cert-manager.io/cluster-issuer": "letsencrypt",
+                "ingress.kubernetes.io/force-ssl-redirect": "true",
+                "kubernetes.io/tls-acme": "true",
+            },
+            "tls": True,
         },
     },
     "externalURL": "https://harbor.ocf.berkeley.edu",
     "forcePassword": True,
+
+    # This helm chart is a little, well, uh... we just override this from Vault.
     "harborAdminPassword": "nice-try-this-isnt-it",
     "core": {"secretKey": "aaaaaaaaaaaaaaaa", "secret": "aaaaaaaaaaaaaaaa"},
 }
