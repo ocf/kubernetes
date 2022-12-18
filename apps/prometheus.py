@@ -4,10 +4,20 @@ from apps.versions import versions
 
 name = "prometheus"
 values = {
+    "defaultRules": {
+        "rules": {
+            # We don't run kube-proxy, Cilium handles that.
+            "kubeProxy": False,
+        },
+    },
+    "nodeExporter": {"enabled": True},
+
+    # TODO: Setup alertmanager.
     "alertmanager": {
-        "enabled": True,
+        "enabled": False,
         "ingress": {
-            "enabled": True,
+            "enabled": False,
+            "ingressClassName": "contour",
             "annotations": {
                 "cert-manager.io/cluster-issuer": "letsencrypt",
                 "ingress.kubernetes.io/force-ssl-redirect": "true",
@@ -17,10 +27,10 @@ values = {
             "tls": [{"hosts": ["alerts.ocf.berkeley.edu"], "secretName": "alerts-tls"}],
         },
     },
-    "nodeExporter": {"enabled": False},
     "prometheus": {
         "ingress": {
             "enabled": True,
+            "ingressClassName": "contour",
             "annotations": {
                 "cert-manager.io/cluster-issuer": "letsencrypt",
                 "ingress.kubernetes.io/force-ssl-redirect": "true",
@@ -33,6 +43,7 @@ values = {
     "grafana": {
         "ingress": {
             "enabled": True,
+            "ingressClassName": "contour",
             "annotations": {
                 "cert-manager.io/cluster-issuer": "letsencrypt",
                 "ingress.kubernetes.io/force-ssl-redirect": "true",
