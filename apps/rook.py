@@ -6,17 +6,14 @@ values = {
     "image": {
         "tag": "v1.10.6",
     },
-
     # <https://rook.io/docs/rook/v1.10/CRDs/Cluster/ceph-cluster-crd/?h=stack#network-configuration-settings>
     "network": {
         "dualStack": True,
     },
-
     # <https://rook.io/docs/rook/v1.10/Storage-Configuration/Monitoring/ceph-dashboard/?h=dashboard#enable-the-ceph-dashboard>
     "dashboard": {
         "enabled": True,
     },
-
     # <https://rook.io/docs/rook/v1.10/Getting-Started/Prerequisites/prerequisites/?h=nixos#nixos>
     # <https://github.com/rook/rook/blob/v1.10.6/deploy/charts/rook-ceph/values.yaml#L141>
     "csi": {
@@ -44,7 +41,21 @@ values = {
 }
 
 name = "rook"
-ceph_yaml = {
+
+nucleusDevices = (
+    [
+        {
+            "config": {"deviceClass": "nvme"},
+            "name": "/dev/disk/by-path/pci-0000:02:00.0-nvme-1",
+        },
+        {
+            "config": {"deviceClass": "nvme"},
+            "name": "/dev/disk/by-path/pci-0000:41:00.0-nvme-1",
+        },
+    ],
+)
+
+ceph_cluster = {
     "apiVersion": "ceph.rook.io/v1",
     "kind": "CephCluster",
     "metadata": {
@@ -60,27 +71,27 @@ ceph_yaml = {
             "enabled": True,
         },
         "storage": {
-            "useAllNodes": False,
-            # This is safe for the strategy with nodes A-D, but revisit this
-            # if new nodes are added!
-            "useAllDevices": True,
             "nodes": [
                 {
+                    "devices": nucleusDevices,
                     "name": "adenine",
                 },
                 {
+                    "devices": nucleusDevices,
                     "name": "guanine",
                 },
                 {
+                    "devices": nucleusDevices,
                     "name": "cytosine",
                 },
-                {
-                    "name": "thymine",
-                },
+                {"name": "thymine"},
             ],
+            "useAllDevices": False,
+            "useAllNodes": False,
         },
     },
 }
+
 storageclass_yaml = [
     {
         "apiVersion": "ceph.rook.io/v1",
@@ -121,12 +132,11 @@ storageclass_yaml = [
 
 
 def objects():
-    yield from (
-        helm.build_chart_from_versions(
-            name="rook",
-            versions=versions,
-            values=values,
-        )
-        + [ceph_yaml]
-        + storageclass_yaml
+    yield from helm.build_chart_from_versions(
+        name="rook",
+        versions=versions,
+        values=values,
     )
+
+    yield ceph_cluster
+    yield from storageclass_yaml

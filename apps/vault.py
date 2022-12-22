@@ -8,8 +8,8 @@ values = {
     "server": {
         "readinessProbe": {"enabled": False},
         "livenessProbe": {"enabled": False, "initialDelaySeconds": 60},
-        "auditStorage": {"enabled": True, "storageClass": "rook-ceph-block"},
-        "dataStorage": {"storageClass": "rook-ceph-block"},
+        "auditStorage": {"enabled": True, "storageClass": "rbd-nvme"},
+        "dataStorage": {"storageClass": "rbd-nvme"},
         "image": {"tag": "1.6.0"},
         "ingress": {
             "enabled": True,
