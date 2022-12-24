@@ -36,6 +36,9 @@ path = "apps/keycloak.py"
 [modules.metallb]
 path = "apps/metallb.py"
 
+[modules.outline]
+git = "https://github.com/ocf/outline"
+
 [modules.prometheus]
 path = "apps/prometheus.py"
 
