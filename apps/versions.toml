@@ -42,7 +42,7 @@ version = "1.11.1"
 helm = "https://falcosecurity.github.io/charts"
 
 [harbor]
-version = "16.0.4"
+version = "16.1.2"
 helm = "https://charts.bitnami.com/bitnami"
 
 [keycloak]
@@ -57,10 +57,9 @@ helm = "https://charts.bitnami.com/bitnami"
 version = "0.3.0"
 helm = "https://harbor.ocf.berkeley.edu/chartrepo/mycelium"
 
-[postgresql]
-version = "9.4.11"
-helm = "https://charts.bitnami.com/bitnami"
-chart = "postgresql-ha"
+[postgres-operator]
+version = "1.8.2"
+helm = "https://opensource.zalando.com/postgres-operator/charts/postgres-operator"
 
 [prometheus]
 version = "43.1.1"

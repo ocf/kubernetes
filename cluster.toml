@@ -42,6 +42,9 @@ git = "https://github.com/ocf/outline"
 [modules.prometheus]
 path = "apps/prometheus.py"
 
+[modules.postgres-operator]
+path = "apps/postgres_operator.py"
+
 [modules.rook]
 path = "apps/rook.py"
 
