@@ -113,6 +113,9 @@ def objects():
         },
     }
 
+    #################
+    # Block Devices #
+    #################
     yield {
         "apiVersion": "ceph.rook.io/v1",
         "kind": "CephBlockPool",
@@ -150,6 +153,79 @@ def objects():
         "reclaimPolicy": "Delete",
     }
 
+    ###############
+    # Filesystems #
+    ###############
+    yield {
+        "apiVersion": "ceph.rook.io/v1",
+        "kind": "CephFilesystem",
+        "metadata": {"name": "cephfs-hybrid"},
+        "spec": {
+            "metadataPool": {
+                "failureDomain": "host",
+                "replicated": {"size": 3},
+                "deviceClass": "nvme",
+            },
+            "dataPools": [
+                {
+                    "name": "nvme",
+                    "failureDomain": "host",
+                    "replicated": {"size": 3},
+                    "deviceClass": "nvme",
+                },
+                {
+                    "name": "hdd",
+                    "failureDomain": "host",
+                    "replicated": {"size": 3},
+                    "deviceClass": "hdd",
+                },
+            ],
+            "preserveFilesystemOnDelete": True,
+            "metadataServer": {"activeCount": 1, "activeStandby": True},
+        },
+    }
+
+    yield {
+        "apiVersion": "storage.k8s.io/v1",
+        "kind": "StorageClass",
+        "metadata": {"name": "cephfs-nvme"},
+        "provisioner": "rook-ceph.cephfs.csi.ceph.com",
+        "parameters": {
+            "clusterID": "rook",
+            "fsName": "cephfs-hybrid",
+            "pool": "cephfs-hybrid-nvme",
+            "csi.storage.k8s.io/provisioner-secret-name": "rook-csi-cephfs-provisioner",
+            "csi.storage.k8s.io/provisioner-secret-namespace": "rook",
+            "csi.storage.k8s.io/controller-expand-secret-name": "rook-csi-cephfs-provisioner",
+            "csi.storage.k8s.io/controller-expand-secret-namespace": "rook",
+            "csi.storage.k8s.io/node-stage-secret-name": "rook-csi-cephfs-node",
+            "csi.storage.k8s.io/node-stage-secret-namespace": "rook",
+        },
+        "reclaimPolicy": "Delete",
+    }
+
+    yield {
+        "apiVersion": "storage.k8s.io/v1",
+        "kind": "StorageClass",
+        "metadata": {"name": "cephfs-hdd"},
+        "provisioner": "rook-ceph.cephfs.csi.ceph.com",
+        "parameters": {
+            "clusterID": "rook",
+            "fsName": "cephfs-hybrid",
+            "pool": "cephfs-hybrid-hdd",
+            "csi.storage.k8s.io/provisioner-secret-name": "rook-csi-cephfs-provisioner",
+            "csi.storage.k8s.io/provisioner-secret-namespace": "rook",
+            "csi.storage.k8s.io/controller-expand-secret-name": "rook-csi-cephfs-provisioner",
+            "csi.storage.k8s.io/controller-expand-secret-namespace": "rook",
+            "csi.storage.k8s.io/node-stage-secret-name": "rook-csi-cephfs-node",
+            "csi.storage.k8s.io/node-stage-secret-namespace": "rook",
+        },
+        "reclaimPolicy": "Delete",
+    }
+
+    ##################
+    # Object Storage #
+    ##################
     crtname = "o3-ocf-crt"
     yield {
         "apiVersion": "cert-manager.io/v1",
@@ -189,11 +265,14 @@ def objects():
                                 "path": "/",
                                 "pathType": "Prefix",
                                 "backend": {
-                                    "service": {"name": "rook-ceph-rgw-rgw-hdd", "port": {"number": 80}}
+                                    "service": {
+                                        "name": "rook-ceph-rgw-rgw-hdd",
+                                        "port": {"number": 80},
+                                    }
                                 },
                             }
                         ]
-                    }
+                    },
                 }
             ],
         },
