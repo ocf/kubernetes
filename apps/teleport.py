@@ -1,4 +1,5 @@
 from transpire import helm
+from transpire.surgery import edit_manifests
 
 from apps.versions import versions
 
@@ -10,8 +11,8 @@ values = {
     "highAvailability": {
         # "replicaCount": 2,
         # "podDisruptionBudget": {
-            # "enabled": True,
-            # "minAvailable": 1,
+        # "enabled": True,
+        # "minAvailable": 1,
         # },
         "certManager": {
             "enabled": True,
@@ -28,11 +29,27 @@ values = {
 
 name = "teleport"
 
+
 def objects():
-    yield from helm.build_chart_from_versions(
-        name="teleport",
-        versions=versions,
-        values=values,
+    yield from edit_manifests(
+        {
+            (("policy/v1beta1", "PodSecurityPolicy"), "teleport"):
+            # PSPs no longer exist in kubernetes (deprecated in 1.21), so remove
+            # the generated one
+            # TODO: add back the securityContext settings applied by this PSP
+            lambda _: None,
+            # Associated RBAC for PSP
+            (("rbac.authorization.k8s.io/v1", "Role"), "teleport-psp"): lambda _: None,
+            (
+                ("rbac.authorization.k8s.io/v1", "RoleBinding"),
+                "teleport-psp",
+            ): lambda _: None,
+        },
+        helm.build_chart_from_versions(
+            name="teleport",
+            versions=versions,
+            values=values,
+        ),
     )
 
     yield {
@@ -45,4 +62,3 @@ def objects():
             "type": "Opaque",
         },
     }
- 
