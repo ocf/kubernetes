@@ -102,7 +102,10 @@ def objects():
                         "devices": nucleusDevices,
                         "name": "cytosine",
                     },
-                    {"name": "thymine"},
+                    {
+                        "devices": nucleusDevices,
+                        "name": "thymine",
+                    },
                 ],
                 "useAllDevices": False,
                 "useAllNodes": False,
