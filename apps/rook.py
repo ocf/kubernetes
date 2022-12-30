@@ -273,7 +273,24 @@ def objects():
                             }
                         ]
                     },
-                }
+                },
+                {
+                    "host": "o3.ocf.berkeley.edu",
+                    "http": {
+                        "paths": [
+                            {
+                                "path": "/",
+                                "pathType": "Prefix",
+                                "backend": {
+                                    "service": {
+                                        "name": "rook-ceph-rgw-rgw-hdd",
+                                        "port": {"number": 80},
+                                    }
+                                },
+                            }
+                        ]
+                    },
+                },
             ],
         },
     }
