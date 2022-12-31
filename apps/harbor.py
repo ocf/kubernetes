@@ -1,9 +1,12 @@
 from transpire import helm, surgery
 
+import secrets
+
 from apps.versions import versions
 
 name = "harbor"
 
+harbor_registry_password = secrets.token_urlsafe(16)
 values = {
     "exposureType": "ingress",
     "ingress": {
@@ -35,9 +38,20 @@ values = {
     "externalURL": "https://harbor.ocf.berkeley.edu",
     "forcePassword": True,
 
-    # This helm chart is a little, well, uh... we just override this from Vault.
-    "harborAdminPassword": "nice-try-this-isnt-it",
-    "core": {"secretKey": "aaaaaaaaaaaaaaaa", "secret": "aaaaaaaaaaaaaaaa"},
+    # This helm chart has default passwords like "not-secure-database-password" and "registry_password" so...
+    # I am pretty sure most harbor instances in the wild are vulnerable as a result, which is great and fantastic.
+    "harborAdminPassword": secrets.token_urlsafe(24),
+    # "core": {"secretKey": "aaaaaaaaaaaaaaaa", "secret": "aaaaaaaaaaaaaaaa"},
+    "registry": {
+        "credentials": {
+            "username": "harbor_registry_user",
+            "password": harbor_registry_password,
+            # TODO: This doesn't work, you need to bcrypt.hashpw(password=b'password', salt=bcrypt.gensalt())
+            # ... but we can't depend on bcrypt because it's not in stdlib, so it has to be added to transpire!
+            "htpasswd": f"harbor_registry_user:{harbor_registry_password}",
+        },
+    },
+    "postgresql": {"auth": {"postgresPassword": secrets.token_urlsafe(24)}},
 }
 
 
