@@ -33,6 +33,9 @@ path = "apps/harbor.py"
 [modules.keycloak]
 path = "apps/keycloak.py"
 
+[modules.knative]
+path = "apps/knative.py"
+
 [modules.metallb]
 path = "apps/metallb.py"
 

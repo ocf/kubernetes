@@ -49,6 +49,11 @@ helm = "https://charts.bitnami.com/bitnami"
 version = "11.0.3"
 github = "https://github.com/keycloak/keycloak"
 
+[knative]
+version = "1.8.1"
+github = "https://github.com/knative/operator"
+checksum = "YuOZwu+SqBaKxGKydpnIHx5mYxMI7Nly7QujC0VgLt8="
+
 [metallb]
 version = "4.1.12"
 helm = "https://charts.bitnami.com/bitnami"
