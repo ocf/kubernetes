@@ -58,6 +58,10 @@ checksum = "YuOZwu+SqBaKxGKydpnIHx5mYxMI7Nly7QujC0VgLt8="
 version = "4.1.12"
 helm = "https://charts.bitnami.com/bitnami"
 
+[metrics-server]
+version = "3.8.3"
+helm = "https://kubernetes-sigs.github.io/metrics-server/"
+
 [mycelium]
 version = "0.3.0"
 helm = "https://harbor.ocf.berkeley.edu/chartrepo/mycelium"

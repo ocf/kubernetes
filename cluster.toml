@@ -39,6 +39,9 @@ path = "apps/knative.py"
 [modules.metallb]
 path = "apps/metallb.py"
 
+[modules.metrics-server]
+path = "apps/metrics_server.py"
+
 [modules.outline]
 git = "https://github.com/ocf/outline"
 
