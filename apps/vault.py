@@ -35,6 +35,7 @@ values = {
         },
     },
     "ui": {"enabled": True},
+    "injector": {"enabled": True},
 }
 
 

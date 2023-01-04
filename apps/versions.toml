@@ -75,6 +75,11 @@ version = "43.1.1"
 helm = "https://prometheus-community.github.io/helm-charts"
 chart = "kube-prometheus-stack"
 
+[rabbitmq]
+version = "3.1.5"
+helm = "https://charts.bitnami.com/bitnami"
+chart = "rabbitmq-cluster-operator"
+
 [rook]
 version = "1.10.6"
 helm = "https://charts.rook.io/release"
