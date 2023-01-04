@@ -45,6 +45,21 @@ helm = "https://falcosecurity.github.io/charts"
 version = "16.1.2"
 helm = "https://charts.bitnami.com/bitnami"
 
+[istio-base]
+version = "1.16.1"
+helm = "https://istio-release.storage.googleapis.com/charts"
+chart = "base"
+
+[istio-istiod]
+version = "1.16.1"
+helm = "https://istio-release.storage.googleapis.com/charts"
+chart = "istiod"
+
+[istio-ingress]
+version = "1.16.1"
+helm = "https://istio-release.storage.googleapis.com/charts"
+chart = "gateway"
+
 [keycloak]
 version = "11.0.3"
 github = "https://github.com/keycloak/keycloak"
