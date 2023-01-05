@@ -27,8 +27,14 @@ path = "apps/cilium.py"
 [modules.coredns]
 path = "apps/coredns.py"
 
+[modules.fission]
+path = "apps/fission.py"
+
 [modules.harbor]
 path = "apps/harbor.py"
+
+[modules.keda]
+path = "apps/keda.py"
 
 [modules.keycloak]
 path = "apps/keycloak.py"

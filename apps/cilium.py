@@ -9,8 +9,10 @@ values = {
     "hubble": {
         "tls": {"auto": {"method": "cronJob"}},
         "listenAddress": ":4244",
-        "relay": {"enabled": True},
-        "ui": {"enabled": True},
+        # Turn this on again when we figure out what causes it.
+        # <https://github.com/cilium/cilium/issues/22949>
+        "relay": {"enabled": False},
+        "ui": {"enabled": False},
     },
     "ipam": {
         "mode": "cluster-pool",

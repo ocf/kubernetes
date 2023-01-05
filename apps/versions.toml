@@ -25,7 +25,7 @@ version = "1.10.1"
 helm = "https://charts.jetstack.io"
 
 [cilium]
-version = "1.13.0-rc3"
+version = "1.13.0-rc4"
 helm = "https://helm.cilium.io/"
 
 [coredns]
@@ -41,9 +41,18 @@ chart = "eck-operator"
 version = "1.11.1"
 helm = "https://falcosecurity.github.io/charts"
 
+[fission]
+version = "1.17.0"
+helm = "https://fission.github.io/fission-charts/"
+chart = "fission-all"
+
 [harbor]
 version = "16.1.2"
 helm = "https://charts.bitnami.com/bitnami"
+
+[keda]
+version = "2.9.1"
+helm = "https://kedacore.github.io/charts"
 
 [keycloak]
 version = "11.0.3"
