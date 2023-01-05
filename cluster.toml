@@ -30,17 +30,8 @@ path = "apps/coredns.py"
 [modules.harbor]
 path = "apps/harbor.py"
 
-[modules.istio]
-path = "apps/istio.py"
-
-[modules.istio-ingress]
-path = "apps/istio_ingress.py"
-
 [modules.keycloak]
 path = "apps/keycloak.py"
-
-[modules.knative]
-path = "apps/knative.py"
 
 [modules.metallb]
 path = "apps/metallb.py"
