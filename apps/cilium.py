@@ -9,10 +9,6 @@ values = {
     "hubble": {
         "tls": {"auto": {"method": "cronJob"}},
         "listenAddress": ":4244",
-        # Turn this on again when we figure out what causes it.
-        # <https://github.com/cilium/cilium/issues/22949>
-        "relay": {"enabled": False},
-        "ui": {"enabled": False},
     },
     "ipam": {
         "mode": "cluster-pool",
@@ -46,6 +42,18 @@ values = {
         },
         # first two are default values, we aren't using them as of 2022
         "ingressLBAnnotationPrefixes": ['service.beta.kubernetes.io', 'service.kubernetes.io', 'metallb.universe.tf'],
+    },
+    # <https://github.com/cilium/cilium/issues/22949>
+    "image": {
+        "repository": "quay.io/cilium/cilium-ci",
+        "tag": "0d91314f403cb906426bd6c13a1e5e0839be7df8",
+        "digest": "sha256:f217be397d00865f0c61964ea9be944294b9e8baaf0126185ff940b1433bb510",
+    },
+    # <https://github.com/cilium/cilium/issues/22668>
+    "operator": {
+        "image": {
+            "override": "quay.io/cilium/operator-generic-ci@sha256:a26bcd90fb3b665009aedb551d6efa14e543290441f7402444cad10595ae4a45",
+        },
     },
 }
 
