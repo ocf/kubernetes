@@ -43,7 +43,6 @@ def objects():
                         # These get injected into the Deployment directly, do not use!
                         # "accessKeyId": "replaced-in-vault",
                         # "secretAccessKey": "replaced-in-vault",
-                        "region": "default",
                         "endPoint": "https://o3.ocf.berkeley.edu",
                     },
                 },
