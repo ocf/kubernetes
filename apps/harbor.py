@@ -10,7 +10,7 @@ values = {
     "exposureType": "ingress",
     "ingress": {
         "core": {
-            "ingressClassName": "cilium",
+            "ingressClassName": "contour",
             "hostname": "harbor.ocf.berkeley.edu",
             "annotations": {
                 "cert-manager.io/cluster-issuer": "letsencrypt",
@@ -23,7 +23,7 @@ values = {
             "pathType": "Prefix",
         },
         "notary": {
-            "ingressClassName": "cilium",
+            "ingressClassName": "contour",
             "hostname": "harbor-notary.ocf.berkeley.edu",
             "annotations": {
                 "cert-manager.io/cluster-issuer": "letsencrypt",

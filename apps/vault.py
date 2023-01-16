@@ -21,7 +21,7 @@ def objects():
                     "annotations": {
                         "cert-manager.io/cluster-issuer": "letsencrypt",
                         "ingress.kubernetes.io/force-ssl-redirect": "true",
-                        "kubernetes.io/ingress.class": "cilium",
+                        "kubernetes.io/ingress.class": "contour",
                         "kubernetes.io/tls-acme": "true",
                     },
                     "hosts": [{"host": "vault.ocf.berkeley.edu", "paths": []}],

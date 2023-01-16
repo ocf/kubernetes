@@ -16,7 +16,7 @@ def objects():
                 "replicas": 2,
                 "ingress": {
                     "enabled": True,
-                    "ingressClassName": "cilium",
+                    "ingressClassName": "contour",
                     "hosts": ["argo.ocf.berkeley.edu"],
                     "tls": [
                         {

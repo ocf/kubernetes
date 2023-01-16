@@ -248,7 +248,7 @@ def objects():
             "name": "o3-ingress",
         },
         "spec": {
-            "ingressClassName": "cilium",
+            "ingressClassName": "contour",
             "tls": [
                 {
                     "hosts": ["o3.ocf.io", "o3.ocf.berkeley.edu"],
