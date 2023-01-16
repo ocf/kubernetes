@@ -1,16 +1,13 @@
 from typing import Generator
 
 from transpire import helm
-
-from apps.versions import versions
+from transpire.utils import get_versions
 
 name = "argo-events"
 
 
 def objects() -> Generator[dict, None, None]:
-    # TODO: Create argo-events namespace.
-
     yield from helm.build_chart_from_versions(
         name="argo-events",
-        versions=versions,
+        versions=get_versions(__file__),
     )

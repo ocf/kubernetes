@@ -1,7 +1,6 @@
 from transpire import helm
 from transpire.surgery import edit_manifests
-
-from apps.versions import versions
+from transpire.utils import get_versions
 
 values = {
     "clusterName": "tele.ocf.io",
@@ -47,7 +46,7 @@ def objects():
         },
         helm.build_chart_from_versions(
             name="teleport",
-            versions=versions,
+            versions=get_versions(__file__),
             values=values,
         ),
     )

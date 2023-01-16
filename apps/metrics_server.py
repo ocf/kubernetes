@@ -1,8 +1,7 @@
 from typing import Generator
 
 from transpire import helm
-
-from apps.versions import versions
+from transpire.utils import get_versions
 
 name = "metrics-server"
 
@@ -13,5 +12,5 @@ def objects() -> Generator[dict, None, None]:
     # <https://artifacthub.io/packages/helm/metrics-server/metrics-server>
     yield from helm.build_chart_from_versions(
         name=name,
-        versions=versions,
+        versions=get_versions(__file__),
     )

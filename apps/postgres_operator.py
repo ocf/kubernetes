@@ -1,6 +1,5 @@
 from transpire import helm
-
-from apps.versions import versions
+from transpire.utils import get_versions
 
 name = "postgres-operator"
 
@@ -8,7 +7,7 @@ name = "postgres-operator"
 def objects():
     yield from helm.build_chart_from_versions(
         name=name,
-        versions=versions,
+        versions=get_versions(__file__),
         values={
             "image": {
                 "tag": "v1.8.2-43-g3e148ea5",

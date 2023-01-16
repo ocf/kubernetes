@@ -1,6 +1,5 @@
 from transpire import helm
-
-from apps.versions import versions
+from transpire.utils import get_versions
 
 name = "metallb"
 
@@ -27,10 +26,9 @@ method = {
 def objects():
     yield from helm.build_chart_from_versions(
         name="metallb",
-        versions=versions,
+        versions=get_versions(__file__),
         values={},
     )
 
     yield pool
     yield method
-

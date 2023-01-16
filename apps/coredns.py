@@ -1,6 +1,5 @@
 from transpire import helm
-
-from apps.versions import versions
+from transpire.utils import get_versions
 
 values = {
     "serviceAccount": {"create": True},
@@ -14,9 +13,10 @@ values = {
 name = "coredns"
 namespace = "kube-system"
 
+
 def objects():
     yield from helm.build_chart_from_versions(
         name="coredns",
-        versions=versions,
+        versions=get_versions(__file__),
         values=values,
     )

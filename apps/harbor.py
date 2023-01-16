@@ -1,8 +1,7 @@
-from transpire import helm, surgery
-
 import secrets
 
-from apps.versions import versions
+from transpire import helm, surgery
+from transpire.utils import get_versions
 
 name = "harbor"
 
@@ -37,7 +36,6 @@ values = {
     },
     "externalURL": "https://harbor.ocf.berkeley.edu",
     "forcePassword": True,
-
     # This helm chart has default passwords like "not-secure-database-password" and "registry_password" so...
     # I am pretty sure most harbor instances in the wild are vulnerable as a result, which is great and fantastic.
     "harborAdminPassword": secrets.token_urlsafe(24),
@@ -70,11 +68,11 @@ def strip_secret_checksum(m):
 
 
 def objects():
-        yield from [
-            strip_secret_checksum(m)
-            for m in helm.build_chart_from_versions(
-                name="harbor",
-                versions=versions,
-                values=values,
-            )
-        ]
+    yield from [
+        strip_secret_checksum(m)
+        for m in helm.build_chart_from_versions(
+            name="harbor",
+            versions=get_versions(__file__),
+            values=values,
+        )
+    ]

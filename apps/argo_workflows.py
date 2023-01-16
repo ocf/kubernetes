@@ -1,8 +1,7 @@
 from typing import Generator
 
 from transpire import helm
-
-from apps.versions import versions
+from transpire.utils import get_versions
 
 name = "argo-workflows"
 
@@ -12,5 +11,5 @@ def objects() -> Generator[dict, None, None]:
 
     yield from helm.build_chart_from_versions(
         name="argo-workflows",
-        versions=versions,
+        versions=get_versions(__file__),
     )

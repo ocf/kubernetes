@@ -1,6 +1,5 @@
 from transpire import helm
-
-from apps.versions import versions
+from transpire.utils import get_versions
 
 name = "vault-secrets-operator"
 values = {
@@ -10,9 +9,10 @@ values = {
     },
 }
 
+
 def objects():
     yield from helm.build_chart_from_versions(
         name="vault-secrets-operator",
-        versions=versions,
+        versions=get_versions(__file__),
         values=values,
     )
