@@ -27,6 +27,9 @@ path = "apps/cilium.py"
 [modules.coredns]
 path = "apps/coredns.py"
 
+[modules.contour]
+path = "apps/contour.py"
+
 [modules.fission]
 path = "apps/fission.py"
 

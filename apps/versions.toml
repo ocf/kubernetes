@@ -28,6 +28,10 @@ helm = "https://charts.jetstack.io"
 version = "1.13.0-rc4"
 helm = "https://helm.cilium.io/"
 
+[contour]
+version = "10.1.3"
+helm = "https://charts.bitnami.com/bitnami"
+
 [coredns]
 version = "1.19.7"
 helm = "https://coredns.github.io/helm"
