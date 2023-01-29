@@ -23,11 +23,18 @@ def objects():
                     "clusterPoolIPv6PodCIDRList": ["2607:f140:8801:1::/112"],
                 },
             },
-            "bpf": {
-                "masquerade": True,
-            },
+            # "bpf": {
+            #     "masquerade": True,
+            # },
             # needed for bpf masquerade
-            "enableIPv6Masquerade": False,
+            # "enableIPv6Masquerade": False,
+            "tunnel": "disabled",
+            "autoDirectNodeRoutes": True,
+            "endpointRoutes": {
+                "enabled": True,
+            },
+            "ipv4NativeRoutingCIDR": "10.244.0.0/16",
+            "ipv6NativeRoutingCIDR": "2607:f140:8801:1::/112",
             "ipv6": {
                 "enabled": True,
             },
