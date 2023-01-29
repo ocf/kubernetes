@@ -42,6 +42,9 @@ path = "apps/keda.py"
 [modules.keycloak]
 path = "apps/keycloak.py"
 
+[modules.kubevirt]
+path = "apps/kubevirt.py"
+
 [modules.metallb]
 path = "apps/metallb.py"
 
