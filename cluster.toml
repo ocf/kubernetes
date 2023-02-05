@@ -1,5 +1,7 @@
 apiVersion = "v1"
 
+[defaults]
+
 [secrets]
 provider = "vault"
 

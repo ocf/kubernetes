@@ -9,12 +9,12 @@ def objects():
     # Secret to allow cert-manager to create DNS01 entries in BIND.
     tsig_secret = "ocf-tsig"
     tsig_key = "key"
-    yield Secret.simple(
+    yield Secret(
         name="ocf-tsig",
         string_data={
             tsig_key: "",
         },
-    )
+    ).build()
 
     def make_le_issuer(name: str, endpoint: str) -> dict:
         return {

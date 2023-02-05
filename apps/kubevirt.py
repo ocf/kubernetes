@@ -9,7 +9,6 @@ name = "kubevirt"
 
 def objects() -> Generator[dict, None, None]:
     version = get_versions(__file__)[name]["version"]
-    print(version)
     yield from yaml.safe_load_all(
         requests.get(
             f"https://github.com/kubevirt/kubevirt/releases/download/{version}/kubevirt-operator.yaml"

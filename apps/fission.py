@@ -11,13 +11,13 @@ def objects():
     # kubectl create -k "github.com/fission/fission/crds/v1?ref=v1.17.0"
 
     s3_secret = "storage-s3-key"
-    yield Secret.simple(
+    yield Secret(
         name=s3_secret,
         string_data={
             "STORAGE_S3_ACCESS_KEY_ID": "",
             "STORAGE_S3_SECRET_ACCESS_KEY": "",
         },
-    )
+    ).build()
 
     def inject_secrets(storagesvc: dict) -> dict:
         envs = storagesvc["spec"]["template"]["spec"]["containers"][0]["env"]
