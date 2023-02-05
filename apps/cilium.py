@@ -15,13 +15,13 @@ def objects():
             "hubble": {
                 "tls": {"auto": {"method": "cronJob"}},
                 "listenAddress": ":4244",
+                "relay": {"enabled": True},
+                "ui": {"enabled": True},
             },
             "ipam": {
-                "mode": "cluster-pool",
-                "operator": {
-                    "clusterPoolIPv4PodCIDRList": ["10.244.0.0/16"],
-                    "clusterPoolIPv6PodCIDRList": ["2607:f140:8801:1::/112"],
-                },
+                "mode": "kubernetes",
+                "requireIPv4PodCIDR": True,
+                "requireIPv6PodCIDR": True,
             },
             # "bpf": {
             #     "masquerade": True,
@@ -30,6 +30,10 @@ def objects():
             # "enableIPv6Masquerade": False,
             "tunnel": "disabled",
             "autoDirectNodeRoutes": True,
+            "loadBalancer": {
+                "mode": "hybrid",
+                "acceleration": "native",
+            },
             "endpointRoutes": {
                 "enabled": True,
             },
