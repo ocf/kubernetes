@@ -71,6 +71,9 @@ path = "apps/rook.py"
 [modules.teleport]
 path = "apps/teleport.py"
 
+[modules.transpire]
+git = "https://github.com/ocf/transpire"
+
 [modules.vault]
 path = "apps/vault.py"
 
