@@ -98,7 +98,7 @@ helm = "https://charts.rook.io/release"
 chart = "rook-ceph"
 
 [teleport]
-version = "11.1.4"
+version = "12.1.1"
 helm = "https://charts.releases.teleport.dev"
 chart = "teleport-cluster"
 
