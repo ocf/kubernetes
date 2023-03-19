@@ -40,6 +40,7 @@ def objects():
                 "metrics": {"enabled": True, "serviceMonitor": {"enabled": True}}
             }
         },
+
     )
 
     yield pool
