@@ -37,6 +37,7 @@ values = {
             "hosts": ["prom.ocf.berkeley.edu"],
             "tls": [{"hosts": ["prom.ocf.berkeley.edu"], "secretName": "prom-tls"}],
         },
+        "prometheusSpec": {"serviceMonitorSelectorNilUsesHelmValues": False},
     },
     "grafana": {
         "ingress": {
@@ -56,7 +57,5 @@ values = {
 
 def objects():
     yield from helm.build_chart_from_versions(
-        name="prometheus",
-        versions=get_versions(__file__),
-        values=values,
+        name="prometheus", versions=get_versions(__file__), values=values,
     )
