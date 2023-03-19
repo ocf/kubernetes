@@ -35,7 +35,7 @@ def objects():
     yield from helm.build_chart_from_versions(
         name="metallb",
         versions=get_versions(__file__),
-        values={},
+        values={"controller": {"metrics": {"enabled": True}}},
     )
 
     yield pool
