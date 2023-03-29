@@ -188,7 +188,7 @@ def objects():
         "apiVersion": "storage.k8s.io/v1",
         "kind": "StorageClass",
         "metadata": {"name": "cephfs-nvme"},
-        "provisioner": "rook-ceph.cephfs.csi.ceph.com",
+        "provisioner": "rook.cephfs.csi.ceph.com",
         "parameters": {
             "clusterID": "rook",
             "fsName": "cephfs-hybrid",
@@ -207,7 +207,7 @@ def objects():
         "apiVersion": "storage.k8s.io/v1",
         "kind": "StorageClass",
         "metadata": {"name": "cephfs-hdd"},
-        "provisioner": "rook-ceph.cephfs.csi.ceph.com",
+        "provisioner": "rook.cephfs.csi.ceph.com",
         "parameters": {
             "clusterID": "rook",
             "fsName": "cephfs-hybrid",
