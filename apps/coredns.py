@@ -8,6 +8,14 @@ values = {
     "service": {
         "clusterIP": "10.96.0.10",
     },
+    "prometheus":{
+        "service": {
+            "enabled": True,
+        },
+        "monitor": {
+            "enabled": True,
+        },
+    },
 }
 
 name = "coredns"

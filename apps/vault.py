@@ -78,10 +78,24 @@ def objects():
                 "ha": {
                     "enabled": True,
                     "replicas": 3,
-                    "raft": {"enabled": True, "setNodeId": True},
+                    "raft": {
+                        "enabled": True, 
+                        "setNodeId": True, 
+                        # for metrics, as recommended by the spec https://artifacthub.io/packages/helm/hashicorp/vault?modal=values&path=serverTelemetry.serviceMonitor
+                        "config": 
+                            r'listener "tcp" { "telemetry" { "unauthenticated_metrics_access" = "true"}}'
+                    },
+                    # for metrics, as recommended by the spec https://artifacthub.io/packages/helm/hashicorp/vault?modal=values&path=serverTelemetry.serviceMonitor
+                    "config": 
+                        r'"telemetry" { "prometheus_retention_time" = "30s", "disable_hostname" = "true"}'
                 },
             },
             "ui": {"enabled": True},
             "injector": {"enabled": True},
+            "serverTelemetry": {
+                "serviceMonitor": {
+                    "enabled": True,
+                },
+            },
         },
     )

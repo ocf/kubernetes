@@ -55,6 +55,12 @@ def objects():
         versions=get_versions(__file__),
         values={
             "installCRDs": True,
+            "prometheus": {
+                "enabled": True,
+                "servicemonitor": {
+                    "enabled": True,
+                },
+            },
         },
     )
 

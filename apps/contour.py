@@ -17,5 +17,10 @@ def objects():
                     "ipFamilyPolicy": "PreferDualStack",
                 },
             },
+            "metrics": {
+                "serviceMonitor": {
+                    "enabled": True,
+                }
+            },
         },
     )

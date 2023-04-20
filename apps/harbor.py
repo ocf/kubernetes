@@ -50,6 +50,12 @@ values = {
         },
     },
     "postgresql": {"auth": {"postgresPassword": secrets.token_urlsafe(24)}},
+    "metrics": {
+        "enabled": True,
+        "serviceMonitor": {
+            "enabled": True,
+        },
+    }
 }
 
 
