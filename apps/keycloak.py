@@ -1,5 +1,7 @@
 import requests
 import yaml
+from transpire import helm
+from transpire.utils import get_versions
 
 name = "keycloak"
 base_url = (
@@ -34,3 +36,15 @@ def objects():
     for path in paths:
         yield from yaml.safe_load_all(requests.get(base_url.format(path)).text)
     yield settings
+    yield from helm.build_chart_from_versions(
+        name=name,
+        versions=get_versions(__file__),
+        values={
+            "metrics": {
+                "enabled": True,
+                "serviceMonitor": {
+                    "enabled": True,
+                },
+            },
+        },
+    )

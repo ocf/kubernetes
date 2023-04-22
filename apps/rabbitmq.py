@@ -26,6 +26,12 @@ def objects() -> Generator[dict, None, None]:
             },
         },
         "useCertManager": True,
+        "metrics": {
+                "enabled": True,
+            },
+            "serviceMonitor": {
+                "enabled": True,
+            },
     }
     yield from helm.build_chart_from_versions(
         name=name,

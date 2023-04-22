@@ -11,7 +11,15 @@ def objects():
         versions=get_versions(__file__),
         values={
             "redis-ha": {"enabled": True},
-            "controller": {"replicas": 1},
+            "controller": {
+                "replicas": 1,
+                "metrics": {
+                    "enabled": True,
+                    "serviceMonitor": {
+                        "enabled": True,
+                    },
+                },
+            },
             "server": {
                 "replicas": 2,
                 "ingress": {
