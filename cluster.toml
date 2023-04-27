@@ -64,6 +64,9 @@ path = "apps/prometheus.py"
 [modules.postgres-operator]
 path = "apps/postgres_operator.py"
 
+[modules.ocf-io]
+path = "apps/ocf_io.py"
+
 [modules.rabbitmq]
 path = "apps/rabbitmq.py"
 
