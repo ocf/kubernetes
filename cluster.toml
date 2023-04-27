@@ -46,6 +46,9 @@ path = "apps/keda.py"
 [modules.kubevirt]
 path = "apps/kubevirt.py"
 
+[modules.labmap]
+git = "https://github.com/ocf/labmap"
+
 [modules.metallb]
 path = "apps/metallb.py"
 
