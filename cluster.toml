@@ -1,6 +1,8 @@
 apiVersion = "v1"
 
 [defaults]
+certManagerIssuer = "letsencrypt"
+ingressClass = "contour"
 
 [secrets]
 provider = "vault"
@@ -41,9 +43,6 @@ path = "apps/harbor.py"
 [modules.keda]
 path = "apps/keda.py"
 
-[modules.keycloak]
-path = "apps/keycloak.py"
-
 [modules.kubevirt]
 path = "apps/kubevirt.py"
 
@@ -70,6 +69,9 @@ path = "apps/rook.py"
 
 [modules.teleport]
 path = "apps/teleport.py"
+
+[modules.templates]
+git = "https://github.com/ocf/templates"
 
 [modules.transpire]
 git = "https://github.com/ocf/transpire"
