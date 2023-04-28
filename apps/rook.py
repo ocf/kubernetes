@@ -313,7 +313,6 @@ def objects():
             "gateway": {
                 "securePort": 443,
                 "port": 80,
-                "sslCertificateRef": crtname,
                 "instances": 1,
             },
             "healthCheck": {"bucket": {"disabled": False, "interval": "120s"}},
