@@ -319,3 +319,15 @@ def objects():
             "healthCheck": {"bucket": {"disabled": False, "interval": "120s"}},
         },
     }
+
+    yield {
+        "apiVersion": "storage.k8s.io/v1",
+        "kind": "StorageClass",
+        "metadata": {"name": "rgw-hdd"},
+        "provisioner": "rook-ceph.ceph.rook.io/bucket",
+        "reclaimPolicy": "Delete",
+        "parameters": {
+            "objectStoreName": "rgw-hdd",
+            "objectStoreNamespace": "rook-ceph",
+        },
+    }
