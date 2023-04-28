@@ -38,6 +38,7 @@ vault-secrets-operator = { path = "apps/vault_secrets_operator.py" }
 
 jukebox = { git = "https://github.com/ocf/jukebox" }
 labmap = { git = "https://github.com/ocf/labmap" }
+notes = { git = "https://github.com/ocf/notes", branch = "transpire" }
 outline = { git = "https://github.com/ocf/outline" }
 templates = { git = "https://github.com/ocf/templates" }
 transpire = { git = "https://github.com/ocf/transpire" }
