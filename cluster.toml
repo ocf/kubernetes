@@ -36,6 +36,7 @@ teleport = { path = "apps/teleport.py" }
 vault = { path = "apps/vault.py" }
 vault-secrets-operator = { path = "apps/vault_secrets_operator.py" }
 
+jukebox = { git = "https://github.com/ocf/jukebox" }
 labmap = { git = "https://github.com/ocf/labmap" }
 outline = { git = "https://github.com/ocf/outline" }
 templates = { git = "https://github.com/ocf/templates" }
