@@ -55,7 +55,14 @@ values = {
         "serviceMonitor": {
             "enabled": True,
         },
-    }
+    },
+    "persistence": {
+        "persistentVolumeClaim": {
+            "registry": {
+                "size": "256Gi",
+            }
+        }
+    },
 }
 
 
