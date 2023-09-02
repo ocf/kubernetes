@@ -23,11 +23,9 @@ def objects():
                 "requireIPv4PodCIDR": True,
                 "requireIPv6PodCIDR": True,
             },
-            # "bpf": {
-            #     "masquerade": True,
-            # },
-            # needed for bpf masquerade
-            # "enableIPv6Masquerade": False,
+            "bpf": {
+                "masquerade": True,
+            },
             "tunnel": "disabled",
             "autoDirectNodeRoutes": True,
             "loadBalancer": {
