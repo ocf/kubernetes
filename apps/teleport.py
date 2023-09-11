@@ -6,18 +6,13 @@ values = {
     "clusterName": "tele.ocf.io",
     "kubeClusterName": "dna.ocf.io",
     "enterprise": True,
-    # "acme": False,
     "highAvailability": {
-        # "replicaCount": 2,
-        # "podDisruptionBudget": {
-        # "enabled": True,
-        # "minAvailable": 1,
-        # },
+        "replicaCount": 1,
         "certManager": {
             "enabled": True,
             "issuerName": "letsencrypt",
             "issuerKind": "ClusterIssuer",
-        }
+        },
     },
     "service": {
         "spec": {
