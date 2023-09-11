@@ -1,3 +1,5 @@
+import json
+
 import yaml
 from transpire import helm
 from transpire.utils import get_versions
@@ -57,6 +59,13 @@ def objects():
                                 "email",
                                 "groups",
                             ],
+                        }
+                    ),
+                    "resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration": json.dumps(
+                        {
+                            "jqPathExpressions": [
+                                ".webhooks[]?.clientConfig.caBundle",
+                            ]
                         }
                     ),
                 },
