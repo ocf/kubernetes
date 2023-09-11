@@ -68,6 +68,13 @@ def objects():
                             ]
                         }
                     ),
+                    "resource.customizations.ignoreDifferences.apiextensions.k8s.io_CustomResourceDefinition": json.dumps(
+                        {
+                            "jqPathExpressions": [
+                                ".spec.conversion.webhook.clientConfig.caBundle",
+                            ]
+                        }
+                    ),
                 },
                 "params": {
                     "server.insecure": True,
