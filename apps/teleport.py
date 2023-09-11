@@ -14,6 +14,11 @@ values = {
             "issuerKind": "ClusterIssuer",
         },
     },
+    "proxy": {
+        "highAvailability": {
+            "replicaCount": 1,
+        },
+    },
     "service": {
         "spec": {
             "loadBalancerIP": "169.229.226.82",
