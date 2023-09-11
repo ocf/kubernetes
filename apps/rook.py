@@ -315,7 +315,6 @@ def objects():
                 "port": 80,
                 "instances": 1,
             },
-            "healthCheck": {"bucket": {"disabled": False, "interval": "120s"}},
         },
     }
 
