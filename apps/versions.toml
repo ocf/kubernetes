@@ -79,7 +79,7 @@ version = "0.3.0"
 helm = "https://harbor.ocf.berkeley.edu/chartrepo/mycelium"
 
 [postgres-operator]
-version = "1.8.2"
+version = "1.10.1"
 helm = "https://opensource.zalando.com/postgres-operator/charts/postgres-operator"
 
 [prometheus]

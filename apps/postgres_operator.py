@@ -8,11 +8,6 @@ def objects():
     yield from helm.build_chart_from_versions(
         name=name,
         versions=get_versions(__file__),
-        values={
-            "image": {
-                "tag": "v1.8.2-43-g3e148ea5",
-            },
-        },
     )
 
     yield {
