@@ -58,10 +58,6 @@ helm = "https://charts.bitnami.com/bitnami"
 version = "2.9.1"
 helm = "https://kedacore.github.io/charts"
 
-[keycloak]
-version = "16.1.1"
-helm = "https://charts.bitnami.com/bitnami"
-
 [kubevirt]
 version = "v0.59.0-alpha.2"
 github = "https://github.com/kubevirt/kubevirt"
