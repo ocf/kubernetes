@@ -299,7 +299,7 @@ helm_values = {
     "auth": {"existingSecret": "keycloak", "existingSecretKey": "admin-password"},
     "production": True,
     "proxy": "edge",
-    "httpRelativePath": "/auth/",
+    "httpRelativePath": "/",
     "replicaCount": 2,
     "ingress": {
         "enabled": True,
