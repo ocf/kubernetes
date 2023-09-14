@@ -300,7 +300,7 @@ helm_values = {
     "production": True,
     "proxy": "edge",
     "httpRelativePath": "/",
-    "replicaCount": 2,
+    "replicaCount": 1,
     "podAnnotations": {
         "vault.hashicorp.com/agent-inject": "true",
         "vault.hashicorp.com/role": "keycloak",
