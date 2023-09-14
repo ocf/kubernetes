@@ -50,7 +50,7 @@ def objects():
                     "oidc.config": yaml.dump(
                         {
                             "name": "Keycloak",
-                            "issuer": "https://auth.ocf.berkeley.edu/auth/realms/ocf",
+                            "issuer": "https://idm.ocf.berkeley.edu/realms/ocf",
                             "clientID": "argocd",
                             "clientSecret": "$oidc.keycloak.clientSecret",
                             "requestedScopes": [

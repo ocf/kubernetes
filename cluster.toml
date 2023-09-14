@@ -24,6 +24,7 @@ contour = { path = "apps/contour.py" }
 fission = { path = "apps/fission.py" }
 harbor = { path = "apps/harbor.py" }
 keda = { path = "apps/keda.py" }
+keycloak = { path = "apps/keycloak.py" }
 kubevirt = { path = "apps/kubevirt.py" }
 metallb = { path = "apps/metallb.py" }
 metrics-server = { path = "apps/metrics_server.py" }
