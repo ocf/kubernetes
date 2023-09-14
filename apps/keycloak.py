@@ -381,7 +381,7 @@ def objects():
             "numberOfInstances": 1,
             "users": {"keycloak": ["superuser", "createdb"]},
             "databases": {"keycloak": "keycloak"},
-            "postgresql": {"version": "14"},
+            "postgresql": {"version": "15"},
         },
     }
 
