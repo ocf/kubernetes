@@ -54,7 +54,7 @@ keycloak_config_cli = {
     "enabled": True,
     "registrationAllowed": False,
     "loginWithEmailAllowed": False,
-    "loginTheme": "ocf-theme",
+    "loginTheme": "keywind",
     "accountTheme": "keycloak.v2",
     "adminTheme": "keycloak.v2",
     "emailTheme": "keycloak",
@@ -314,6 +314,17 @@ helm_values = {
             "`}}"
         ),
     },
+    "initContainers": [
+        {
+            "name": "download-resources",
+            "image": "alpine/git",
+            "command": ["/bin/sh", "-c"],
+            "args": [
+                "mkdir -p /keycloak/themes/keywind && (git -C /keycloak/themes/keywind pull || git clone https://github.com/lukin/keywind /keycloak/themes/keywind)"
+            ],
+            "volumeMounts": [{"name": "keycloak", "mountPath": "/keycloak"}],
+        }
+    ],
     "ingress": {
         "enabled": True,
         "ingressClassName": "contour",
@@ -344,19 +355,20 @@ helm_values = {
         "existingSecretPasswordKey": "password",
     },
     "extraVolumes": [
-        {
-            "name": "krb5-conf",
-            "configMap": {
-                "name": "krb5-conf",
-            },
-        }
+        {"name": "krb5-conf", "configMap": {"name": "krb5-conf"}},
+        {"name": "keycloak", "persistentVolumeClaim": {"claimName": "keycloak"}},
     ],
     "extraVolumeMounts": [
         {
             "name": "krb5-conf",
             "mountPath": "/etc/krb5.conf",
             "subPath": "krb5.conf",
-        }
+        },
+        {
+            "mountPath": "/opt/bitnami/keycloak/themes/keywind",
+            "name": "keycloak",
+            "subPath": "themes/keywind/theme/keywind",
+        },
     ],
 }
 
@@ -367,6 +379,17 @@ def objects():
         "keycloak-config-cli",
         data={"configuration": json.dumps(keycloak_config_cli)},
     ).build()
+
+    yield {
+        "apiVersion": "v1",
+        "kind": "PersistentVolumeClaim",
+        "metadata": {"name": "keycloak"},
+        "spec": {
+            "storageClassName": "rbd-nvme",
+            "accessModes": ["ReadWriteOnce"],
+            "resources": {"requests": {"storage": "2Gi"}},
+        },
+    }
 
     yield {
         "apiVersion": "acid.zalan.do/v1",
