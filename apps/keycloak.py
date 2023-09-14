@@ -153,8 +153,8 @@ keycloak_config_cli = {
                     "changedSyncPeriod": ["86400"],
                     "allowKerberosAuthentication": ["true"],
                     "kerberosRealm": ["OCF.BERKELEY.EDU"],
-                    "serverPrincipal": ["HTTP/lb.ocf.berkeley.edu@OCF.BERKELEY.EDU"],
-                    "keyTab": ["/etc/keytabs/http.keytab"],
+                    "serverPrincipal": ["HTTP/idm.ocf.berkeley.edu@OCF.BERKELEY.EDU"],
+                    "keyTab": ["/vault/secrets/keytab"],
                     "debug": ["true"],
                     "useKerberosForPasswordAuthentication": ["true"],
                     "cachePolicy": ["DEFAULT"],
@@ -301,6 +301,19 @@ helm_values = {
     "proxy": "edge",
     "httpRelativePath": "/",
     "replicaCount": 2,
+    "podAnnotations": {
+        "vault.hashicorp.com/agent-inject": "true",
+        "vault.hashicorp.com/role": "keycloak",
+        "vault.hashicorp.com/service": "https://vault.ocf.berkeley.edu/",
+        "vault.hashicorp.com/agent-inject-secret-keytab": "kvv2/data/keycloak/keycloak",
+        "vault.hashicorp.com/agent-inject-template-keytab": (
+            "{{`"
+            '{{- with secret "kvv2/data/keycloak/keycloak" -}}'
+            "{{ base64Decode .Data.data.keytab }}"
+            "{{- end}}"
+            "`}}"
+        ),
+    },
     "ingress": {
         "enabled": True,
         "ingressClassName": "contour",
