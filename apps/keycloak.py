@@ -40,9 +40,16 @@ clients = [
     oidc_client(
         "hedgedoc",
         name="HedgeDoc",
-        description="Collaborative Markdown Notes",
+        description="Collaborative markdown notes",
         home_url="https://notes.ocf.berkeley.edu/",
         redirect_uris=["https://notes.ocf.berkeley.edu/auth/oauth2/callback"],
+    ),
+    oidc_client(
+        "outline",
+        name="Outline",
+        description="Team knowledge base & wiki",
+        home_url="https://docs.ocf.berkeley.edu/",
+        redirect_uris=["https://docs.ocf.berkeley.edu/auth/oidc.callback"],
     ),
 ]
 
