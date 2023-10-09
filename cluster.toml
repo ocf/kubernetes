@@ -42,6 +42,7 @@ etc = { git = "https://github.com/ocf/etc" }
 jukebox = { git = "https://github.com/ocf/jukebox" }
 labmap = { git = "https://github.com/ocf/labmap" }
 notes = { git = "https://github.com/ocf/notes" }
+ocfstatic = { git = "https://github.com/ocf/ocfstatic" }
 ocfweb = { git = "https://github.com/ocf/ocfweb" }
 outline = { git = "https://github.com/ocf/outline" }
 templates = { git = "https://github.com/ocf/templates" }
