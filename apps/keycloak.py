@@ -51,6 +51,13 @@ clients = [
         home_url="https://docs.ocf.berkeley.edu/",
         redirect_uris=["https://docs.ocf.berkeley.edu/auth/oidc.callback"],
     ),
+    oidc_client(
+        "id6",
+        name="id6",
+        description="Identification linking engine",
+        home_url="https://github.com/ocf/id6",
+        redirect_uris=["https://discord.ocf.berkeley.edu/*"],
+    ),
 ]
 
 keycloak_config_cli = {
