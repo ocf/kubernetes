@@ -14,6 +14,7 @@ def oidc_client(
     description: str,
     home_url: str,
     redirect_uris: list[str],
+    extra: dict[str, str] = {},
 ):
     return {
         "clientId": client_id,
@@ -26,6 +27,7 @@ def oidc_client(
         "publicClient": False,
         "protocol": "openid-connect",
         "enabled": True,
+        **extra,
     }
 
 
@@ -57,6 +59,20 @@ clients = [
         description="Identification linking engine",
         home_url="https://github.com/ocf/id6",
         redirect_uris=["https://discord.ocf.berkeley.edu/*"],
+        extra={
+            "protocolMappers": [
+                {
+                    "name": "audience",
+                    "protocol": "openid-connect",
+                    "protocolMapper": "oidc-audience-mapper",
+                    "config": {
+                        "included.client.audience": "id6",
+                        "id.token.claim": "false",
+                        "access.token.claim": "true",
+                    },
+                }
+            ]
+        },
     ),
 ]
 
