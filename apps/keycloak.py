@@ -74,6 +74,13 @@ clients = [
             ]
         },
     ),
+    oidc_client(
+        "macwiitl",
+        name="MacWiitl",
+        description="WIITL Laptop Extension",
+        home_url="https://macwiitl.ocf.berkeley.edu/",
+        redirect_uris=["https://macwiitl.ocf.berkeley.edu/oauth2-callback"],
+    ),
 ]
 
 keycloak_config_cli = {
