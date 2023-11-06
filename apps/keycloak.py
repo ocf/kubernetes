@@ -89,6 +89,8 @@ keycloak_config_cli = {
     "displayName": "OCF",
     "sslRequired": "all",
     "enabled": True,
+    "ssoSessionIdleTimeout": 1800,
+    "ssoSessionMaxLifespan": 36000,
     "registrationAllowed": False,
     "loginWithEmailAllowed": False,
     "loginTheme": "keywind",
