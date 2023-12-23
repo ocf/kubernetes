@@ -6,17 +6,17 @@
 # Cluster Services & Core Applications
 
 [argocd]
-version = "5.45.0"
+version = "5.51.6"
 helm = "https://argoproj.github.io/argo-helm"
 chart = "argo-cd"
 
 [argo-workflows]
-version = "0.22.0"
+version = "0.40.1"
 helm = "https://argoproj.github.io/argo-helm"
 chart = "argo-workflows"
 
 [argo-events]
-version = "2.0.6"
+version = "2.4.1"
 helm = "https://argoproj.github.io/argo-helm"
 chart = "argo-events"
 
