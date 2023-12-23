@@ -47,7 +47,7 @@ def objects():
                 "livenessProbe": {"enabled": False, "initialDelaySeconds": 60},
                 "auditStorage": {"enabled": True, "storageClass": "rbd-nvme"},
                 "dataStorage": {"storageClass": "rbd-nvme"},
-                "image": {"tag": "1.12.2"},
+                # "image": {"tag": "1.12.2"},
                 "ingress": {
                     "enabled": True,
                     "annotations": {
@@ -81,13 +81,7 @@ def objects():
                     "raft": {
                         "enabled": True, 
                         "setNodeId": True, 
-                        # for metrics, as recommended by the spec https://artifacthub.io/packages/helm/hashicorp/vault?modal=values&path=serverTelemetry.serviceMonitor
-                        "config": 
-                            r'listener "tcp" { "telemetry" { "unauthenticated_metrics_access" = "true"}}'
                     },
-                    # for metrics, as recommended by the spec https://artifacthub.io/packages/helm/hashicorp/vault?modal=values&path=serverTelemetry.serviceMonitor
-                    "config": 
-                        r'"telemetry" { "prometheus_retention_time" = "30s", "disable_hostname" = "true"}'
                 },
             },
             "ui": {"enabled": True},
