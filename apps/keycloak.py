@@ -81,6 +81,13 @@ clients = [
         home_url="https://macwiitl.ocf.berkeley.edu/",
         redirect_uris=["https://macwiitl.ocf.berkeley.edu/oauth2-callback"],
     ),
+    oidc_client(
+        "jenkins",
+        name="Jenkins",
+        description="Open source automation server",
+        home_url="https://jenkins.ocf.berkeley.edu/",
+        redirect_uris=["https://jenkins.ocf.berkeley.edu/securityRealm/finishLogin"],
+    ),
 ]
 
 keycloak_config_cli = {
