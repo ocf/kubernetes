@@ -15,6 +15,19 @@ values = {
                 },
             ],
         },
+        {
+            "name": "velero-plugin-for-aws",
+            # for S3-compatible API
+            "image": "velero/velero-plugin-for-aws:v1.9.0",
+            "imagePullPolicy": "IfNotPresent",
+            "volumeMounts": [
+                {
+                    "mountPath": "/target",
+                    "name": "plugins",
+                },
+            ],
+        },
+
     ],
     "configuration": {
         "backupStorageLocation": [],
