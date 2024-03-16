@@ -45,7 +45,13 @@ values = {
                 },
             }
         ],
-        "volumeSnapshotLocation": [],
+        "volumeSnapshotLocation": [
+            {
+                "name": "default",
+                "provider": "csi",
+            }
+        ],
+        "features": "EnableCSI",
     },
 }
 
