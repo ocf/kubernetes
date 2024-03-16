@@ -152,6 +152,19 @@ def objects():
         "reclaimPolicy": "Delete",
     }
 
+    yield {
+        "apiVersion": "snapshot.storage.k8s.io/v1",
+        "kind": "VolumeSnapshotClass",
+        "metadata": {"name": "csi-rbdplugin-snapclass"},
+        "driver": "rook.rbd.csi.ceph.com",
+        "parameters": {
+            "clusterID": "rook",
+            "csi.storage.k8s.io/snapshotter-secret-name": "rook-csi-rbd-provisioner",
+            "csi.storage.k8s.io/snapshotter-secret-namespace": "rook",
+        },
+        "deletionPolicy": "Delete",
+    }
+
     ###############
     # Filesystems #
     ###############
@@ -220,6 +233,19 @@ def objects():
             "csi.storage.k8s.io/node-stage-secret-namespace": "rook",
         },
         "reclaimPolicy": "Delete",
+    }
+
+    yield {
+        "apiVersion": "snapshot.storage.k8s.io/v1",
+        "kind": "VolumeSnapshotClass",
+        "metadata": {"name": "csi-cephfsplugin-snapclass"},
+        "driver": "rook.cephfs.csi.ceph.com",
+        "parameters": {
+            "clusterID": "rook",
+            "csi.storage.k8s.io/snapshotter-secret-name": "rook-csi-cephfs-provisioner",
+            "csi.storage.k8s.io/snapshotter-secret-namespace": "rook",
+        },
+        "deletionPolicy": "Delete",
     }
 
     ##################
