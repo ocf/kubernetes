@@ -53,6 +53,22 @@ values = {
         ],
         "features": "EnableCSI",
     },
+    "nodeAgent": {
+        # The defaults are way too low, they cause OOM Kills
+        # when backing up larger PVs. These are probably(?)
+        # too high but we have a lot of spare compute so I'm
+        # just going to leave it as is.
+        "resources": {
+            "requests": {
+                "cpu": "2000m",
+                "memory": "8Gi",
+            },
+            "limits": {
+                "cpu": "4000m",
+                "memory": "16Gi",
+            }
+        },
+    },
 }
 
 
