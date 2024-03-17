@@ -33,7 +33,7 @@ version = "17.0.0"
 helm = "https://charts.bitnami.com/bitnami"
 
 [coredns]
-version = "1.26.0"
+version = "1.29.0"
 helm = "https://coredns.github.io/helm"
 
 [elastic]
