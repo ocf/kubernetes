@@ -21,7 +21,7 @@ helm = "https://argoproj.github.io/argo-helm"
 chart = "argo-events"
 
 [cert-manager]
-version = "1.12.4"
+version = "v1.14.4"
 helm = "https://charts.jetstack.io"
 
 [cilium]
