@@ -29,7 +29,7 @@ version = "1.14.6"
 helm = "https://helm.cilium.io/"
 
 [contour]
-version = "12.6.0"
+version = "17.0.0"
 helm = "https://charts.bitnami.com/bitnami"
 
 [coredns]
