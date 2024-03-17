@@ -13,6 +13,9 @@ def objects():
         versions=get_versions(__file__),
         values={
             "redis-ha": {"enabled": True},
+            "global": {
+                "domain": "argo.ocf.berkeley.edu",
+            },
             "controller": {
                 "replicas": 1,
                 "metrics": {
