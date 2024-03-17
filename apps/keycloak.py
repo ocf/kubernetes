@@ -200,7 +200,7 @@ keycloak_config_cli = {
                     "changedSyncPeriod": ["86400"],
                     "allowKerberosAuthentication": ["true"],
                     "kerberosRealm": ["OCF.BERKELEY.EDU"],
-                    "serverPrincipal": ["HTTP/idm.ocf.berkeley.edu@OCF.BERKELEY.EDU"],
+                    "serverPrincipal": ["HTTP/lb-81.ocf.berkeley.edu@OCF.BERKELEY.EDU"],
                     "keyTab": ["/vault/secrets/keytab"],
                     "debug": ["true"],
                     "useKerberosForPasswordAuthentication": ["true"],
