@@ -16,6 +16,7 @@ def objects():
                     },
                     "ipFamilyPolicy": "PreferDualStack",
                 },
+                "resourcesPreset": "large", # otherwise it OOMs
             },
             "metrics": {
                 "serviceMonitor": {
