@@ -53,6 +53,22 @@ values = {
         ],
         "features": "EnableCSI",
     },
+    "schedules": {
+        "daily": {
+            "disabled": False,
+            # We run our servers with daylight savings time
+            # and 4 AM never happens twice
+            "schedule": "4 0 * * *",
+            # If this is true, deleting this schedule will
+            # delete all the backups, which is bad!
+            "useOwnerReferencesInBackup": False,
+            "template": {
+                # Specify nothing else so it backs up everything.
+                # We can also exclude some namespaces if needed.
+                "ttl": "168h",  # 7 days
+            },
+        }
+    },
     "nodeAgent": {
         # The defaults are way too low, they cause OOM Kills
         # when backing up larger PVs. These are probably(?)
@@ -66,7 +82,7 @@ values = {
             "limits": {
                 "cpu": "4000m",
                 "memory": "16Gi",
-            }
+            },
         },
     },
 }
@@ -89,4 +105,3 @@ def objects():
         versions=get_versions(__file__),
         values=values,
     )
-
