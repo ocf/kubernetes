@@ -16,6 +16,6 @@ def objects():
         "metadata": {"name": "nginx-gvisor"},
         "spec": {
             "runtimeClassName": "gvisor",
-            "containers": [{"name": "nginx", "image": "nginx"}],
+            "containers": [{"name": "nginx", "image": "docker.io/nginx"}],
         },
     }
