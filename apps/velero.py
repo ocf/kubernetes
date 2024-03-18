@@ -58,7 +58,8 @@ values = {
             "disabled": False,
             # We run our servers with daylight savings time
             # and 4 AM never happens twice
-            "schedule": "4 0 * * *",
+            # TODO: This might not be California time? It could be UTC.
+            "schedule": "0 4 * * *",
             # If this is true, deleting this schedule will
             # delete all the backups, which is bad!
             "useOwnerReferencesInBackup": False,
