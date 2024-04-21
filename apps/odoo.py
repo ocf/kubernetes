@@ -44,6 +44,8 @@ def objects():
             # "smtpPort": "587",
             # "smtpUser": "ocfodoo",
 
+            "command": ["/bin/sh", "-c", "chmod -R 777 /root && /opt/bitnami/scripts/odoo/entrypoint.sh /opt/bitnami/scripts/odoo/run.sh"],
+
             # Ingress
             "ingress": {
                 "enabled": True,
