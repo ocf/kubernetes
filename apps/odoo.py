@@ -37,6 +37,7 @@ def objects():
                 "database": "odoo",
                 "existingSecret": "odoo.ocf-odoo-db.credentials.postgresql.acid.zalan.do",
                 "existingSecretPasswordKey": "password",
+                "create": False,
             },
             # Mail
             "smtpHost": "smtp.ocf.berkeley.edu",
