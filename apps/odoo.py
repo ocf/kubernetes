@@ -41,6 +41,9 @@ def objects():
             },
             # Mail
             "smtpHost": "smtp.ocf.berkeley.edu",
+            "smtpPort": "587",
+            "smtpUser": "ocfodoo",
+
             # Ingress
             "ingress": {
                 "enabled": True,
