@@ -32,6 +32,7 @@ metrics-server = { path = "apps/metrics_server.py" }
 prometheus = { path = "apps/prometheus.py" }
 postgres-operator = { path = "apps/postgres_operator.py" }
 ocf-io = { path = "apps/ocf_io.py" }
+odoo = { path = "apps/odoo.py" }
 rabbitmq = { path = "apps/rabbitmq.py" }
 rook = { path = "apps/rook.py" }
 snapshot-controller = { path = "apps/snapshot_controller.py" }
@@ -51,3 +52,4 @@ ocfweb = { git = "https://github.com/ocf/ocfweb" }
 outline = { git = "https://github.com/ocf/outline" }
 templates = { git = "https://github.com/ocf/templates" }
 transpire = { git = "https://github.com/ocf/transpire" }
+

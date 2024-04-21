@@ -78,6 +78,10 @@ helm = "https://kubernetes-sigs.github.io/metrics-server/"
 version = "0.3.0"
 helm = "https://harbor.ocf.berkeley.edu/chartrepo/mycelium"
 
+[odoo]
+version = "26.0.0"
+helm = "https://charts.bitnami.com/bitnami"
+
 [postgres-operator]
 version = "1.10.1"
 helm = "https://opensource.zalando.com/postgres-operator/charts/postgres-operator"
