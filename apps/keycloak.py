@@ -88,6 +88,13 @@ clients = [
         home_url="https://jenkins.ocf.berkeley.edu/",
         redirect_uris=["https://jenkins.ocf.berkeley.edu/securityRealm/finishLogin"],
     ),
+    oidc_client(
+        "ergo",
+        name="Ergo",
+        description="IRC server",
+        home_url="https://irc-dev.ocf.berkeley.edu/",
+        redirect_uris=["https://irc-dev.ocf.berkeley.edu/*"],
+    )
 ]
 
 keycloak_config_cli = {
