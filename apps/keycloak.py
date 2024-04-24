@@ -92,9 +92,12 @@ clients = [
         "ergo",
         name="Ergo",
         description="IRC server",
-        home_url="https://irc-dev.ocf.berkeley.edu/",
-        redirect_uris=["https://irc-dev.ocf.berkeley.edu/*"],
-    )
+        home_url="https://irc.ocf.berkeley.edu/",
+        redirect_uris=["https://irc.ocf.berkeley.edu/*"],
+        extra={
+            "implicitFlowEnabled": True,
+        },
+    ),
 ]
 
 keycloak_config_cli = {
