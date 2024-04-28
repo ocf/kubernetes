@@ -112,7 +112,7 @@ repo_url = "https://github.com/kubernetes-csi/external-snapshotter.git/"
 path = "client/config/crd"
 
 [teleport]
-version = "14.2.4"
+version = "15.2.5"
 helm = "https://charts.releases.teleport.dev"
 chart = "teleport-cluster"
 
