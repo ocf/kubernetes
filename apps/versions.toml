@@ -87,7 +87,7 @@ version = "1.10.1"
 helm = "https://opensource.zalando.com/postgres-operator/charts/postgres-operator"
 
 [prometheus]
-version = "43.1.1"
+version = "58.2.2"
 helm = "https://prometheus-community.github.io/helm-charts"
 chart = "kube-prometheus-stack"
 
