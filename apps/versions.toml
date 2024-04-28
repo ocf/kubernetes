@@ -83,7 +83,7 @@ version = "26.0.0"
 helm = "https://charts.bitnami.com/bitnami"
 
 [postgres-operator]
-version = "1.10.1"
+version = "1.11.0"
 helm = "https://opensource.zalando.com/postgres-operator/charts/postgres-operator"
 
 [prometheus]
