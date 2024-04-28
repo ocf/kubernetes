@@ -36,15 +36,6 @@ helm = "https://charts.bitnami.com/bitnami"
 version = "1.29.0"
 helm = "https://coredns.github.io/helm"
 
-[elastic]
-version = "2.12.1"
-helm = "https://helm.elastic.co"
-chart = "eck-operator"
-
-[falco]
-version = "4.3.0"
-helm = "https://falcosecurity.github.io/charts"
-
 [fission]
 version = "1.20.1"
 helm = "https://fission.github.io/fission-charts/"
@@ -73,14 +64,6 @@ helm = "https://charts.bitnami.com/bitnami"
 [metrics-server]
 version = "3.12.1"
 helm = "https://kubernetes-sigs.github.io/metrics-server/"
-
-[mycelium]
-version = "0.3.0"
-helm = "https://harbor.ocf.berkeley.edu/chartrepo/mycelium"
-
-[odoo]
-version = "26.0.0"
-helm = "https://charts.bitnami.com/bitnami"
 
 [postgres-operator]
 version = "1.11.0"
