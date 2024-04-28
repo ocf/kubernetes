@@ -71,7 +71,7 @@ version = "6.1.2"
 helm = "https://charts.bitnami.com/bitnami"
 
 [metrics-server]
-version = "3.8.3"
+version = "3.12.1"
 helm = "https://kubernetes-sigs.github.io/metrics-server/"
 
 [mycelium]
