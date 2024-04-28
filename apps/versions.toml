@@ -67,7 +67,7 @@ version = "v0.59.0-alpha.2"
 github = "https://github.com/kubevirt/kubevirt"
 
 [metallb]
-version = "4.1.12"
+version = "6.1.2"
 helm = "https://charts.bitnami.com/bitnami"
 
 [metrics-server]
