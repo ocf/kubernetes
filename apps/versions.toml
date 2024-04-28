@@ -46,7 +46,7 @@ version = "1.11.1"
 helm = "https://falcosecurity.github.io/charts"
 
 [fission]
-version = "v1.20.1"
+version = "1.20.1"
 helm = "https://fission.github.io/fission-charts/"
 chart = "fission-all"
 
