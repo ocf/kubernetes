@@ -37,7 +37,7 @@ version = "1.29.0"
 helm = "https://coredns.github.io/helm"
 
 [elastic]
-version = "1.8.0"
+version = "2.12.1"
 helm = "https://helm.elastic.co"
 chart = "eck-operator"
 
