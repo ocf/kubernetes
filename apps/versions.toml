@@ -121,7 +121,7 @@ version = "0.27.0"
 helm = "https://helm.releases.hashicorp.com"
 
 [vault-secrets-operator]
-version = "2.5.4"
+version = "2.5.7"
 helm = "https://ricoberger.github.io/helm-charts"
 
 [velero]
