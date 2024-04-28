@@ -42,7 +42,7 @@ helm = "https://helm.elastic.co"
 chart = "eck-operator"
 
 [falco]
-version = "1.11.1"
+version = "4.3.0"
 helm = "https://falcosecurity.github.io/charts"
 
 [fission]
