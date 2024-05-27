@@ -67,6 +67,7 @@ values = {
                 # Specify nothing else so it backs up everything.
                 # We can also exclude some namespaces if needed.
                 "ttl": "168h",  # 7 days
+                "snapshotMoveData": True,
             },
         }
     },
