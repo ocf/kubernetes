@@ -5,7 +5,7 @@ This is the git repository for the [Open Computing Facility](https://ocf.berkele
 ## Deploying Software
 
 1. Create a new Python file in `apps/` with a function `objects()` that yields Kubernetes objects (dicts or `python-kubernetes` objects are both accepted). See the other Python files in that folder for examples. Helper functions are provided for Helm charts, although not all software will use helm charts.
-    a. If you need to build your own container image, do so in another git repository. Instructions coming soon (TM).
+    a. If you need to build your own container image, do so in another git repository. Instructions at [our internal docs](https://docs.ocf.berkeley.edu/doc/deploying-services-to-kubernetes-NrroInWHyc) (going public soon).
 2. (Root Required) Go to [ArgoCD](https://argo.ocf.berkeley.edu/) and run a sync. Before you click sync, look at the diff to sanity check what will change. We do not automatically sync configuration for safety reasons.
 
 ### Code-Test Loop
