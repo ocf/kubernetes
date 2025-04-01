@@ -33,13 +33,6 @@ def oidc_client(
 
 clients = [
     oidc_client(
-        "rt",
-        name="rt",
-        description="Request Ticket tracker",
-        home_url="https://rt.ocf.berkeley.edu",
-        redirect_uris=["https://rt.ocf.berkeley.edu/oauth2callback"]
-    ),
-    oidc_client(
         "argocd",
         name="ArgoCD",
         description="Declarative GitOps CD for Kubernetes",
