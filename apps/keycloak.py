@@ -360,12 +360,12 @@ helm_values = {
     "replicaCount": 1,
     "resources": {
         "requests": {
-            "cpu": "100m",
-            "memory": "1024Mi",
+            "cpu": "2",
+            "memory": "2048Mi",
         },
         "limits": {
-            "cpu": "500m",
-            "memory": "2048Mi",
+            "cpu": "3",
+            "memory": "4096Mi",
         },
     },
     "podAnnotations": {
