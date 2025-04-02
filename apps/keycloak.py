@@ -358,6 +358,16 @@ helm_values = {
     "proxy": "edge",
     "httpRelativePath": "/",
     "replicaCount": 1,
+    "resources": {
+        "requests": {
+            "cpu": "2",
+            "memory": "1024Mi",
+        },
+        "limits": {
+            "cpu": "3",
+            "memory": "2048Mi",
+        },
+    },
     "podAnnotations": {
         "vault.hashicorp.com/agent-inject": "true",
         "vault.hashicorp.com/role": "keycloak",
