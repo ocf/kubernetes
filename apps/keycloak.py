@@ -415,7 +415,7 @@ helm_values = {
         "enabled": True,
         "existingConfigmap": "keycloak-config-cli",
         "cleanupAfterFinished": {
-            "enabled": True,
+            "enabled": False,
             "seconds": 0,
         },
     },
