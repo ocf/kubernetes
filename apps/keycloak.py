@@ -368,11 +368,11 @@ helm_values = {
     "resources": {
         "requests": {
             "cpu": "100m",
-            "memory": "1024Mi",
+            "memory": "2048Mi",
         },
         "limits": {
             "cpu": "500m",
-            "memory": "2048Mi",
+            "memory": "4096Mi",
         },
     },
     "podAnnotations": {
