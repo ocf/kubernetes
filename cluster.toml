@@ -40,6 +40,7 @@ vault = { path = "apps/vault.py" }
 vault-secrets-operator = { path = "apps/vault_secrets_operator.py" }
 velero = { path = "apps/velero.py" }
 
+create = { git = "https://github.com/ocf/create" }
 etc = { git = "https://github.com/ocf/etc" }
 ergo = { git = "https://github.com/ocf/irc" }
 id6 = { git = "https://github.com/ocf/id6" }
