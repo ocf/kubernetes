@@ -33,6 +33,13 @@ def oidc_client(
 
 clients = [
     oidc_client(
+         "rt",
+         name="rt",
+         description="Request Ticket tracker",
+         home_url="https://rt.ocf.berkeley.edu",
+         redirect_uris=["https://rt.ocf.berkeley.edu/oauth2callback"]
+     ),
+    oidc_client(
         "argocd",
         name="ArgoCD",
         description="Declarative GitOps CD for Kubernetes",
@@ -358,6 +365,16 @@ helm_values = {
     "proxy": "edge",
     "httpRelativePath": "/",
     "replicaCount": 1,
+    "resources": {
+        "requests": {
+            "cpu": "100m",
+            "memory": "2048Mi",
+        },
+        "limits": {
+            "cpu": "500m",
+            "memory": "4096Mi",
+        },
+    },
     "podAnnotations": {
         "vault.hashicorp.com/agent-inject": "true",
         "vault.hashicorp.com/role": "keycloak",
@@ -398,7 +415,7 @@ helm_values = {
         "enabled": True,
         "existingConfigmap": "keycloak-config-cli",
         "cleanupAfterFinished": {
-            "enabled": True,
+            "enabled": False,
             "seconds": 0,
         },
     },
