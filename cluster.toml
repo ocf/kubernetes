@@ -50,6 +50,7 @@ notes = { git = "https://github.com/ocf/notes" }
 ocfstatic = { git = "https://github.com/ocf/ocfstatic" }
 ocfweb = { git = "https://github.com/ocf/ocfweb" }
 outline = { git = "https://github.com/ocf/outline" }
+rt = { git = "https://github.com/ocf/rt" }
 templates = { git = "https://github.com/ocf/templates" }
 transpire = { git = "https://github.com/ocf/transpire" }
 ocfdocs = { git = "https://github.com/ocf/ocfdocs" }
