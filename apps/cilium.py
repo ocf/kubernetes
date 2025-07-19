@@ -10,7 +10,7 @@ def objects():
         versions=get_versions(__file__),
         values={
             "kubeProxyReplacement": "strict",
-            "k8sServiceHost": "dna.ocf.io",
+            "k8sServiceHost": "gravitywell.ocf.io",
             "k8sServicePort": "6443",
             "hubble": {
                 "tls": {"auto": {"method": "cronJob"}},
