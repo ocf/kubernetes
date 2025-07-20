@@ -12,7 +12,7 @@ def objects():
             "envoy": {
                 "service": {
                     "annotations": {
-                        "metallb.universe.tf/loadBalancerIPs": "169.229.226.81,2607:f140:8801::1:81",
+                        "metallb.universe.tf/loadBalancerIPs": "169.229.226.105,2607:f140:8801::1:105",
                     },
                     "ipFamilyPolicy": "PreferDualStack",
                 },
