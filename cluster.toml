@@ -46,6 +46,7 @@ ergo = { git = "https://github.com/ocf/irc" }
 id6 = { git = "https://github.com/ocf/id6" }
 jukebox = { git = "https://github.com/ocf/jukebox" }
 labmap = { git = "https://github.com/ocf/labmap" }
+minecraft-server = { git = "https://github.com/ocf/minecraft-server" }
 notes = { git = "https://github.com/ocf/notes" }
 ocfstatic = { git = "https://github.com/ocf/ocfstatic" }
 ocfweb = { git = "https://github.com/ocf/ocfweb" }
