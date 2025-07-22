@@ -33,7 +33,7 @@ prometheus = { path = "apps/prometheus.py" }
 #postgres-operator = { path = "apps/postgres_operator.py" }
 #ocf-io = { path = "apps/ocf_io.py" }
 #rabbitmq = { path = "apps/rabbitmq.py" }
-rook = { path = "apps/rook.py" }
+#rook = { path = "apps/rook.py" }
 #snapshot-controller = { path = "apps/snapshot_controller.py" }
 teleport = { path = "apps/teleport.py" }
 vault = { path = "apps/vault.py" }
