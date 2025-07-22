@@ -3,8 +3,8 @@ from transpire.surgery import edit_manifests
 from transpire.utils import get_versions
 
 values = {
-    "clusterName": "tele.ocf.io",
-    "kubeClusterName": "dna.ocf.io",
+    "clusterName": "dev-tele.ocf.io",
+    "kubeClusterName": "gravitywell.ocf.io",
     "enterprise": True,
     "highAvailability": {
         "replicaCount": 1,
@@ -21,7 +21,7 @@ values = {
     },
     "service": {
         "spec": {
-            "loadBalancerIP": "169.229.226.82",
+            "loadBalancerIP": "169.229.226.106",
         },
     },
 }

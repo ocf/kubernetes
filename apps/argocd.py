@@ -14,7 +14,7 @@ def objects():
         values={
             "redis-ha": {"enabled": True},
             "global": {
-                "domain": "argo.ocf.berkeley.edu",
+                "domain": "dev-argo.ocf.berkeley.edu",
             },
             "controller": {
                 "replicas": 1,
@@ -30,7 +30,7 @@ def objects():
                 "ingress": {
                     "enabled": True,
                     "ingressClassName": "contour",
-                    "hosts": ["argo.ocf.berkeley.edu"],
+                    "hosts": ["dev-argo.ocf.berkeley.edu"],
                     "annotations": {
                         "cert-manager.io/cluster-issuer": "letsencrypt",
                         "projectcontour.io/websocket-routes": "/",
@@ -40,7 +40,7 @@ def objects():
                     "tls": [
                         {
                             "secretName": "argocd-server-tls",
-                            "hosts": ["argo.ocf.berkeley.edu"],
+                            "hosts": ["dev-argo.ocf.berkeley.edu"],
                         },
                     ],
                 },
@@ -49,7 +49,7 @@ def objects():
             "applicationSet": {"replicaCount": 2},
             "configs": {
                 "cm": {
-                    "url": "https://argo.ocf.berkeley.edu",
+                    "url": "https://dev-argo.ocf.berkeley.edu",
                     "oidc.config": yaml.dump(
                         {
                             "name": "Keycloak",
@@ -102,6 +102,7 @@ def objects():
             "source": {
                 "repoURL": "https://github.com/ocf/cluster",
                 "path": "base",
+                "ref": "dev",
             },
         },
     }

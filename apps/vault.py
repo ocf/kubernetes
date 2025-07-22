@@ -56,10 +56,10 @@ def objects():
                         "kubernetes.io/ingress.class": "contour",
                         "kubernetes.io/tls-acme": "true",
                     },
-                    "hosts": [{"host": "vault.ocf.berkeley.edu", "paths": []}],
+                    "hosts": [{"host": "dev-vault.ocf.berkeley.edu", "paths": []}],
                     "tls": [
                         {
-                            "hosts": ["vault.ocf.berkeley.edu"],
+                            "hosts": ["dev-vault.ocf.berkeley.edu"],
                             "secretName": "vault-ingress-tls",
                         },
                     ],
