@@ -102,7 +102,7 @@ def objects():
             "source": {
                 "repoURL": "https://github.com/ocf/cluster",
                 "path": "base",
-                "ref": "dev",
+                "targetRevision": "dev",
             },
         },
     }
