@@ -47,6 +47,13 @@ clients = [
         redirect_uris=["https://argo.ocf.berkeley.edu/auth/callback"],
     ),
     oidc_client(
+        "dev-argocd",
+        name="Devkube ArgoCD",
+        description="Declarative GitOps CD for Kubernetes",
+        home_url="https://dev-argo.ocf.berkeley.edu/",
+        redirect_uris=["https://dev-argo.ocf.berkeley.edu/auth/callback"],
+    ),
+    oidc_client(
         "hedgedoc",
         name="HedgeDoc",
         description="Collaborative markdown notes",
