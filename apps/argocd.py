@@ -54,7 +54,7 @@ def objects():
                         {
                             "name": "Keycloak",
                             "issuer": "https://idm.ocf.berkeley.edu/realms/ocf",
-                            "clientID": "argocd",
+                            "clientID": "dev-argocd",
                             "clientSecret": "$oidc.keycloak.clientSecret",
                             "requestedScopes": [
                                 "openid",
