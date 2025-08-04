@@ -4,7 +4,7 @@ from transpire.utils import get_versions
 name = "rook"
 values = {
     "image": {
-        "tag": "v1.11.11",
+        "tag": "v1.12.11",
     },
     # <https://rook.io/docs/rook/v1.10/CRDs/Cluster/ceph-cluster-crd/?h=stack#network-configuration-settings>
     "network": {
