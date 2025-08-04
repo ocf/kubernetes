@@ -80,7 +80,7 @@ helm = "https://charts.bitnami.com/bitnami"
 chart = "rabbitmq-cluster-operator"
 
 [rook]
-version = "1.15.9"
+version = "1.16.8"
 helm = "https://charts.rook.io/release"
 chart = "rook-ceph"
 
