@@ -77,7 +77,7 @@ def objects():
             "annotations": {"argocd.argoproj.io/compare-options": "IgnoreExtraneous"},
         },
         "spec": {
-            "cephVersion": {"image": "quay.io/ceph/ceph:v17.2.5"},
+            "cephVersion": {"image": "quay.io/ceph/ceph:v18.2.2"},
             "dataDirHostPath": "/var/lib/rook",
             "mon": {"count": 3, "allowMultiplePerNode": False},
             # Re-enable this when the issue that blocks it is merged and available in a released Ceph version.
