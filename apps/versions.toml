@@ -6,7 +6,7 @@
 # Cluster Services & Core Applications
 
 [argocd]
-version = "7.8.13"
+version = "8.2.5"
 helm = "https://argoproj.github.io/argo-helm"
 chart = "argo-cd"
 
