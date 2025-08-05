@@ -9,7 +9,7 @@ def objects():
         name="cilium",
         versions=get_versions(__file__),
         values={
-            "kubeProxyReplacement": "strict",
+            "kubeProxyReplacement": "true",
             "k8sServiceHost": "dna.ocf.io",
             "k8sServicePort": "6443",
             "hubble": {
