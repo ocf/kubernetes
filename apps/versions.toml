@@ -85,12 +85,12 @@ helm = "https://charts.rook.io/release"
 chart = "rook-ceph"
 
 [snapshot-controller]
-version = "v7.0.1"
+version = "v8.2.0"
 repo_url = "https://github.com/kubernetes-csi/external-snapshotter.git/"
 path = "deploy/kubernetes/snapshot-controller"
 
 [snapshot-controller-crds]
-version = "v7.0.1"
+version = "v8.2.0"
 repo_url = "https://github.com/kubernetes-csi/external-snapshotter.git/"
 path = "client/config/crd"
 
