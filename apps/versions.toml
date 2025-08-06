@@ -100,11 +100,11 @@ helm = "https://charts.releases.teleport.dev"
 chart = "teleport-cluster"
 
 [vault]
-version = "0.28.0"
+version = "0.30.1"
 helm = "https://helm.releases.hashicorp.com"
 
 [vault-secrets-operator]
-version = "2.7.0"
+version = "3.1.1"
 helm = "https://ricoberger.github.io/helm-charts"
 
 [velero]
