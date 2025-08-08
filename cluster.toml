@@ -42,7 +42,6 @@ velero = { path = "apps/velero.py" }
 
 create = { git = "https://github.com/ocf/create" }
 etc = { git = "https://github.com/ocf/etc" }
-ergo = { git = "https://github.com/ocf/irc" }
 grafana = { git = "https://github.com/ocf/grafana" }
 id6 = { git = "https://github.com/ocf/id6" }
 jukebox = { git = "https://github.com/ocf/jukebox" }
