@@ -112,6 +112,13 @@ clients = [
             "implicitFlowEnabled": True,
         },
     ),
+    oidc_client(
+        "vault",
+        name="Vault",
+        description="Secrets management",
+        home_url="https://vault.ocf.berkeley.edu/",
+        redirect_uris=["https://vault.ocf.berkeley.edu/ui/vault/auth/oidc/oidc/callback"],
+    ),
 ]
 
 keycloak_config_cli = {
