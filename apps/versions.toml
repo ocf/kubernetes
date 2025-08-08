@@ -42,7 +42,7 @@ helm = "https://fission.github.io/fission-charts/"
 chart = "fission-all"
 
 [harbor]
-version = "24.0.2"
+version = "26.8.3"
 helm = "https://charts.bitnami.com/bitnami"
 
 [keda]
