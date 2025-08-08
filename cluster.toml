@@ -23,7 +23,6 @@ coredns = { path = "apps/coredns.py" }
 contour = { path = "apps/contour.py" }
 fission = { path = "apps/fission.py" }
 gvisor = { path = "apps/gvisor.py" }
-harbor = { path = "apps/harbor.py" }
 keda = { path = "apps/keda.py" }
 keycloak = { path = "apps/keycloak.py" }
 kubevirt = { path = "apps/kubevirt.py" }
