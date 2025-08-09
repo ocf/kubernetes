@@ -36,8 +36,8 @@ clients = [
         "matrix",
         name="matrix",
         description="OCF Matrix Server",
-        home_url="https://matrix.ocf.berkeley.edu",
-        redirect_uris=["https://matrix.ocf.berkeley.edu/_synapse/client/oidc/callback"],
+        home_url="https://matrix.ocf.io",
+        redirect_uris=["https://matrix.ocf.io/_synapse/client/oidc/callback"],
     ),
     oidc_client(
         "rt",
