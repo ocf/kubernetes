@@ -33,11 +33,18 @@ def oidc_client(
 
 clients = [
     oidc_client(
-         "rt",
-         name="rt",
-         description="Request Ticket tracker",
-         home_url="https://rt.ocf.berkeley.edu",
-         redirect_uris=["https://rt.ocf.berkeley.edu/oauth2callback"]
+        "matrix",
+        name="matrix",
+        description="OCF Matrix Server",
+        home_url="https://matrix.ocf.berkeley.edu",
+        redirect_uris=["https://matrix.ocf.berkeley.edu/_synapse/client/oidc/callback"],
+    ),
+    oidc_client(
+        "rt",
+        name="rt",
+        description="Request Ticket tracker",
+        home_url="https://rt.ocf.berkeley.edu",
+        redirect_uris=["https://rt.ocf.berkeley.edu/oauth2callback"],
      ),
     oidc_client(
         "argocd",
