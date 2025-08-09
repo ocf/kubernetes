@@ -33,6 +33,13 @@ def oidc_client(
 
 clients = [
     oidc_client(
+        "gapps",
+        name="gapps",
+        description="Google Workspace",
+        home_url="https://google.com",
+        redirect_uris=["https://accounts.google.com/oidcrp/03ig9uvl20pcbgg/cb"],
+    ),
+    oidc_client(
         "matrix",
         name="matrix",
         description="OCF Matrix Server",
