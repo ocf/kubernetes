@@ -33,6 +33,13 @@ def oidc_client(
 
 clients = [
     oidc_client(
+        "teleport",
+        name="teleport",
+        description="OCF Teleport",
+        home_url="https://tele.ocf.io",
+        redirect_uris=["https://tele.ocf.io/v1/webapi/oidc/callback"],
+    ),
+    oidc_client(
         "gapps",
         name="gapps",
         description="Google Workspace",
