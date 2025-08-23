@@ -75,6 +75,13 @@ clients = [
         redirect_uris=["https://dev-argo.ocf.berkeley.edu/auth/callback"],
     ),
     oidc_client(
+        "grafana",
+        name="Grafana",
+        description="Server resource usage dashboard",
+        home_url="https://grafana.ocf.berkeley.edu/",
+        redirect_uris=["https://grafana.ocf.berkeley.edu/login/generic_oauth"],
+    ),
+    oidc_client(
         "hedgedoc",
         name="HedgeDoc",
         description="Collaborative markdown notes",
