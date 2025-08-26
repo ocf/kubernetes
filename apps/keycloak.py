@@ -33,6 +33,13 @@ def oidc_client(
 
 clients = [
     oidc_client(
+        "jenkins",
+        name="jenkins",
+        description="OCF Jenkins",
+        home_url="https://jenkins.ocf.berkeley.edu",
+        redirect_uris=["https://jenkins.ocf.berkeley.edu/securityRealm/finishLogin"],
+    ),
+    oidc_client(
         "teleport",
         name="teleport",
         description="OCF Teleport",
