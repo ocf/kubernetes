@@ -44,7 +44,7 @@ etc = { git = "https://github.com/ocf/etc" }
 grafana = { git = "https://github.com/ocf/grafana" }
 id6 = { git = "https://github.com/ocf/id6" }
 jukebox = { git = "https://github.com/ocf/jukebox" }
-labmap = { git = "https://github.com/ocf/labmap" }
+labmap2 = { git = "https://github.com/ocf/labmap2" }
 minecraft-server = { git = "https://github.com/ocf/minecraft-server" }
 notes = { git = "https://github.com/ocf/notes" }
 ocfstatic = { git = "https://github.com/ocf/ocfstatic" }
