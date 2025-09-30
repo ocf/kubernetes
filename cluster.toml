@@ -56,3 +56,4 @@ rt = { git = "https://github.com/ocf/rt" }
 templates = { git = "https://github.com/ocf/templates" }
 transpire = { git = "https://github.com/ocf/transpire" }
 ocfdocs = { git = "https://github.com/ocf/ocfdocs" }
+github-runner = { git = "https://github.com/ocf/github-runner" }
