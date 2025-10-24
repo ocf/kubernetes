@@ -3,9 +3,6 @@ from transpire.utils import get_versions
 
 name = "rook"
 values = {
-    "image": {
-        "tag": "v1.17.7",
-    },
     # <https://rook.io/docs/rook/v1.10/CRDs/Cluster/ceph-cluster-crd/?h=stack#network-configuration-settings>
     "network": {
         "dualStack": True,
@@ -77,7 +74,10 @@ def objects():
             "annotations": {"argocd.argoproj.io/compare-options": "IgnoreExtraneous"},
         },
         "spec": {
-            "cephVersion": {"image": "quay.io/ceph/ceph:v19.2.3"},
+            "cephVersion": {
+                # renovate source=docker name=quay.io/ceph/ceph
+                "image": "quay.io/ceph/ceph:v19.2.3"
+            },
             "dataDirHostPath": "/var/lib/rook",
             "mon": {"count": 3, "allowMultiplePerNode": False},
             # Re-enable this when the issue that blocks it is merged and available in a released Ceph version.
