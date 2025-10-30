@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "config:recommended",
+    "docker:enableMajor",
+    ":disableRateLimiting",
+    ":disableDependencyDashboard",
+    ":semanticCommits",
+    "github>ocf/kubernetes//.renovate/commit-message",
+    "github>ocf/kubernetes//.renovate/manager",
+    "github>ocf/kubernetes//.renovate/pr-label"
+  ],
+  "prBodyTemplate": "{{{table}}}{{{notes}}}{{{changelogs}}}{{{controls}}}"
+}

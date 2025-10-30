@@ -1,0 +1,25 @@
+{
+  "commitMessageTopic": "{{depName}}",
+  "commitMessageExtra": "to {{newVersion}}",
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["*"],
+      "semanticCommitType": "build"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "semanticCommitScope": "docker",
+      "commitMessageTopic": "{{{replace '.+/' '' depName}}}"
+    },
+    {
+      "matchDatasources": ["github-actions", "github-releases", "github-tags"],
+      "semanticCommitScope": "github",
+      "commitMessageTopic": "{{depName}}"
+    },
+    {
+      "matchDatasources": ["helm"],
+      "semanticCommitScope": "helm",
+      "commitMessageTopic": "{{depName}}"
+    }
+  ]
+}
