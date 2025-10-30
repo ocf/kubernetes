@@ -71,7 +71,7 @@ helm = "https://prometheus-community.github.io/helm-charts"
 chart = "kube-prometheus-stack"
 
 [rabbitmq]
-version = "4.4.29"
+version = "4.4.34"
 helm = "https://charts.bitnami.com/bitnami"
 chart = "rabbitmq-cluster-operator"
 
