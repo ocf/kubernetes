@@ -4,6 +4,9 @@ inputs:
     url: github:cachix/devenv-nixpkgs/rolling
   transpire:
     url: github:ocf/transpire
+    inputs:
+      nixpkgs:
+        follows: nixpkgs
 
 # If you're using non-OSS software, you can set allowUnfree to true.
 # allowUnfree: true

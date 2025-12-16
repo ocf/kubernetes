@@ -6,6 +6,6 @@
     teleport
     k9s
     kubectl
-    inputs.transpire.packages.${pkgs.system}.transpire
+    inputs.transpire.packages.${pkgs.system}.default
   ];
 }
