@@ -1,0 +1,28 @@
+{
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["major"],
+      "addLabels": ["version/major"]
+    },
+    {
+      "matchUpdateTypes": ["minor"],
+      "addLabels": ["version/minor"]
+    },
+    {
+      "matchUpdateTypes": ["patch"],
+      "addLabels": ["version/patch"]
+    },
+    {
+      "matchDatasources": ["docker"],
+      "addLabels": ["renovate/docker"]
+    },
+    {
+      "matchDatasources": ["github-actions", "github-releases", "github-tags"],
+      "addLabels": ["renovate/github"]
+    },
+    {
+      "matchDatasources": ["helm"],
+      "addLabels": ["renovate/helm"]
+    }
+  ]
+}

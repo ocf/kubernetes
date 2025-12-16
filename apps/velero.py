@@ -8,6 +8,7 @@ values = {
     "initContainers": [
         {
             "name": "velero-plugin-for-csi",
+            # renovate source=docker name=docker.io/velero/velero-plugin-for-csi
             "image": "velero/velero-plugin-for-csi:v0.7.0",
             "imagePullPolicy": "IfNotPresent",
             "volumeMounts": [
@@ -20,6 +21,7 @@ values = {
         {
             "name": "velero-plugin-for-aws",
             # for S3-compatible API
+            # renovate source=docker name=docker.io/velero/velero-plugin-for-aws
             "image": "velero/velero-plugin-for-aws:v1.9.0",
             "imagePullPolicy": "IfNotPresent",
             "volumeMounts": [
