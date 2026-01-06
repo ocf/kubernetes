@@ -104,5 +104,5 @@ version = "2.7.0"
 helm = "https://ricoberger.github.io/helm-charts"
 
 [velero]
-version = "6.0.0"
+version = "11.3.2"
 helm = "https://vmware-tanzu.github.io/helm-charts/"
