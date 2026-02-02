@@ -42,7 +42,7 @@ helm = "https://fission.github.io/fission-charts/"
 chart = "fission-all"
 
 [keda]
-version = "2.17.2"
+version = "2.19.0"
 helm = "https://kedacore.github.io/charts"
 
 [keycloak]
