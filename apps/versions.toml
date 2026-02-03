@@ -46,7 +46,7 @@ version = "2.17.2"
 helm = "https://kedacore.github.io/charts"
 
 [keycloak]
-version = "25.2.0"
+version = "24.9.0"
 helm = "https://charts.bitnami.com/bitnami"
 
 [kubevirt]
