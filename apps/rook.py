@@ -76,7 +76,7 @@ def objects():
         "spec": {
             "cephVersion": {
                 # renovate source=docker name=quay.io/ceph/ceph
-                "image": "quay.io/ceph/ceph:v19.2.3"
+                "image": "quay.io/ceph/ceph:v20.2.0"
             },
             "dataDirHostPath": "/var/lib/rook",
             "mon": {"count": 3, "allowMultiplePerNode": False},
