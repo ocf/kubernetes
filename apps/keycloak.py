@@ -33,6 +33,20 @@ def oidc_client(
 
 clients = [
     oidc_client(
+        "reef",
+        name="reef",
+        description="OCF Proxmox Node",
+        home_url="http://reef.ocf.berkeley.edu:8006",
+        redirect_uris=["http://reef.ocf.berkeley.edu:8006/*"],
+    ),
+    oidc_client(
+        "doorplug",
+        name="doorplug",
+        description="OCF Proxmox Node",
+        home_url="http://doorplug.ocf.berkeley.edu:8006",
+        redirect_uris=["http://doorplug.ocf.berkeley.edu:8006/*"],
+    ),
+    oidc_client(
         "jenkins",
         name="jenkins",
         description="OCF Jenkins",
