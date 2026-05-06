@@ -337,7 +337,6 @@ def objects():
             },
             "preservePoolsOnDelete": True,
             "gateway": {
-                "securePort": 443,
                 "port": 80,
                 "instances": 1,
             },
