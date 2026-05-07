@@ -33,6 +33,37 @@ def oidc_client(
 
 clients = [
     oidc_client(
+        "niks3",
+        name="niks3",
+        description="OCF Nix binary cache (push auth)",
+        home_url="https://cache.ocf.berkeley.edu",
+        redirect_uris=[
+            "http://127.0.0.1/*",
+            "http://localhost/*",
+        ],
+        extra={
+            "publicClient": True,
+            "standardFlowEnabled": True,
+            "directAccessGrantsEnabled": False,
+            "implicitFlowEnabled": False,
+            "attributes": {
+                "pkce.code.challenge.method": "S256",
+            },
+            "protocolMappers": [
+                {
+                    "name": "audience",
+                    "protocol": "openid-connect",
+                    "protocolMapper": "oidc-audience-mapper",
+                    "config": {
+                        "included.client.audience": "niks3",
+                        "id.token.claim": "false",
+                        "access.token.claim": "true",
+                    },
+                },
+            ],
+        },
+    ),
+    oidc_client(
         "reef",
         name="reef",
         description="OCF Proxmox Node",
