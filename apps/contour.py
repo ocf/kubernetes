@@ -9,7 +9,10 @@ def objects():
         name=name,
         versions=get_versions(__file__),
         values={
+            "global": {"security":{"allowInsecureImages": True}},
+            "contour": {"image": {"repository": "bitnamilegacy/contour"}},
             "envoy": {
+                "image": {"repository": "bitnamilegacy/envoy"},
                 "service": {
                     "annotations": {
                         "metallb.universe.tf/loadBalancerIPs": "169.229.226.81,2607:f140:8801::1:81",
