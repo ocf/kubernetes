@@ -454,6 +454,8 @@ krb5_conf = """
 """
 
 helm_values = {
+    "global": {"security":{"allowInsecureImages": True}},
+    "image": {"repository": "bitnamilegacy/keycloak"},
     "auth": {"existingSecret": "keycloak", "existingSecretKey": "admin-password"},
     "production": True,
     "proxy": "edge",
@@ -507,6 +509,7 @@ helm_values = {
     "metrics": {"enabled": True},
     "keycloakConfigCli": {
         "enabled": True,
+        "image": {"repository": "bitnamilegacy/keycloak-config-cli"},
         "existingConfigmap": "keycloak-config-cli",
         "cleanupAfterFinished": {
             "enabled": False,
