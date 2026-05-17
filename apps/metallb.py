@@ -28,8 +28,13 @@ def objects():
         name="metallb",
         versions=get_versions(__file__),
         values={
+            "global": {"security":{"allowInsecureImages": True}},
             "controller": {
+                "image": {"repository": "bitnamilegacy/metallb-controller"},
                 "metrics": {"enabled": True, "serviceMonitor": {"enabled": True}}
+            },
+            "speaker": {
+                "image": {"repository": "bitnamilegacy/metallb-speaker"}
             }
         },
     )
