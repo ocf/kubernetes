@@ -21,7 +21,6 @@ cert-manager = { path = "apps/cert_manager.py" }
 cilium = { path = "apps/cilium.py" }
 coredns = { path = "apps/coredns.py" }
 contour = { path = "apps/contour.py" }
-gvisor = { path = "apps/gvisor.py" }
 keda = { path = "apps/keda.py" }
 keycloak = { path = "apps/keycloak.py" }
 kubevirt = { path = "apps/kubevirt.py" }
@@ -42,7 +41,6 @@ ergo = { git = "https://github.com/ocf/irc" }
 etc = { git = "https://github.com/ocf/etc" }
 grafana = { git = "https://github.com/ocf/grafana" }
 id6 = { git = "https://github.com/ocf/id6" }
-jukebox = { git = "https://github.com/ocf/jukebox" }
 labmap2 = { git = "https://github.com/ocf/labmap2" }
 minecraft-server = { git = "https://github.com/ocf/minecraft-server" }
 notes = { git = "https://github.com/ocf/notes" }
@@ -53,4 +51,3 @@ rt = { git = "https://github.com/ocf/rt" }
 templates = { git = "https://github.com/ocf/templates" }
 transpire = { git = "https://github.com/ocf/transpire" }
 ocfdocs = { git = "https://github.com/ocf/ocfdocs" }
-github-runner = { git = "https://github.com/ocf/github-runner" }
