@@ -37,7 +37,7 @@ version = "1.43.1"
 helm = "https://coredns.github.io/helm"
 
 [keda]
-version = "2.17.2"
+version = "2.19.0"
 helm = "https://kedacore.github.io/charts"
 
 [keycloak]
