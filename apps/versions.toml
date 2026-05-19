@@ -45,7 +45,7 @@ version = "24.9.0"
 helm = "https://charts.bitnami.com/bitnami"
 
 [kubevirt]
-version = "v1.6.0"
+version = "v1.8.2"
 github = "https://github.com/kubevirt/kubevirt"
 
 [metallb]
