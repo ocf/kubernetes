@@ -57,11 +57,11 @@ version = "3.13.0"
 helm = "https://kubernetes-sigs.github.io/metrics-server/"
 
 [postgres-operator]
-version = "1.14.0"
+version = "1.15.1"
 helm = "https://opensource.zalando.com/postgres-operator/charts/postgres-operator"
 
 [prometheus]
-version = "85.1.2"
+version = "85.1.3"
 helm = "https://prometheus-community.github.io/helm-charts"
 chart = "kube-prometheus-stack"
 
