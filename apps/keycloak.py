@@ -64,18 +64,15 @@ clients = [
         },
     ),
     oidc_client(
-        "reef",
-        name="reef",
-        description="OCF Proxmox Node",
-        home_url="http://reef.ocf.berkeley.edu:8006",
-        redirect_uris=["http://reef.ocf.berkeley.edu:8006/*"],
-    ),
-    oidc_client(
-        "doorplug",
-        name="doorplug",
-        description="OCF Proxmox Node",
-        home_url="http://doorplug.ocf.berkeley.edu:8006",
-        redirect_uris=["http://doorplug.ocf.berkeley.edu:8006/*"],
+        "aquarium",
+        name="aquarium",
+        description="OCF Proxmox Cluster",
+        home_url="https://reef.ocf.berkeley.edu:8006",
+        redirect_uris=[
+            "https://doorplug.ocf.berkeley.edu:8006/*",
+            "https://paws.ocf.berkeley.edu:8006/*",
+            "https://reef.ocf.berkeley.edu:8006/*",
+        ],
     ),
     oidc_client(
         "jenkins",
