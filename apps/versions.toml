@@ -11,7 +11,7 @@ helm = "https://argoproj.github.io/argo-helm"
 chart = "argo-cd"
 
 [argo-workflows]
-version = "1.0.14"
+version = "2.0.4"
 helm = "https://argoproj.github.io/argo-helm"
 chart = "argo-workflows"
 
