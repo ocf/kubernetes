@@ -10,16 +10,6 @@ version = "9.5.15"
 helm = "https://argoproj.github.io/argo-helm"
 chart = "argo-cd"
 
-[argo-workflows]
-version = "1.0.14"
-helm = "https://argoproj.github.io/argo-helm"
-chart = "argo-workflows"
-
-[argo-events]
-version = "2.4.21"
-helm = "https://argoproj.github.io/argo-helm"
-chart = "argo-events"
-
 [keda]
 version = "2.19.0"
 helm = "https://kedacore.github.io/charts"
@@ -27,10 +17,6 @@ helm = "https://kedacore.github.io/charts"
 [keycloak]
 version = "24.9.0"
 helm = "https://charts.bitnami.com/bitnami"
-
-[kubevirt]
-version = "v1.8.2"
-github = "https://github.com/kubevirt/kubevirt"
 
 [metrics-server]
 version = "3.13.0"

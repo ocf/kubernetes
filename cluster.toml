@@ -14,12 +14,9 @@ kvstore = "kvv2"
 webhook_url = "https://ocf.io/wtf"
 
 [modules]
-argo-events = { path = "apps/argo_events.py" }
-argo-workflows = { path = "apps/argo_workflows.py" }
 argocd = { path = "apps/argocd.py" }
 keda = { path = "apps/keda.py" }
 keycloak = { path = "apps/keycloak.py" }
-kubevirt = { path = "apps/kubevirt.py" }
 metrics-server = { path = "apps/metrics_server.py" }
 prometheus = { path = "apps/prometheus.py" }
 postgres-operator = { path = "apps/postgres_operator.py" }
