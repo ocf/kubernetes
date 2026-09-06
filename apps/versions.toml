@@ -19,7 +19,7 @@ version = "24.9.0"
 helm = "https://charts.bitnami.com/bitnami"
 
 [metrics-server]
-version = "3.13.0"
+version = "3.14.0"
 helm = "https://kubernetes-sigs.github.io/metrics-server/"
 
 [postgres-operator]
