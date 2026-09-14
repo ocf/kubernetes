@@ -67,13 +67,13 @@ clients = [
         "aquarium",
         name="aquarium",
         description="OCF Proxmox",
-        home_url="http://reef.ocf.berkeley.edu:8006",
+        home_url="https://reef.ocf.berkeley.edu:8006",
         redirect_uris=[
-            "http://reef.ocf.berkeley.edu:8006/*",
-            "http://yuu.ocf.berkeley.edu:8006/*",
-            "http://paws.ocf.berkeley.edu:8006/*",
-            "http://doorplug.ocf.berkeley.edu:8006/*",
-            "http://coral.ocf.berkeley.edu:8006/*"
+            "https://reef.ocf.berkeley.edu:8006/*",
+            "https://yuu.ocf.berkeley.edu:8006/*",
+            "https://paws.ocf.berkeley.edu:8006/*",
+            "https://doorplug.ocf.berkeley.edu:8006/*",
+            "https://coral.ocf.berkeley.edu:8006/*"
         ],
     ),
     oidc_client(
