@@ -64,6 +64,15 @@ clients = [
         },
     ),
     oidc_client(
+        "kubernetes-prod",
+        name="kubernetes-prod",
+        description="OCF Kubernetes Production Cluster",
+        redirect_uris=[
+            "http://localhost:8000",
+            "http://localhost:18000"
+        ],
+    ),
+    oidc_client(
         "kubernetes-staging",
         name="kubernetes-staging",
         description="OCF Kubernetes Staging Cluster",
