@@ -475,7 +475,7 @@ helm_values = {
     "image": {"repository": "bitnamilegacy/keycloak"},
     "auth": {"existingSecret": "keycloak", "existingSecretKey": "admin-password"},
     "production": True,
-    "proxy": "edge",
+    "proxyHeaders": "xforwarded",
     "httpRelativePath": "/",
     "replicaCount": 1,
     "resources": {
