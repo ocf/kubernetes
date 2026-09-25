@@ -15,7 +15,6 @@ webhook_url = "https://ocf.io/wtf"
 
 [modules]
 argocd = { path = "apps/argocd.py" }
-keda = { path = "apps/keda.py" }
 keycloak = { path = "apps/keycloak.py" }
 metrics-server = { path = "apps/metrics_server.py" }
 prometheus = { path = "apps/prometheus.py" }

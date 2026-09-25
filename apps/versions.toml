@@ -10,10 +10,6 @@ version = "9.5.15"
 helm = "https://argoproj.github.io/argo-helm"
 chart = "argo-cd"
 
-[keda]
-version = "2.19.0"
-helm = "https://kedacore.github.io/charts"
-
 [keycloak]
 version = "24.9.0"
 helm = "https://charts.bitnami.com/bitnami"
