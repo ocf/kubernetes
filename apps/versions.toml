@@ -11,7 +11,7 @@ helm = "https://argoproj.github.io/argo-helm"
 chart = "argo-cd"
 
 [keycloak]
-version = "24.9.0"
+version = "25.2.0"
 helm = "https://charts.bitnami.com/bitnami"
 
 [metrics-server]
