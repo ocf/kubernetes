@@ -37,4 +37,3 @@ outline = { git = "https://github.com/ocf/outline" }
 printlist = { git = "https://github.com/ocf/printlist" }
 rt = { git = "https://github.com/ocf/rt" }
 templates = { git = "https://github.com/ocf/templates" }
-ocfdocs = { git = "https://github.com/ocf/ocfdocs" }
