@@ -64,6 +64,14 @@ clients = [
         },
     ),
     oidc_client(
+        "vaultwarden",
+        name="vaultwarden",
+        description="OCF Vaultwarden",
+        redirect_uris=[
+            "https://vaultwarden.ocf.berkeley.edu/identity/connect/oidc-signin"
+        ],
+    ),
+    oidc_client(
         "kubernetes-prod",
         name="kubernetes-prod",
         description="OCF Kubernetes Production Cluster",
