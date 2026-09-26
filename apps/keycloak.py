@@ -216,6 +216,13 @@ clients = [
         home_url="https://vault.ocf.berkeley.edu/",
         redirect_uris=["https://vault.ocf.berkeley.edu/ui/vault/auth/oidc/oidc/callback"],
     ),
+    oidc_client(
+        "harbor",
+        name="Harbor",
+        description="Container registry",
+        home_url="https://registry.ocf.berkeley.edu/",
+        redirect_uris=[""],
+    )
 ]
 
 keycloak_config_cli = {
