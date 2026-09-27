@@ -32,7 +32,7 @@ values = {
             ],
         },
     ],
-    "deployNodeAgent": "true",
+    "deployNodeAgent": True,
     "configuration": {
         "backupStorageLocation": [
             {
