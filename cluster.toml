@@ -2,7 +2,7 @@ apiVersion = "v1"
 
 [defaults]
 certManagerIssuer = "letsencrypt"
-ingressClass = "contour"
+ingressClass = "cilium"
 
 [secrets]
 provider = "vault"
