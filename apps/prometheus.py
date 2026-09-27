@@ -15,7 +15,6 @@ values = {
         "enabled": False,
         "ingress": {
             "enabled": False,
-            "ingressClassName": "contour",
             "annotations": {
                 "cert-manager.io/cluster-issuer": "letsencrypt",
                 "ingress.kubernetes.io/force-ssl-redirect": "true",
@@ -28,7 +27,6 @@ values = {
     "prometheus": {
         "ingress": {
             "enabled": True,
-            "ingressClassName": "contour",
             "annotations": {
                 "cert-manager.io/cluster-issuer": "letsencrypt",
                 "ingress.kubernetes.io/force-ssl-redirect": "true",
@@ -42,7 +40,6 @@ values = {
     "grafana": {
         "ingress": {
             "enabled": True,
-            "ingressClassName": "contour",
             "annotations": {
                 "cert-manager.io/cluster-issuer": "letsencrypt",
                 "ingress.kubernetes.io/force-ssl-redirect": "true",

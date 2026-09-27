@@ -529,7 +529,6 @@ helm_values = {
     ],
     "ingress": {
         "enabled": True,
-        "ingressClassName": "contour",
         "annotations": {
             "cert-manager.io/cluster-issuer": "letsencrypt",
             "ingress.kubernetes.io/force-ssl-redirect": "true",
