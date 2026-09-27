@@ -31,7 +31,7 @@ values = {
                 "config": {
                     "region": "seaweedfs",
                     "s3ForcePathStyle": "true",
-                    "s3Url": "http://hal.ocf.berkeley.edu:8333",
+                    "s3Url": "http://hal.ocf.berkeley.edu:443",
                 },
             }
         ],
