@@ -38,12 +38,12 @@ values = {
             {
                 "name": "default",
                 "provider": "velero.io/aws",
-                "bucket": "velero",
+                "bucket": "dna-ceph-backup",
                 "credential": {"key": "aws-config", "name": "minio-credentials"},
                 "config": {
-                    "region": "minio",
+                    "region": "seaweedfs",
                     "s3ForcePathStyle": "true",
-                    "s3Url": "http://hal.ocf.berkeley.edu:9000",
+                    "s3Url": "http://hal.ocf.berkeley.edu:8333",
                 },
             }
         ],
