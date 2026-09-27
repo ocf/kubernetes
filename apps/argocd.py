@@ -29,11 +29,10 @@ def objects():
                 "replicas": 2,
                 "ingress": {
                     "enabled": True,
-                    "ingressClassName": "contour",
+                    "ingressClassName": "cilium",
                     "hosts": ["argo.ocf.berkeley.edu"],
                     "annotations": {
                         "cert-manager.io/cluster-issuer": "letsencrypt",
-                        "projectcontour.io/websocket-routes": "/",
                         "ingress.kubernetes.io/force-ssl-redirect": "true",
                         "kubernetes.io/tls-acme": "true",
                     },
