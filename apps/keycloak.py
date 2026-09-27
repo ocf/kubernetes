@@ -529,6 +529,7 @@ helm_values = {
     ],
     "ingress": {
         "enabled": True,
+        "pathType": "ImplementationSpecific",
         "annotations": {
             "cert-manager.io/cluster-issuer": "letsencrypt",
             "ingress.kubernetes.io/force-ssl-redirect": "true",
