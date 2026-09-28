@@ -10,7 +10,7 @@ values = {
             "name": "velero-plugin-for-aws",
             # for S3-compatible API
             # renovate source=docker name=docker.io/velero/velero-plugin-for-aws
-            "image": "velero/velero-plugin-for-aws:v1.9.0",
+            "image": "velero/velero-plugin-for-aws:v1.14.4",
             "imagePullPolicy": "IfNotPresent",
             "volumeMounts": [
                 {
