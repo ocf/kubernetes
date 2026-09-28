@@ -31,7 +31,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6.0.2
       - name: Run renovate
-        uses: renovatebot/github-action@v46.1.14
+        uses: renovatebot/github-action@v46.3.3
         env:
           LOG_LEVEL: ${{ inputs.logLevel || 'info' }}
           RENOVATE_DRY_RUN: ${{ inputs.dryRun }}
