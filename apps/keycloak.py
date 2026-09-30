@@ -529,11 +529,9 @@ helm_values = {
     ],
     "ingress": {
         "enabled": True,
-        "pathType": "ImplementationSpecific",
+        "pathType": "Prefix",
         "annotations": {
             "cert-manager.io/cluster-issuer": "letsencrypt",
-            "ingress.kubernetes.io/force-ssl-redirect": "true",
-            "kubernetes.io/tls-acme": "true",
         },
         "hostname": "idm.ocf.berkeley.edu",
         "tls": True,
