@@ -28,12 +28,12 @@ helm = "https://prometheus-community.github.io/helm-charts"
 chart = "kube-prometheus-stack"
 
 [snapshot-controller]
-version = "v8.6.0"
+version = "v8.7.0"
 repo_url = "https://github.com/kubernetes-csi/external-snapshotter.git/"
 path = "deploy/kubernetes/snapshot-controller"
 
 [snapshot-controller-crds]
-version = "v8.6.0"
+version = "v8.7.0"
 repo_url = "https://github.com/kubernetes-csi/external-snapshotter.git/"
 path = "client/config/crd"
 
